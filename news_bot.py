@@ -11,6 +11,9 @@ RSS_FEEDS = [
     "https://spaceflightnow.com/feed/",
     "https://www.energy-storage.news/feed/",
     "https://www.faa.gov/news/updates/?feed=news",
+    "https://www.electrive.com/feed/",
+    "https://cointelegraph.com/rss",
+    "https://arstechnica.com/space/feed/",
 ]
 
 def fetch_news():
@@ -33,7 +36,7 @@ def summarize_with_groq(news_text):
     data = {
         "model": "llama-3.1-8b-instant",
         "messages": [
-            {"role": "system", "content": "Summarize news in 3 bullet points with emojis. No fluff. Be direct."},
+            {"role": "system", "content": "Summarize news in 5 bullet points with emojis. Each bullet: one sentence summary + why it matters."},
             {"role": "user", "content": f"Summarize these headlines:\n{news_text}"}
         ],
         "temperature": 0.3
