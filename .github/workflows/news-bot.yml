@@ -22,7 +22,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install feedparser requests google-genai
+          pip install feedparser requests
           
       - name: Run news bot
         env:
