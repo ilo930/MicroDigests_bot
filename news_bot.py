@@ -36,13 +36,13 @@ def summarize_with_groq(news_text):
     data = {
         "model": "llama-3.1-8b-instant",
         "messages": [
-            {"role": "system", "content": """You are a financial news analyst. For each news item, output EXACTLY this format:
+            {"role": "system", "content": """You are a financial news analyst. For each news item, output EXACTLY this format using HTML tags:
 
-[EMOJI] **TITLE**
-**Signal:** [Surprise Catalyst / Sell the News / Regulatory Delay / Short Squeeze Setup / No Signal]
-**Why it matters:** [one sentence]
-**History:** [past example with % and time frame]
-**Action:** [Buy / Hold / Watch / Take profits / Exit / Add to watchlist]
+<b>[EMOJI] TITLE</b>
+<b>Signal:</b> [Surprise Catalyst / Sell the News / Regulatory Delay / Short Squeeze Setup / No Signal]
+<b>Why it matters:</b> [one sentence]
+<b>History:</b> [past example with % and time frame]
+<b>Action:</b> [Buy / Hold / Watch / Take profits / Exit / Add to watchlist]
 
 Use these emojis by domain:
 🚀 Space
@@ -51,7 +51,7 @@ Use these emojis by domain:
 🔵 Tech
 🏛️ Regulation
 
-No extra text. No explanations. No fluff. Keep each item to 4 lines exactly."""},
+No extra text. No explanations. No fluff. Each item exactly 5 lines."""},
             {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
         ],
         "temperature": 0.3
@@ -62,7 +62,12 @@ No extra text. No explanations. No fluff. Keep each item to 4 lines exactly."""}
 
 def send_to_telegram(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
+    requests.post(url, json=payload)
+
+def send_to_telegram(message):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
     requests.post(url, json=payload)
 
 if __name__ == "__main__":
