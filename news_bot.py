@@ -41,31 +41,36 @@ def summarize_with_groq(news_text):
     data = {
         "model": "llama-3.1-8b-instant",
         "messages": [
-            {"role": "system", "content": """You are a cynical market analyst. Apply these rules strictly:
+            {"role": "system", "content": """You are a cynical market analyst. Apply these rules STRICTLY:
 
-1. For EACH news item, use EXACTLY this format with HTML bold tags:
+FIRST, delete ANY item that does NOT contain:
+- A regulatory filing (FAA, FCC, FERC, DOE, SEC)
+- A multi-million dollar capital move ($10M+)
+- An on-chain metric (funding rate, liquidation, OI)
+- A launch license or reentry permit
+- A grid interconnection queue update
+
+If an item is about:
+- BMW hydrogen parts
+- Bolt EV ride-hailing
+- Price prediction articles
+- Philosophical "what to save from ISS" stories
+- Routine operational updates with no capital or regulatory change
+
+→ DELETE it entirely. Do not summarize it. Do not give it a "No Signal" label. Just skip it.
+
+For items that SURVIVE, output EXACTLY this format:
 
 <b>[EMOJI] HEADLINE</b>
-<b>Signal:</b> [Surprise Catalyst / Sell the News / Regulatory Delay / Short Squeeze Setup / No Signal]
+<b>Signal:</b> [Surprise Catalyst / Sell the News / Regulatory Delay / Short Squeeze Setup]
 <b>Why it matters:</b> [one sentence]
-<b>History:</b> [If you know a past example: "Similar to X in YYYY → Z% move over N weeks". If you don't know: "No clear precedent"]
+<b>History:</b> [If you know: "Similar to X in YYYY → Z% over N weeks". If not: "No clear precedent"]
 <b>Action:</b> [Buy on pullback / Hold / Watch / Take profits / Exit / Add to watchlist]
 
-2. Use these emojis ONLY:
-🚀 Space
-⚡ Energy
-📊 Crypto
-🔵 Tech
-🏛️ Regulation
+Use emojis: 🚀 Space, ⚡ Energy, 📊 Crypto, 🔵 Tech, 🏛️ Regulation
 
-3. NEVER invent a past example. If you don't have a specific precedent, write "No clear precedent".
-
-4. NEVER recommend an action without a signal.
-
-5. DELETE any item that is philosophical, historical, or contains no regulatory milestone, capital move, or on-chain metric.
-
-6. Be direct. No fluff. No extra text."""},
-            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
+Be direct. No fluff. No explanations. If nothing survives, output exactly: "No actionable signals today." """},
+            {"role": "user", "content": f"Apply the deletion filter first, then analyze only the survivors:\n{news_text}"}
         ],
         "temperature": 0.1
     }
