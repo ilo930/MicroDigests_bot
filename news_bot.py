@@ -26,11 +26,11 @@ def fetch_news():
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
-            for entry in feed.entries[:2]:
-                all_entries.append(f"• {entry.title}")
+            for entry in feed.entries[:3]:
+                all_entries.append(f"• {entry.title}\n  {entry.link}")
         except Exception as e:
-            print(f"Error fetching {feed_url}: {e}")
-    return "\n".join(all_entries[:10])
+            print(f"Error: {e}")
+    return "\n\n".join(all_entries[:15])
 
 def summarize_with_groq(news_text):
     url = "https://api.groq.com/openai/v1/chat/completions"
@@ -41,32 +41,33 @@ def summarize_with_groq(news_text):
     data = {
         "model": "llama-3.1-8b-instant",
         "messages": [
-            {"role": "system", "content": """You are a cynical quantitative analyst. Apply these strict rules:
+            {"role": "system", "content": """You are a cynical market analyst. Apply these rules strictly:
 
-1. DELETE any item that does NOT contain:
-   - A specific regulatory filing (FAA, FCC, FERC, DOE loan)
-   - A multi-million dollar capital move
-   - A verifiable on-chain metric (funding rate, liquidation, OI)
-   - A launch license or reentry permit
+1. For EACH news item, use EXACTLY this format with HTML bold tags:
 
-2. For items that survive, output EXACTLY this format:
+<b>[EMOJI] HEADLINE</b>
+<b>Signal:</b> [Surprise Catalyst / Sell the News / Regulatory Delay / Short Squeeze Setup / No Signal]
+<b>Why it matters:</b> [one sentence]
+<b>History:</b> [If you know a past example: "Similar to X in YYYY → Z% move over N weeks". If you don't know: "No clear precedent"]
+<b>Action:</b> [Buy on pullback / Hold / Watch / Take profits / Exit / Add to watchlist]
 
-<b>🚀/⚡/📊/🔵/🏛️ [TITLE]</b>
-<b>Ticker:</b> [PUBLIC TICKER or "Private" or "No direct trade"]
-<b>Current price:</b> [NUMBER or "N/A"]
-<b>Glossary term:</b> [One from Phase 1]
-<b>What changed:</b> [One sentence, factual only]
-<b>Last time:</b> [Specific % and time frame from similar event]
-<b>Action:</b> [Buy / Hold / Watch / Exit / No trade]
+2. Use these emojis ONLY:
+🚀 Space
+⚡ Energy
+📊 Crypto
+🔵 Tech
+🏛️ Regulation
 
-3. NEVER invent history. If you don't know a past example, write "No clear precedent".
+3. NEVER invent a past example. If you don't have a specific precedent, write "No clear precedent".
 
-4. NEVER recommend an action without a ticker.
+4. NEVER recommend an action without a signal.
 
-5. DELETE philosophical or historical feature articles entirely."""},
-            {"role": "user", "content": f"Apply these rules strictly to:\n{news_text}"}
+5. DELETE any item that is philosophical, historical, or contains no regulatory milestone, capital move, or on-chain metric.
+
+6. Be direct. No fluff. No extra text."""},
+            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
         ],
-        "temperature": 0.1  # Lower temp = less hallucination
+        "temperature": 0.1
     }
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
