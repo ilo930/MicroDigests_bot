@@ -2,13 +2,9 @@ import feedparser
 import requests
 import os
 
-from google import genai
-
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
-GEMINI_API_KEY = os.environ["GEMINI_API_KEY"]
-
-client = genai.Client(api_key=GEMINI_API_KEY)
+GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 
 RSS_FEEDS = [
     "https://payloadspace.com/feed/",
@@ -28,13 +24,22 @@ def fetch_news():
             print(f"Error: {e}")
     return "\n".join(all_entries[:10])
 
-def summarize_with_gemini(news_text):
-    prompt = f"Summarize these news headlines in 3 bullet points with emojis:\n{news_text}"
-    response = client.models.generate_content(
-        model="gemini-2.0-flash-lite",
-        contents=prompt
-    )
-    return response.text
+def summarize_with_groq(news_text):
+    url = "https://api.groq.com/openai/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {GROQ_API_KEY}",
+        "Content-Type": "application/json"
+    }
+    data = {
+        "model": "llama-3.1-8b-instant",
+        "messages": [
+            {"role": "system", "content": "Summarize news in 3 bullet points with emojis. No fluff."},
+            {"role": "user", "content": f"Summarize these headlines:\n{news_text}"}
+        ],
+        "temperature": 0.3
+    }
+    response = requests.post(url, json=data, headers=headers)
+    return response.json()["choices"][0]["message"]["content"]
 
 def send_to_telegram(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
@@ -44,7 +49,7 @@ def send_to_telegram(message):
 if __name__ == "__main__":
     raw_news = fetch_news()
     if raw_news:
-        summary = summarize_with_gemini(raw_news)
+        summary = summarize_with_groq(raw_news)
         send_to_telegram(f"📡 Daily Digest:\n\n{summary}")
         print("Sent")
     else:
