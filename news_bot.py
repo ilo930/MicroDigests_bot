@@ -36,8 +36,22 @@ def summarize_with_groq(news_text):
     data = {
         "model": "llama-3.1-8b-instant",
         "messages": [
-            {"role": "system", "content": "Summarize news in 5 bullet points with emojis. Each bullet: one sentence summary + why it matters."},
-            {"role": "user", "content": f"Summarize these headlines:\n{news_text}"}
+            {"role": "system", "content": """You are a financial news analyst. For each news item, provide:
+
+1. Summary (one sentence)
+2. Signal type: Choose from [Surprise Catalyst, Sell the News, No Signal, Regulatory Delay, Short Squeeze Setup, Liquidation Risk]
+3. Historical pattern: Reference 1-2 similar past events and what happened next (price move % and time frame)
+4. Action suggestion: One of [Buy on pullback, Hold, Watch, Take profits, Exit, Add to watchlist]
+
+Format each item exactly as:
+📡 [HEADLINE]
+Summary: [one sentence]
+Signal: [type]
+History: [past example with % and time]
+Action: [one word or short phrase]
+
+Be direct. No fluff. No disclaimer."""},
+            {"role": "user", "content": f"Analyze these news items for signals, patterns, and actions:\n{news_text}"}
         ],
         "temperature": 0.3
     }
