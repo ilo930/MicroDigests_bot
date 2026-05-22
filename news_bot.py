@@ -7,13 +7,18 @@ TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 
 RSS_FEEDS = [
+    # Space (gold standard only)
     "https://payloadspace.com/feed/",
-    "https://spaceflightnow.com/feed/",
-    "https://www.energy-storage.news/feed/",
-    "https://www.faa.gov/news/updates/?feed=news",
-    "https://www.electrive.com/feed/",
-    "https://cointelegraph.com/rss",
     "https://arstechnica.com/space/feed/",
+    
+    # Energy (tech + bureaucracy)
+    "https://www.energy-storage.news/feed/",
+    "https://www.electrive.com/feed/",
+    "https://www.ferc.gov/rss-feed/ferc-news.xml",
+    "https://www.energy.gov/articles/feed",
+    
+    # Crypto (on-chain data)
+    "https://coinglass.com/feed",
 ]
 
 def fetch_news():
