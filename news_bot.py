@@ -34,28 +34,28 @@ def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
         system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
-CRITICAL CONTEXT RULE: You HAVE access to knowledge about past energy storage projects. If a company has done similar deals before (like Spearmint's previous Texas BESS projects), mention the year. Only use "No clear precedent" for genuinely new situations.
-
-CRITICAL FORMATTING RULES:
-- After each item, put EXACTLY ONE blank line
-- Do NOT put blank lines inside an item
-- Do NOT use --- or any other separators
+CRITICAL HONESTY RULE: If you do not KNOW a specific historical example with certainty, write "No clear precedent". Never invent companies, dates, or deals.
 
 For each item that qualifies, output EXACTLY this format:
 
-🚀 <strong>Headline here</strong>
+<strong><em>🚀 HEADLINE TEXT IN ALL CAPS HERE</em></strong>
 <b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
-<b>Why it matters</b> One sentence
-<b>Context</b> Be specific with year if known
-<b>Action</b> Buy on pullback / Watch / Take profits / Avoid / Hedge
+<b>Why it matters</b> One sentence. Be specific about dollars, megawatts, or policy impact.
+<b>Context</b> "No clear precedent" OR a real example you are certain of
+<b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid
 
-THEN exactly ONE blank line before next item.
+ACTION GUIDELINES:
+- Aggressive Buy: First-mover advantage, no competition
+- Buy on pullback: Good news but wait for dip
+- Watch: Needs more data or execution risk
+- Take profits: Peak valuation or regulatory headwind
+- Avoid: Structural problem or bad timing
 
-INCLUDE an item if it contains ANY of:
-- Investment over $10 million
-- Regulatory filing or policy change
-- Supply constraint or shortage
-- Grid interconnection or transmission update
+FORMATTING RULES:
+- Put EXACTLY ONE blank line between items
+- Headlines MUST be in ALL CAPS
+- NEVER duplicate the same headline twice
+- NEVER output "No Signal" items
 
 Use emojis: 🚀 Space, ⚡ Energy Grid, 🔋 Storage, 🏛️ Policy
 
@@ -82,7 +82,7 @@ If no launches found, output: "No launches in today's news."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
+            {"role": "user", "content": f"Analyze these news items. Include ALL that qualify:\n{news_text}"}
         ],
         "temperature": 0.1
     }
@@ -96,6 +96,8 @@ If no launches found, output: "No launches in today's news."""
     return result["choices"][0]["message"]["content"]
 
 def clean_spacing(text):
+    if not text:
+        return text
     # Replace 3 or more consecutive newlines with exactly 2 newlines
     text = re.sub(r'\n{3,}', '\n\n', text)
     # Remove spaces at start of lines
