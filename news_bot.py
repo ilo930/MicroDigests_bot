@@ -20,61 +20,54 @@ def fetch_news():
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
-            for entry in feed.entries[:5]:
+            for entry in feed.entries[:6]:  # Slightly expanded lookback per feed
                 title_lower = entry.title.lower()
-                noise_keywords = ['podcast', 'video', 'interview', 'opinion', 'philosophical']
+                noise_keywords = ['podcast', 'video', 'interview', 'opinion', 'philosophical', 'roundup']
                 if any(kw in title_lower for kw in noise_keywords):
                     continue
                 all_entries.append(f"• {entry.title}\n  {entry.link}")
         except Exception as e:
             print(f"Error with {feed_url}: {e}")
-    return "\n\n".join(all_entries[:25])
+    return "\n\n".join(all_entries[:30])
 
 def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
-        system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
+        system_prompt = """You are an asymmetric macro intelligence analyst evaluating energy grid infrastructure and space markets. Your job is to translate non-public or private industry events into actionable ecosystem proxy trades.
 
-CRITICAL HONESTY RULE: If you do not KNOW a specific historical example with certainty, write "No clear precedent". Never invent companies, dates, or deals.
+### THE BLAST RADIUS RULE
+You are forbidden from stating "Private" or "No direct trade." You must use the ecosystem mapping provided below to link private sector capital expansions, infrastructure upgrades, or regulatory bottlenecks directly to public proxy stocks.
 
-For each item that qualifies, output EXACTLY this format:
+### HARDCODED ECOSYSTEM MAPPING
+- Space Launch Capacity / Bottlenecks / Policy -> Rocket Lab ($RKLB), Spire Global ($SPIR), Planet Labs ($PL).
+- Grid Infrastructure / Texas ERCOT / BESS / Storage Deployment -> Fluence Energy ($FLNC), Tesla ($TSLA), GE Vernova ($GEV).
+- Hydrogen Production / Industrial Infrastructure -> Plug Power ($PLUG), Bloom Energy ($BE).
 
-<strong><em>🚀 HEADLINE TEXT IN ALL CAPS HERE</em></strong>
-<b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
-<b>Why it matters</b> One sentence. Be specific about dollars, megawatts, or policy impact.
-<b>Context</b> "No clear precedent" OR a real example you are certain of
-<b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid
+### CONDITIONAL FILTERING RULE
+Evaluate every article against these explicit core concepts: [FAA/FCC Launch License, Interconnection Queue, FERC Ruling, DOE Loan, PPA, Capacity Bottleneck]. If an entry is simply generic consumer PR, a historical feature, or cannot be directly tied to the financial blast radius of these public proxies, DROP IT ENTIRELY. Do not output anything for it.
 
-ACTION GUIDELINES:
-- Aggressive Buy: First-mover advantage, no competition
-- Buy on pullback: Good news but wait for dip
-- Watch: Needs more data or execution risk
-- Take profits: Peak valuation or regulatory headwind
-- Avoid: Structural problem or bad timing
+### FORMATTING OUTPUT REQUIREMENT
+For each valid item that qualifies, output EXACTLY this format:
 
-FORMATTING RULES:
-- Put EXACTLY ONE blank line between items
-- Headlines MUST be in ALL CAPS
-- NEVER duplicate the same headline twice
-- NEVER output "No Signal" items
+<strong>📡 SIGNAL: [INSERT CORPORATE ENTITY OR AGENCY]</strong>
+<b>Glossary Match:</b> [Insert specific term match from list above]
+<b>The Vector:</b> One clear sentence explaining the physical shift or capital movement.
+<b>Public Proxies (Blast Radius):</b> List explicit tickers from the cheat sheet with a (+) for bullish or (-) for bearish.
+<b>The Asymmetric Angle:</b> Explain the structural connection between this event and the public stock's upcoming revenue or bottleneck relief. Why will retail miss this?
+<b>Tactical Stance:</b> Accumulate / Hedge / Watch + Short trigger condition.
 
-Use emojis: 🚀 Space, ⚡ Energy Grid, 🔋 Storage, 🏛️ Policy
-
-Keep response under 3500 characters."""
+Put EXACTLY ONE blank line between items. Do not invent metrics or prices if you do not know them."""
 
     else:
-        system_prompt = """You are a space launch tracker.
-
-Extract ALL rocket launches mentioned.
+        system_prompt = """You are an orbital launch tracker.
+Extract active rocket launches mentioned.
 
 Output EXACTLY this format:
-
-🚀 Launch: Rocket name
-<b>Payload</b> What was launched
-<b>Date</b> Date or "Upcoming"
+🚀 <b>Launch:</b> Rocket name
+<b>Payload:</b> What was launched
+<b>Date:</b> Date or "Upcoming"
 
 Then ONE empty line between launches.
-
-If no launches found, output: "No launches in today's news."""
+If no launches found, output: "No launches in today's news.\""""
 
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
@@ -82,7 +75,7 @@ If no launches found, output: "No launches in today's news."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items. Include ALL that qualify:\n{news_text}"}
+            {"role": "user", "content": f"Analyze these news items. Filter heavily and output only high-signal events:\n{news_text}"}
         ],
         "temperature": 0.1
     }
@@ -98,13 +91,9 @@ If no launches found, output: "No launches in today's news."""
 def clean_spacing(text):
     if not text:
         return text
-    # Replace 3 or more consecutive newlines with exactly 2 newlines
     text = re.sub(r'\n{3,}', '\n\n', text)
-    # Remove spaces at start of lines
     lines = [line.strip() for line in text.split('\n')]
-    # Rejoin with single newlines
     cleaned = '\n'.join(lines)
-    # Ensure exactly double newlines between items
     cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
     return cleaned
 
@@ -132,7 +121,7 @@ if __name__ == "__main__":
     raw_news = fetch_news()
     
     if raw_news and len(raw_news) > 50:
-        print("Getting high-signal analysis...")
+        print("Getting high-signal ecosystem analysis...")
         signal_analysis = analyze_with_groq(raw_news, "signal")
         signal_analysis = clean_spacing(signal_analysis)
         
@@ -140,12 +129,12 @@ if __name__ == "__main__":
         launch_log = analyze_with_groq(raw_news, "launch")
         launch_log = clean_spacing(launch_log)
         
-        today = datetime.datetime.now().strftime('%Y%m%d')
+        today = datetime.datetime.now().strftime('%Y-%m-%d')
         
-        header = f"🟢 S I G N A L   D I G E S T   {today}\n\n"
+        header = f"🟢 <b>E C O S Y S T E M  D I G E S T</b> ｜ {today}\n\n"
         send_to_telegram(header + signal_analysis)
         
-        launch_header = f"🚀 L   A   U   N   C   H   L   O   G   {today}\n\n"
+        launch_header = f"🚀 <b>L A U N C H  L O G</b> ｜ {today}\n\n"
         send_to_telegram(launch_header + launch_log)
         
         print("Done")
