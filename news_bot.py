@@ -2,6 +2,7 @@ import feedparser
 import requests
 import os
 import re
+import datetime
 
 TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
@@ -72,10 +73,12 @@ Use emojis: 🚀 Space, ⚡ Energy Grid, 🔋 Storage, 🏛️ Policy, 📊 Cryp
 
 CRITICAL: Do NOT filter items out. Every item gets analyzed. If an item is truly noise (opinion piece, price prediction, routine update), label it "No Signal" with action "Ignore".
 
-Be direct. No introductions. No fluff."""},
+Be direct. No introductions. No fluff.
+
+IMPORTANT: Keep your entire response under 3800 characters total."""},
             {"role": "user", "content": f"Analyze each news item:\n{news_text}"}
         ],
-        "temperature": 0.2  # Slightly higher for better classification
+        "temperature": 0.2
     }
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
@@ -87,14 +90,19 @@ Be direct. No introductions. No fluff."""},
     
     return result["choices"][0]["message"]["content"]
 
-# FIXED: Removed duplicate function
 def send_to_telegram(message):
+    # Truncate to Telegram's 4096 character limit
+    if len(message) > 4096:
+        message = message[:4000] + "\n\n... (truncated)"
+    
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
     try:
         response = requests.post(url, json=payload)
         if response.status_code != 200:
             print(f"Telegram error: {response.text}")
+        else:
+            print("Telegram sent successfully")
     except Exception as e:
         print(f"Failed to send: {e}")
 
@@ -102,11 +110,15 @@ if __name__ == "__main__":
     print("Fetching news...")
     raw_news = fetch_news()
     
-    if raw_news and len(raw_news) > 50:  # Ensure we have content
+    if raw_news and len(raw_news) > 50:
         print(f"Found {len(raw_news.split('•'))-1} items. Sending to Groq...")
         summary = summarize_with_groq(raw_news)
-        send_to_telegram(f"📡 Daily Digest - {__import__('datetime').datetime.now().strftime('%Y-%m-%d')}\n\n{summary}")
+        
+        # ADDED: Print Groq output to logs so you can see it
+        print(f"\n=== GROQ OUTPUT ===\n{summary}\n=== END GROQ OUTPUT ===\n")
+        
+        send_to_telegram(f"📡 Daily Digest - {datetime.datetime.now().strftime('%Y-%m-%d')}\n\n{summary}")
         print("News sent")
     else:
-        send_to_telegram(f"📡 Daily Digest - {__import__('datetime').datetime.now().strftime('%Y-%m-%d')}\n\nNo actionable news fetched today. Check RSS feeds.")
-        print("No news")
+        print("No news fetched")
+        send_to_telegram(f"📡 Daily Digest - {datetime.datetime.now().strftime('%Y-%m-%d')}\n\nNo actionable news fetched today. Check RSS feeds.")
