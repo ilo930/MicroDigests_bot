@@ -31,7 +31,7 @@ def fetch_news():
     return "\n\n".join(all_entries[:25])
 
 def analyze_with_groq(news_text, analysis_type):
-   if analysis_type == "signal":
+    if analysis_type == "signal":
         system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
 CRITICAL FORMATTING RULES:
@@ -127,11 +127,9 @@ if __name__ == "__main__":
         
         today = datetime.datetime.now().strftime('%Y%m%d')
         
-        # Send signal digest
         header = f"🟢 S I G N A L   D I G E S T   {today}\n\n"
         send_to_telegram(header + signal_analysis)
         
-        # Send launch log
         launch_header = f"🚀 L   A   U   N   C   H   L   O   G   {today}\n\n"
         send_to_telegram(launch_header + launch_log)
         
