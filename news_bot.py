@@ -31,26 +31,31 @@ def fetch_news():
     return "\n\n".join(all_entries[:25])
 
 def analyze_with_groq(news_text, analysis_type):
-    if analysis_type == "signal":
+   if analysis_type == "signal":
         system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
-INCLUDE an item if it contains ANY of these:
-- Investment over $10 million (Capital Deployment)
-- Regulatory filing or policy change (Regulatory Change)
-- Supply constraint or shortage (Supply Shock)
-- Grid interconnection or transmission update (Technical Setup)
+CRITICAL FORMATTING RULES:
+- After each item, put EXACTLY ONE blank line (not two, not three)
+- Do NOT put blank lines inside an item
+- Do NOT use --- or any other separators
 
-For each item that qualifies, output EXACTLY this format:
+For each item that qualifies, output EXACTLY this format (with NO extra spaces):
 
 🚀 <strong>Headline here</strong>
 <b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
 <b>Why it matters</b> One sentence
-<b>Context</b> Like X in YYYY or "No clear precedent"
+<b>Context</b> Use ONLY "No clear precedent" if truly unknown. Otherwise be specific.
 <b>Action</b> Buy on pullback / Watch / Take profits / Avoid / Hedge
 
-Then ONE empty line between items.
+THEN exactly ONE blank line before next item.
 
-If you are unsure whether to include an item, INCLUDE it. Better to send a false positive than miss a signal.
+HALLUCINATION RULE: If you don't know a specific historical example, write "No clear precedent". NEVER write "Like X in 2025" without a real year and real event.
+
+INCLUDE an item if it contains ANY of:
+- Investment over $10 million
+- Regulatory filing or policy change
+- Supply constraint or shortage
+- Grid interconnection or transmission update
 
 Use emojis: 🚀 Space, ⚡ Energy Grid, 🔋 Storage, 🏛️ Policy
 
