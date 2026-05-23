@@ -69,7 +69,7 @@ Output EXACTLY this format with NO extra blank lines inside each launch:
 
 Then ONE empty line between launches.
 
-If no launches found, output: "No launches in today's news.""
+If no launches found, output: "No launches in today's news."""
 
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
@@ -120,13 +120,13 @@ if __name__ == "__main__":
         print("Getting launch log...")
         launch_log = analyze_with_groq(raw_news, "launch")
         
-        today = datetime.datetime.now().strftime('%Y%m%d')  # No dashes
+        today = datetime.datetime.now().strftime('%Y%m%d')
         
-        # Send signal digest even if it's short
+        # Send signal digest
         header = f"🟢 S I G N A L   D I G E S T   {today}\n\n"
         send_to_telegram(header + signal_analysis)
         
-        # Send launch log with spaced typo
+        # Send launch log
         launch_header = f"🚀 L   A   U   N   C   H   L   O   G   {today}\n\n"
         send_to_telegram(launch_header + launch_log)
         
