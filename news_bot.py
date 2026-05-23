@@ -32,34 +32,36 @@ def fetch_news():
 
 def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
-        system_prompt = """You are a cynical market analyst. 
+        system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
-CRITICAL: If an item has NO actionable market impact, DO NOT include it. Skip it completely.
+INCLUDE an item if it contains ANY of these:
+- Investment over $10 million (Capital Deployment)
+- Regulatory filing or policy change (Regulatory Change)
+- Supply constraint or shortage (Supply Shock)
+- Grid interconnection or transmission update (Technical Setup)
 
-For items that SURVIVE, output EXACTLY this format:
+For each item that qualifies, output EXACTLY this format:
 
 🚀 <strong>Headline here</strong>
 <b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
-<b>Why it matters</b> One sentence explaining actual market impact
+<b>Why it matters</b> One sentence
 <b>Context</b> Like X in YYYY or "No clear precedent"
 <b>Action</b> Buy on pullback / Watch / Take profits / Avoid / Hedge
 
-Then ONE empty line. Do NOT use --- dividers.
+Then ONE empty line between items.
 
-Use emojis: 🚀 for Space, ⚡ for Energy Grid, 🔋 for Storage, 🏛️ for Policy
+If you are unsure whether to include an item, INCLUDE it. Better to send a false positive than miss a signal.
 
-NEVER output "No Signal" or "Ignore". Omit those items entirely.
-
-If EVERY item is noise, output exactly: "No high-signal items today."
+Use emojis: 🚀 Space, ⚡ Energy Grid, 🔋 Storage, 🏛️ Policy
 
 Keep response under 3500 characters."""
 
-    else:  # launch log
+    else:
         system_prompt = """You are a space launch tracker.
 
-Extract ONLY routine rocket launches (SpaceX, Rocket Lab, ULA, etc.).
+Extract ALL rocket launches mentioned.
 
-Output EXACTLY this format with NO extra spaces:
+Output EXACTLY this format with NO extra blank lines inside each launch:
 
 🚀 Launch: Rocket name
 <b>Payload</b> What was launched
@@ -67,11 +69,7 @@ Output EXACTLY this format with NO extra spaces:
 
 Then ONE empty line between launches.
 
-Do NOT add blank lines inside each launch entry.
-
-If no launches found, output: "No launches in today's news."
-
-Keep response under 2000 characters."""
+If no launches found, output: "No launches in today's news.""
 
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
@@ -79,9 +77,9 @@ Keep response under 2000 characters."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
+            {"role": "user", "content": f"Analyze these news items. Include ALL that qualify:\n{news_text}"}
         ],
-        "temperature": 0.2
+        "temperature": 0.1
     }
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
@@ -92,11 +90,10 @@ Keep response under 2000 characters."""
     
     return result["choices"][0]["message"]["content"]
 
-def send_to_telegram(message, topic=None):
+def send_to_telegram(message):
     if not message or len(message) < 10:
         return
     
-    # Truncate if too long
     if len(message) > 4000:
         message = message[:3950] + "\n\n... (truncated)"
     
@@ -108,7 +105,7 @@ def send_to_telegram(message, topic=None):
         if response.status_code != 200:
             print(f"Telegram error: {response.text}")
         else:
-            print(f"Sent {topic or 'message'} successfully")
+            print("Sent successfully")
     except Exception as e:
         print(f"Failed to send: {e}")
 
@@ -123,19 +120,17 @@ if __name__ == "__main__":
         print("Getting launch log...")
         launch_log = analyze_with_groq(raw_news, "launch")
         
-        today = datetime.datetime.now().strftime('%Y-%m-%d')
+        today = datetime.datetime.now().strftime('%Y%m%d')  # No dashes
         
-        # Signal digest with weird typo to make it stand out
-        if signal_analysis and signal_analysis != "No high-signal items today.":
-            send_to_telegram(f"📡 S1GNAL D1GEST {today}\n\n{signal_analysis}", "signal")
-        else:
-            send_to_telegram(f"📡 S1GNAL D1GEST {today}\n\nNo high-signal items today.", "signal")
+        # Send signal digest even if it's short
+        header = f"🟢 S I G N A L   D I G E S T   {today}\n\n"
+        send_to_telegram(header + signal_analysis)
         
-        # Launch log with different weird typo
-        if launch_log and launch_log != "No launches in today's news.":
-            send_to_telegram(f"🚀 L4UNCH L0G {today}\n\n{launch_log}", "launch")
+        # Send launch log with spaced typo
+        launch_header = f"🚀 L   A   U   N   C   H   L   O   G   {today}\n\n"
+        send_to_telegram(launch_header + launch_log)
         
         print("Done")
     else:
-        send_to_telegram(f"No news fetched on {datetime.datetime.now().strftime('%Y-%m-%d')}")
+        send_to_telegram(f"No news fetched on {datetime.datetime.now().strftime('%Y%m%d')}")
         print("No news")
