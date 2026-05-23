@@ -91,12 +91,16 @@ IMPORTANT: Keep your entire response under 3800 characters total."""},
     return result["choices"][0]["message"]["content"]
 
 def send_to_telegram(message):
+    # Remove HTML tags that might be malformed
+    import re
+    clean_message = re.sub(r'<[^>]+>', '', message)
+    
     # Truncate to Telegram's 4096 character limit
-    if len(message) > 4096:
-        message = message[:4000] + "\n\n... (truncated)"
+    if len(clean_message) > 4096:
+        clean_message = clean_message[:4000] + "\n\n... (truncated)"
     
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
+    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": clean_message}  # Removed parse_mode
     try:
         response = requests.post(url, json=payload)
         if response.status_code != 200:
