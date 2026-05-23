@@ -38,15 +38,15 @@ CRITICAL: If an item has NO actionable market impact, DO NOT include it. Skip it
 
 For items that SURVIVE, output EXACTLY this format:
 
-<strong>🚀 Headline here</strong>
-<strong>Signal:</strong> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
-<strong>Why it matters:</strong> One sentence
-<strong>Context:</strong> Like X in YYYY or "No clear precedent"
-<strong>Action:</strong> Buy on pullback / Watch / Take profits / Avoid / Hedge
+🚀 <strong>Headline here</strong>
+<b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
+<b>Why it matters</b> One sentence explaining actual market impact
+<b>Context</b> Like X in YYYY or "No clear precedent"
+<b>Action</b> Buy on pullback / Watch / Take profits / Avoid / Hedge
 
-Then a blank line, then next item.
+Then ONE empty line. Do NOT use --- dividers.
 
-Use emojis: 🚀 Space, ⚡ Energy, 🔋 Storage, 🏛️ Policy
+Use emojis: 🚀 for Space, ⚡ for Energy Grid, 🔋 for Storage, 🏛️ for Policy
 
 NEVER output "No Signal" or "Ignore". Omit those items entirely.
 
@@ -59,15 +59,17 @@ Keep response under 3500 characters."""
 
 Extract ONLY routine rocket launches (SpaceX, Rocket Lab, ULA, etc.).
 
-Output EXACTLY this format:
+Output EXACTLY this format with NO extra spaces:
 
-<strong>🚀 Launch: Rocket name</strong>
-<strong>Payload:</strong> What was launched
-<strong>Date:</strong> Date or "Upcoming"
+🚀 Launch: Rocket name
+<b>Payload</b> What was launched
+<b>Date</b> Date or "Upcoming"
 
-Then a blank line, then next launch.
+Then ONE empty line between launches.
 
-If no launches found, output: "No launches in today's news.""
+Do NOT add blank lines inside each launch entry.
+
+If no launches found, output: "No launches in today's news."
 
 Keep response under 2000 characters."""
 
@@ -93,16 +95,6 @@ Keep response under 2000 characters."""
 def send_to_telegram(message, topic=None):
     if not message or len(message) < 10:
         return
-    
-    # Remove any malformed HTML and ensure <strong> tags are balanced
-    message = re.sub(r'</?b>', '<strong>', message)  # Replace <b> with <strong>
-    message = re.sub(r'</?strong>', '<strong>', message)
-    
-    # Ensure all <strong> tags are closed
-    open_count = message.count('<strong>')
-    close_count = message.count('</strong>')
-    if open_count > close_count:
-        message += '</strong>' * (open_count - close_count)
     
     # Truncate if too long
     if len(message) > 4000:
@@ -131,16 +123,17 @@ if __name__ == "__main__":
         print("Getting launch log...")
         launch_log = analyze_with_groq(raw_news, "launch")
         
-        # Send both messages
         today = datetime.datetime.now().strftime('%Y-%m-%d')
         
+        # Signal digest with weird typo to make it stand out
         if signal_analysis and signal_analysis != "No high-signal items today.":
-            send_to_telegram(f"📡 SIGNAL DIGEST {today}\n\n{signal_analysis}", "signal")
+            send_to_telegram(f"📡 S1GNAL D1GEST {today}\n\n{signal_analysis}", "signal")
         else:
-            send_to_telegram(f"📡 SIGNAL DIGEST {today}\n\nNo high-signal items today.", "signal")
+            send_to_telegram(f"📡 S1GNAL D1GEST {today}\n\nNo high-signal items today.", "signal")
         
+        # Launch log with different weird typo
         if launch_log and launch_log != "No launches in today's news.":
-            send_to_telegram(f"🚀 LAUNCH LOG {today}\n\n{launch_log}", "launch")
+            send_to_telegram(f"🚀 L4UNCH L0G {today}\n\n{launch_log}", "launch")
         
         print("Done")
     else:
