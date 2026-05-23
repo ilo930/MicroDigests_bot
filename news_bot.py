@@ -34,22 +34,22 @@ def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
         system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
+CRITICAL CONTEXT RULE: You HAVE access to knowledge about past energy storage projects. If a company has done similar deals before (like Spearmint's previous Texas BESS projects), mention the year. Only use "No clear precedent" for genuinely new situations.
+
 CRITICAL FORMATTING RULES:
-- After each item, put EXACTLY ONE blank line (not two, not three)
+- After each item, put EXACTLY ONE blank line
 - Do NOT put blank lines inside an item
 - Do NOT use --- or any other separators
 
-For each item that qualifies, output EXACTLY this format (with NO extra spaces):
+For each item that qualifies, output EXACTLY this format:
 
 🚀 <strong>Headline here</strong>
 <b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
 <b>Why it matters</b> One sentence
-<b>Context</b> Use ONLY "No clear precedent" if truly unknown. Otherwise be specific.
+<b>Context</b> Be specific with year if known
 <b>Action</b> Buy on pullback / Watch / Take profits / Avoid / Hedge
 
 THEN exactly ONE blank line before next item.
-
-HALLUCINATION RULE: If you don't know a specific historical example, write "No clear precedent". NEVER write "Like X in 2025" without a real year and real event.
 
 INCLUDE an item if it contains ANY of:
 - Investment over $10 million
@@ -66,7 +66,7 @@ Keep response under 3500 characters."""
 
 Extract ALL rocket launches mentioned.
 
-Output EXACTLY this format with NO extra blank lines inside each launch:
+Output EXACTLY this format:
 
 🚀 Launch: Rocket name
 <b>Payload</b> What was launched
@@ -82,7 +82,7 @@ If no launches found, output: "No launches in today's news."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items. Include ALL that qualify:\n{news_text}"}
+            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
         ],
         "temperature": 0.1
     }
@@ -94,6 +94,17 @@ If no launches found, output: "No launches in today's news."""
         return "⚠️ API error"
     
     return result["choices"][0]["message"]["content"]
+
+def clean_spacing(text):
+    # Replace 3 or more consecutive newlines with exactly 2 newlines
+    text = re.sub(r'\n{3,}', '\n\n', text)
+    # Remove spaces at start of lines
+    lines = [line.strip() for line in text.split('\n')]
+    # Rejoin with single newlines
+    cleaned = '\n'.join(lines)
+    # Ensure exactly double newlines between items
+    cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
+    return cleaned
 
 def send_to_telegram(message):
     if not message or len(message) < 10:
@@ -121,9 +132,11 @@ if __name__ == "__main__":
     if raw_news and len(raw_news) > 50:
         print("Getting high-signal analysis...")
         signal_analysis = analyze_with_groq(raw_news, "signal")
+        signal_analysis = clean_spacing(signal_analysis)
         
         print("Getting launch log...")
         launch_log = analyze_with_groq(raw_news, "launch")
+        launch_log = clean_spacing(launch_log)
         
         today = datetime.datetime.now().strftime('%Y%m%d')
         
