@@ -8,11 +8,20 @@ TELEGRAM_TOKEN = os.environ["TELEGRAM_BOT_TOKEN"]
 TELEGRAM_CHAT_ID = os.environ["TELEGRAM_CHAT_ID"]
 GROQ_API_KEY = os.environ["GROQ_API_KEY"]
 
+# --- THE TELEMETRY PIPELINE ---
+# These are no longer general news feeds. These are raw agency endpoints.
 RSS_FEEDS = [
-    "https://arstechnica.com/space/feed/",
-    "https://spaceflightnow.com/feed/",
-    "https://www.energy-storage.news/feed/",
-    "https://www.utilitydive.com/feeds/news/",
+    # 1. Raw Federal Register FAA Space Telemetry
+    "https://www.federalregister.gov/api/v1/documents.rss?conditions[agencies][]=federal-aviation-administration&conditions[term]=space",
+    # 2. Raw FCC Electronic Document Feed (STAs, Satellite tracking)
+    "https://www.fcc.gov/feeds/edocs.xml",
+    # 3. Raw FERC Daily Filings and Grid Queue Reforms
+    "https://elibrary.ferc.gov/eLibrary/rss/whatsnew",
+    # 4. Raw Dept of Energy (DOE) Loan and Policy Releases
+    "https://www.energy.gov/api/v1/news.rss",
+    # 5. Core Institutional Policy Analysis (The Filtered Exception)
+    "https://payloadspace.com/feed/",
+    "https://www.energy-storage.news/feed/"
 ]
 
 def fetch_news():
@@ -20,7 +29,7 @@ def fetch_news():
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
-            for entry in feed.entries[:6]:  # Pull slightly more to ensure high-signal coverage after filtering
+            for entry in feed.entries[:6]:  
                 title_lower = entry.title.lower()
                 noise_keywords = ['podcast', 'video', 'interview', 'opinion', 'philosophical', 'roundup']
                 if any(kw in title_lower for kw in noise_keywords):
@@ -32,42 +41,42 @@ def fetch_news():
 
 def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
-        system_prompt = """You are an asymmetric macro intelligence analyst evaluating energy grid infrastructure and space markets. Your job is to translate raw industry events into actionable ecosystem proxy trades.
+        system_prompt = """You are an asymmetric macro intelligence analyst tracking space policy bottlenecks and power grid regulation. Your core objective is to analyze regulatory filings, agency updates, and institutional policy shifts to issue high-conviction proxy calls 14 days before mainstream financial media identifies the trend.
 
-### ANTI-HALLUNCIATION & COGNITIVE RULES
-1. STICK STRICTLY TO THE TEXT: You are forbidden from inventing features, technologies, locations, or byproducts that are not explicitly cited in the input headlines. If a solar/storage article does not explicitly say it produces hydrogen, DO NOT map it to the hydrogen ecosystem.
-2. BAN BOILERPLATE: Do not copy and paste the same repetitive generic reasoning across different items. Every "Asymmetric Angle" must focus entirely on the unique real-world mechanics of that exact headline (e.g., call out specific state bills, corporate names, or regional grid conditions).
-3. NO FABRICATIONS: If you do not know a specific piece of data or historical connection with absolute certainty, do not guess or invent it.
+### CRITICAL COGNITIVE PROTOCOLS
+1. SPOT THE REACTION GAP: Look specifically for regulatory gatekeeping. An approved FAA Launch License, an FCC Special Temporary Authority (STA) grant, a FERC cluster queue reform, or a Department of Energy (DOE) conditional loan guarantee are high-impact catalysts.
+2. REVENUE IMPACT: Distinguish between minor procedural paperwork and massive structural unlocks. (e.g., A streamlined "One-Stop" Office of Space Commerce certification speeds up time-to-market for payload operators like $PL or $SPIR; an oversubscribed CAISO/ERCOT interconnection cluster delay traps capital for grid integrators like $FLNC).
+3. PROXIES ONLY: Explicitly connect agency decisions to public tickers: Space ($RKLB, $SPIR, $PL), Grid ($FLNC, $TSLA, $GEV), Hydrogen ($PLUG, $BE). 
+4. MECHANICAL DIFFERENTIATION: You must distinguish between a new capital buildout (which drives physical hardware procurement) and a portfolio acquisition/asset flip (which is a secondary market paper transfer and does not create immediate hardware demand). If an item is an asset transfer, explicitly state that it yields zero immediate hardware revenue.
+5. STRICT BAN ON REPETITIVE PHRASES: Do not use boilerplate or lazy repetitive text across entries.
 
 ### THE BLAST RADIUS RULE
-You are forbidden from stating "Private" or "No direct trade." You must use the ecosystem mapping provided below to link private sector capital expansions, infrastructure upgrades, or regulatory bottlenecks directly to public proxy stocks.
+You are forbidden from stating "Private" or "No direct trade." You must use the ecosystem mapping provided below to link private sector adjustments directly to public proxy stocks.
 
-### HARDCODED ECOSYSTEM MAPPING
+### HARDCODED ECOSYSTEM & ASYMMETRIC DYNAMICS MAPPING
 - Space Launch Capacity / Bottlenecks / Policy -> Rocket Lab ($RKLB), Spire Global ($SPIR), Planet Labs ($PL).
+  *CRITICAL MACRO DYNAMIC:* SpaceX Starship milestones are competitive headwinds (-) for Rocket Lab ($RKLB) launch services, but serve as massive cost-reduction tailwinds (+) for satellite constellation operators/components providers like Spire ($SPIR) or Planet Labs ($PL) due to cheaper ride-share costs.
 - Grid Infrastructure / Texas ERCOT / BESS / Storage Deployment -> Fluence Energy ($FLNC), Tesla ($TSLA), GE Vernova ($GEV).
 - Hydrogen Production / Industrial Infrastructure -> Plug Power ($PLUG), Bloom Energy ($BE).
 
-### CONDITIONAL FILTERING RULE
-Evaluate every article against these explicit core concepts: [FAA/FCC Launch License, Interconnection Queue, FERC Ruling, DOE Loan, PPA, Capacity Bottleneck]. If an entry is simply generic consumer PR, a historical feature, or cannot be directly tied to the financial blast radius of these public proxies, DROP IT ENTIRELY. Do not output anything for it.
-
 ### FORMATTING OUTPUT REQUIREMENT
-For each valid item that qualifies, output EXACTLY this format:
+For each high-signal regulatory or bottleneck shift, output EXACTLY this format:
 
-<strong>📡 SIGNAL: [INSERT CORPORATE ENTITY OR AGENCY]</strong>
-<b>Glossary Match:</b> [Insert specific term match from list above]
-<b>The Vector:</b> One clear sentence explaining the physical shift or capital movement.
-<b>Public Proxies (Blast Radius):</b> List explicit tickers from the cheat sheet with a (+) for bullish or (-) for bearish.
-<b>The Asymmetric Angle:</b> Explain the structural connection between this event and the public stock's upcoming revenue or bottleneck relief. Why will retail miss this?
-<b>Tactical Stance:</b> Accumulate / Hedge / Watch + Short trigger condition.
+<strong>🏛️ REGULATORY SIGNAL: [GOVERNMENT AGENCY / REGULATOR]</strong>
+<b>Ecosystem Catalyst:</b> [FAA Part 450 / FCC STA / FERC Queue Reform / DOE 45V Voucher / Infrastructure Grant]
+<b>The Shift:</b> One hyper-specific sentence on what policy or timeline changed based strictly on the text.
+<b>Public Proxies (Blast Radius):</b> Tickers from your cheat sheet with a (+) or (-) indicator.
+<b>The Asymmetric Alpha:</b> Explain the 14-day lead. Why does a delay or approval here drastically alter the cash flow or time-to-market for the public proxy before retail notices?
+<b>Tactical Stance:</b> Accumulate / Hedge / Watch + Precise operational trigger condition.
 
-Put EXACTLY ONE blank line between items. Do not invent metrics or prices if you do not know them."""
+Filter ruthlessly. If an entry does not contain a specific regulatory shift, an institutional funding milestone, or a structural grid bottleneck update, output nothing."""
 
     else:
         system_prompt = """You are an orbital launch tracker.
 Extract active rocket launches mentioned.
 
 Output EXACTLY this format:
-🚀 <b>Launch:</b> Rocket name
+<b>Launch:</b> Rocket name
 <b>Payload:</b> What was launched
 <b>Date:</b> Date or "Upcoming"
 
@@ -82,7 +91,7 @@ If no launches found, output: "No launches in today's news.\""""
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"Analyze these news items. Filter heavily and output only high-signal events:\n{news_text}"}
         ],
-        "temperature": 0.0  # Dropped to absolute minimum to eliminate hallucination creativity
+        "temperature": 0.0  
     }
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
@@ -106,7 +115,6 @@ def send_to_telegram(message):
     if not message or len(message) < 10:
         return
     
-    # Cap strictly below Telegram's 4096 character markdown/HTML rendering crash zone
     if len(message) > 4000:
         message = message[:3950] + "\n\n... (truncated due to length rules)"
     
@@ -137,10 +145,10 @@ if __name__ == "__main__":
         
         today = datetime.datetime.now().strftime('%Y-%m-%d')
         
-        header = f"🟢 <b>E C O S Y S T E M  D I G E S T</b> ｜ {today}\n\n"
+        header = f"<b>E C O S Y S T E M  D I G E S T</b> ｜ {today}\n\n"
         send_to_telegram(header + signal_analysis)
         
-        launch_header = f"🚀 <b>L A U N C H  L O G</b> ｜ {today}\n\n"
+        launch_header = f"<b>L A U N C H  L O G</b> ｜ {today}\n\n"
         send_to_telegram(launch_header + launch_log)
         
         print("Done")
