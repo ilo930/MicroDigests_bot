@@ -20,7 +20,7 @@ def fetch_news():
     for feed_url in RSS_FEEDS:
         try:
             feed = feedparser.parse(feed_url)
-            for entry in feed.entries[:6]:  # Slightly expanded lookback per feed
+            for entry in feed.entries[:6]:  # Pull slightly more to ensure high-signal coverage after filtering
                 title_lower = entry.title.lower()
                 noise_keywords = ['podcast', 'video', 'interview', 'opinion', 'philosophical', 'roundup']
                 if any(kw in title_lower for kw in noise_keywords):
@@ -32,7 +32,12 @@ def fetch_news():
 
 def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
-        system_prompt = """You are an asymmetric macro intelligence analyst evaluating energy grid infrastructure and space markets. Your job is to translate non-public or private industry events into actionable ecosystem proxy trades.
+        system_prompt = """You are an asymmetric macro intelligence analyst evaluating energy grid infrastructure and space markets. Your job is to translate raw industry events into actionable ecosystem proxy trades.
+
+### ANTI-HALLUNCIATION & COGNITIVE RULES
+1. STICK STRICTLY TO THE TEXT: You are forbidden from inventing features, technologies, locations, or byproducts that are not explicitly cited in the input headlines. If a solar/storage article does not explicitly say it produces hydrogen, DO NOT map it to the hydrogen ecosystem.
+2. BAN BOILERPLATE: Do not copy and paste the same repetitive generic reasoning across different items. Every "Asymmetric Angle" must focus entirely on the unique real-world mechanics of that exact headline (e.g., call out specific state bills, corporate names, or regional grid conditions).
+3. NO FABRICATIONS: If you do not know a specific piece of data or historical connection with absolute certainty, do not guess or invent it.
 
 ### THE BLAST RADIUS RULE
 You are forbidden from stating "Private" or "No direct trade." You must use the ecosystem mapping provided below to link private sector capital expansions, infrastructure upgrades, or regulatory bottlenecks directly to public proxy stocks.
@@ -77,7 +82,7 @@ If no launches found, output: "No launches in today's news.\""""
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": f"Analyze these news items. Filter heavily and output only high-signal events:\n{news_text}"}
         ],
-        "temperature": 0.1
+        "temperature": 0.0  # Dropped to absolute minimum to eliminate hallucination creativity
     }
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
@@ -101,8 +106,9 @@ def send_to_telegram(message):
     if not message or len(message) < 10:
         return
     
+    # Cap strictly below Telegram's 4096 character markdown/HTML rendering crash zone
     if len(message) > 4000:
-        message = message[:3950] + "\n\n... (truncated)"
+        message = message[:3950] + "\n\n... (truncated due to length rules)"
     
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     payload = {"chat_id": TELEGRAM_CHAT_ID, "text": message, "parse_mode": "HTML"}
