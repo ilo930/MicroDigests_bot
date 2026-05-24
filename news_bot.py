@@ -120,6 +120,26 @@ def clean_spacing(text):
     cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
     return cleaned
 
+def fix_html_tags(text):
+    # Ensure all <strong> and <em> tags are properly closed
+    # Count opening and closing tags
+    strong_open = text.count('<strong>')
+    strong_close = text.count('</strong>')
+    em_open = text.count('<em>')
+    em_close = text.count('</em>')
+    b_open = text.count('<b>')
+    b_close = text.count('</b>')
+    
+    # Add missing closing tags
+    if strong_open > strong_close:
+        text += '</strong>' * (strong_open - strong_close)
+    if em_open > em_close:
+        text += '</em>' * (em_open - em_close)
+    if b_open > b_close:
+        text += '</b>' * (b_open - b_close)
+    
+    return text
+    
 def send_to_telegram(message):
     if not message or len(message) < 10:
         return
@@ -157,7 +177,9 @@ if __name__ == "__main__":
         today = datetime.datetime.now().strftime('%Y%m%d')
         
         header = f"🟢 S I G N A L   D I G E S T   {today}\n\n"
-        send_to_telegram(header + signal_analysis)
+        full_signal = header + signal_analysis
+        full_signal = fix_html_tags(full_signal)
+        send_to_telegram(full_signal)
         
         launch_header = f"🚀 L   A   U   N   C   H   L   O   G   {today}\n\n"
         send_to_telegram(launch_header + launch_log)
