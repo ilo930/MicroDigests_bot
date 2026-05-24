@@ -41,7 +41,7 @@ For EACH item, output EXACTLY this format:
 <b>Context</b> "No clear precedent" or a real example
 <b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid / Ignore
 
-Use these emojis based on the headline content:
+Use these emojis:
 - 🔋 Battery storage or grid
 - ☀️ Solar or renewables
 - 🏛️ Policy or regulation
@@ -65,11 +65,23 @@ Keep response under 3500 characters."""
     response = requests.post(url, json=data, headers=headers)
     result = response.json()
     
+    # DEBUG: Print the full response to logs
+    print(f"DEBUG Groq response status: {response.status_code}")
+    print(f"DEBUG Groq result keys: {result.keys() if result else 'None'}")
+    
     if "error" in result:
-        print(f"Groq API error: {result}")
+        print(f"DEBUG Groq error: {result['error']}")
         return "⚠️ API error - check Groq key"
     
-    return result["choices"][0]["message"]["content"]
+    if "choices" not in result or len(result["choices"]) == 0:
+        print(f"DEBUG Unexpected response: {result}")
+        return "⚠️ No choices in response"
+    
+    content = result["choices"][0]["message"]["content"]
+    print(f"DEBUG Groq content length: {len(content)} characters")
+    print(f"DEBUG Groq first 200 chars: {content[:200]}")
+    
+    return content
 
 def extract_launches(news_text):
     # Simple pattern matching for launch headlines (no AI)
@@ -133,6 +145,9 @@ if __name__ == "__main__":
     if raw_news and len(raw_news) > 50:
         print("Getting high-signal analysis...")
         signal_analysis = analyze_with_groq(raw_news, "signal")
+        print(f"DEBUG Signal analysis received: {bool(signal_analysis)}")
+        if signal_analysis:
+            print(f"DEBUG First 100 chars: {signal_analysis[:100]}")
         signal_analysis = clean_spacing(signal_analysis)
         
         print("Extracting launches locally...")
