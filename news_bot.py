@@ -31,14 +31,14 @@ def fetch_news():
     return "\n\n".join(all_entries[:25])
 
 def analyze_with_groq(news_text, analysis_type):
-    if analysis_type == "signal":
-     system_prompt = """You are a cynical market analyst.
+    # Only used for signal analysis now
+    system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
 
 For each item, choose the CORRECT emoji based on sector:
 - 🔋 Battery storage or grid infrastructure
 - ☀️ Solar, wind, or renewable generation
 - 🏛️ Policy, regulation, or legislation
-- 🚀 Space, rockets, or satellites
+- 🚀 Space, rockets, or satellites (ONLY for non-launch space news)
 - 🔬 Supply chains, materials, or critical minerals
 
 Then output EXACTLY this format:
@@ -51,28 +51,10 @@ Then output EXACTLY this format:
 
 CRITICAL RULES:
 - ONE blank line between items
-- NEVER duplicate the same headline
-- NEVER invent launches that aren't in the news
-- "Project Completion" is NOT a Signal – use Capital Deployment instead
+- NEVER duplicate headlines
+- NEVER use 🚀 for energy or storage items
 
 Keep response under 3500 characters."""
-
-    else:
-       system_prompt = """You are a space launch tracker.
-
-Extract UNIQUE rocket launches. If the same rocket appears multiple times with the same payload, merge them.
-
-Output EXACTLY this format:
-
-🚀 Launch: Rocket name
-<b>Payload</b> What was launched
-<b>Date</b> Date or "Upcoming"
-
-Then ONE empty line between launches.
-
-If no launches found, output: "No launches in today's news."
-
-CRITICAL: Do NOT repeat the same launch twice."""
 
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
@@ -80,7 +62,7 @@ CRITICAL: Do NOT repeat the same launch twice."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items. Include ALL that qualify:\n{news_text}"}
+            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
         ],
         "temperature": 0.1
     }
@@ -93,16 +75,39 @@ CRITICAL: Do NOT repeat the same launch twice."""
     
     return result["choices"][0]["message"]["content"]
 
+def extract_launches(news_text):
+    # Simple pattern matching for launch headlines (no AI)
+    launches = []
+    lines = news_text.split('\n')
+    
+    for line in lines:
+        line_lower = line.lower()
+        # Look for space/launch related headlines
+        if ('launch' in line_lower or 'starship' in line_lower or 'falcon' in line_lower) and '•' in line:
+            headline = line.split('•')[1].strip()
+            # Remove duplicates
+            if headline not in launches:
+                launches.append(headline)
+    
+    if not launches:
+        return "No launches in today's news."
+    
+    # Format output
+    result = []
+    for launch in launches[:10]:
+        result.append(f"🚀 Launch: {launch}")
+        result.append("<b>Payload</b> See article link")
+        result.append("<b>Date</b> Today's news")
+        result.append("")  # Empty line between launches
+    
+    return '\n'.join(result)
+
 def clean_spacing(text):
     if not text:
         return text
-    # Replace 3 or more consecutive newlines with exactly 2 newlines
     text = re.sub(r'\n{3,}', '\n\n', text)
-    # Remove spaces at start of lines
     lines = [line.strip() for line in text.split('\n')]
-    # Rejoin with single newlines
     cleaned = '\n'.join(lines)
-    # Ensure exactly double newlines between items
     cleaned = re.sub(r'\n{3,}', '\n\n', cleaned)
     return cleaned
 
@@ -134,9 +139,8 @@ if __name__ == "__main__":
         signal_analysis = analyze_with_groq(raw_news, "signal")
         signal_analysis = clean_spacing(signal_analysis)
         
-        print("Getting launch log...")
-        launch_log = analyze_with_groq(raw_news, "launch")
-        launch_log = clean_spacing(launch_log)
+        print("Extracting launches locally...")
+        launch_log = extract_launches(raw_news)
         
         today = datetime.datetime.now().strftime('%Y%m%d')
         
