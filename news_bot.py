@@ -84,7 +84,7 @@ Keep response under 3500 characters."""
     return content
 
 def extract_launches(news_text):
-    # Simple pattern matching for launch headlines (no AI)
+    # Simple pattern matching for launch headlines (no AI) - max 5 items
     launches = []
     lines = news_text.split('\n')
     
@@ -96,20 +96,21 @@ def extract_launches(news_text):
             # Remove duplicates
             if headline not in launches:
                 launches.append(headline)
+                if len(launches) >= 5:  # Stop after 5 items
+                    break
     
     if not launches:
         return "No launches in today's news."
     
     # Format output
     result = []
-    for launch in launches[:10]:
+    for launch in launches[:5]:  # Ensure max 5
         result.append(f"🚀 Launch: {launch}")
         result.append("<b>Payload</b> See article link")
         result.append("<b>Date</b> Today's news")
         result.append("")  # Empty line between launches
     
     return '\n'.join(result)
-
 def clean_spacing(text):
     if not text:
         return text
