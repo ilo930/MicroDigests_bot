@@ -32,41 +32,35 @@ def fetch_news():
 
 def analyze_with_groq(news_text, analysis_type):
     if analysis_type == "signal":
-      system_prompt = """You are a cynical market analyst tracking energy storage, grid infrastructure, and space.
+     system_prompt = """You are a cynical market analyst.
 
-INCLUDE an item if it mentions ANY of these:
-- Any investment amount (any dollar figure)
-- Any project completion or new construction
-- Any regulatory filing, bill, or policy change
-- Any launch delay, success, or failure
-- Any supply chain or capacity change
+For each item, choose the CORRECT emoji based on sector:
+- 🔋 Battery storage or grid infrastructure
+- ☀️ Solar, wind, or renewable generation
+- 🏛️ Policy, regulation, or legislation
+- 🚀 Space, rockets, or satellites
+- 🔬 Supply chains, materials, or critical minerals
 
-For each item, output EXACTLY this format:
+Then output EXACTLY this format:
 
-<strong><em>🚀 HEADLINE TEXT IN ALL CAPS HERE</em></strong>
+<strong><em>🔋 HEADLINE TEXT IN ALL CAPS HERE</em></strong>
 <b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
 <b>Why it matters</b> One sentence
-<b>Context</b> "No clear precedent" or a real example
+<b>Context</b> Real example or "No clear precedent"
 <b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid
 
-ACTION GUIDELINES:
-- Aggressive Buy: First-mover, no competition
-- Buy on pullback: Good news, wait for dip
-- Watch: Needs more data
-- Take profits: Peak valuation
-- Avoid: Structural problem
-
-FORMATTING RULES:
+CRITICAL RULES:
 - ONE blank line between items
-- ALL CAPS headlines
-- Use 🚀 for space, ⚡ for energy, 🔋 for storage, 🏛️ for policy
+- NEVER duplicate the same headline
+- NEVER invent launches that aren't in the news
+- "Project Completion" is NOT a Signal – use Capital Deployment instead
 
 Keep response under 3500 characters."""
 
     else:
-        system_prompt = """You are a space launch tracker.
+       system_prompt = """You are a space launch tracker.
 
-Extract ALL rocket launches mentioned.
+Extract UNIQUE rocket launches. If the same rocket appears multiple times with the same payload, merge them.
 
 Output EXACTLY this format:
 
@@ -76,7 +70,9 @@ Output EXACTLY this format:
 
 Then ONE empty line between launches.
 
-If no launches found, output: "No launches in today's news."""
+If no launches found, output: "No launches in today's news."
+
+CRITICAL: Do NOT repeat the same launch twice."""
 
     url = "https://api.groq.com/openai/v1/chat/completions"
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}", "Content-Type": "application/json"}
