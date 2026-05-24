@@ -31,28 +31,24 @@ def fetch_news():
     return "\n\n".join(all_entries[:25])
 
 def analyze_with_groq(news_text, analysis_type):
-    # Only used for signal analysis now
-    system_prompt = """You are a cynical market analyst tracking energy storage and grid infrastructure.
+    system_prompt = """You are a market analyst. Analyze EVERY news item below. Do not skip anything.
 
-For each item, choose the CORRECT emoji based on sector:
-- 🔋 Battery storage or grid infrastructure
-- ☀️ Solar, wind, or renewable generation
-- 🏛️ Policy, regulation, or legislation
-- 🚀 Space, rockets, or satellites (ONLY for non-launch space news)
-- 🔬 Supply chains, materials, or critical minerals
-
-Then output EXACTLY this format:
+For EACH item, output EXACTLY this format:
 
 <strong><em>🔋 HEADLINE TEXT IN ALL CAPS HERE</em></strong>
-<b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup
+<b>Signal</b> Capital Deployment / Regulatory Change / Supply Shock / Technical Setup / Routine Update
 <b>Why it matters</b> One sentence
-<b>Context</b> Real example or "No clear precedent"
-<b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid
+<b>Context</b> "No clear precedent" or a real example
+<b>Action</b> Aggressive Buy / Buy on pullback / Watch / Take profits / Avoid / Ignore
 
-CRITICAL RULES:
-- ONE blank line between items
-- NEVER duplicate headlines
-- NEVER use 🚀 for energy or storage items
+Use these emojis based on the headline content:
+- 🔋 Battery storage or grid
+- ☀️ Solar or renewables
+- 🏛️ Policy or regulation
+- 🚀 Space or rockets
+- 🔬 Supply chains or materials
+
+CRITICAL: You MUST output something for every headline. If truly nothing matters, write "Routine Update" as Signal and "Ignore" as Action.
 
 Keep response under 3500 characters."""
 
@@ -62,7 +58,7 @@ Keep response under 3500 characters."""
         "model": "llama-3.1-8b-instant",
         "messages": [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": f"Analyze these news items:\n{news_text}"}
+            {"role": "user", "content": f"Analyze EVERY news item. Output something for each one:\n{news_text}"}
         ],
         "temperature": 0.1
     }
@@ -71,7 +67,7 @@ Keep response under 3500 characters."""
     
     if "error" in result:
         print(f"Groq API error: {result}")
-        return "⚠️ API error"
+        return "⚠️ API error - check Groq key"
     
     return result["choices"][0]["message"]["content"]
 
