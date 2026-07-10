@@ -597,23 +597,23 @@ def fmt_market_line(item, prices):
     lead = f"{arrow} " if arrow else ""
     rationale = (item.get("rationale") or "").strip().rstrip(".")
     reason = f" — {esc(rationale)}" if rationale else ""
-    return f"📈 {lead}{' · '.join(parts)}{reason}"
+    return f"› <b>Market:</b> {lead}{' · '.join(parts)}{reason}"
 
 
 def format_item(item, prices):
     lines = [f"▸ <b>{esc(item.get('headline'))}</b>"]
     if item.get("scifi_hook"):
-        lines.append(f"✨ <b>The sci-fi part:</b> {esc(item['scifi_hook'])}")
+        lines.append(f"› <b>The sci-fi part:</b> {esc(item['scifi_hook'])}")
     if item.get("eli5"):
-        lines.append(f"🧒 <b>In plain terms:</b> {esc(item['eli5'])}")
+        lines.append(f"› <b>In plain terms:</b> {esc(item['eli5'])}")
     if item.get("why"):
-        lines.append(f"🌍 <b>Why it matters:</b> {esc(item['why'])}")
+        lines.append(f"› <b>Why it matters:</b> {esc(item['why'])}")
     market = fmt_market_line(item, prices)
     if market:
         lines.append(market)
     if item.get("link"):
         href = html.escape(item["link"], quote=True)
-        lines.append(f"🔗 <a href=\"{href}\">{esc(item['source'])} ↗</a>")
+        lines.append(f"› <a href=\"{href}\">{esc(item['source'])} ↗</a>")
     return "\n".join(lines)
 
 
@@ -636,7 +636,7 @@ def build_theme_messages(analyzed, prices, date_str):
                            f"<i>(cont.)</i>\n\n" + block)
             else:
                 current = candidate
-        current += "\n\n<i>Not financial advice · 🔗 tap a source to go deeper</i>"
+        current += "\n\n<i>Not financial advice · tap a source to go deeper</i>"
         messages.append((theme, current))
     return messages
 
