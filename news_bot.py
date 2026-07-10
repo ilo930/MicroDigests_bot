@@ -44,6 +44,10 @@ from watchlist import all_tickers, render_for_prompt
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN", "")
 TELEGRAM_CHAT_ID = os.environ.get("TELEGRAM_CHAT_ID", "")
+# Optional extra broadcast targets (e.g. a channel/group to share with friends),
+# comma-separated. Your private DM (TELEGRAM_CHAT_ID) always still gets the digest.
+EXTRA_CHATS = [c.strip() for c in
+               os.environ.get("TELEGRAM_EXTRA_CHATS", "").split(",") if c.strip()]
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
@@ -699,24 +703,38 @@ def build_theme_messages(analyzed, prices, date_str):
 # 7. Send
 # ----------------------------------------------------------------------------
 
+def _send_one(chat_id, text):
+    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
+    payload = {"chat_id": chat_id, "text": text, "parse_mode": "HTML",
+               "disable_web_page_preview": True}
+    try:
+        r = requests.post(url, json=payload, timeout=30)
+        if r.status_code != 200:
+            print(f"[telegram] {chat_id} error {r.status_code}: {r.text}")
+            return False
+        return True
+    except Exception as e:
+        print(f"[telegram] {chat_id} failed: {e}")
+        return False
+
+
 def send_telegram(text):
+    """Send to your private DM plus any EXTRA_CHATS (channel/group for friends).
+    Success is judged on the primary DM; extras are best-effort."""
     if DRY_RUN:
         print("\n" + "=" * 64)
         print(text)
         print("=" * 64)
         return True
-    url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
-    payload = {"chat_id": TELEGRAM_CHAT_ID, "text": text, "parse_mode": "HTML",
-               "disable_web_page_preview": True}
-    try:
-        r = requests.post(url, json=payload, timeout=30)
-        if r.status_code != 200:
-            print(f"[telegram] error {r.status_code}: {r.text}")
-            return False
-        return True
-    except Exception as e:
-        print(f"[telegram] failed: {e}")
-        return False
+    primary_ok = True
+    for i, chat in enumerate([TELEGRAM_CHAT_ID] + EXTRA_CHATS):
+        if not chat:
+            continue
+        ok = _send_one(chat, text)
+        if i == 0:
+            primary_ok = ok
+        time.sleep(0.4)  # gentle with per-chat rate limits
+    return primary_ok
 
 
 # ----------------------------------------------------------------------------
