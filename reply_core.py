@@ -18,6 +18,7 @@ import json
 import requests
 
 import news_bot as nb
+import players
 
 # Where to read the last digest from (public raw file by default; a local path
 # works too for offline testing).
@@ -45,6 +46,9 @@ HELP = (
     "<code>more minerals</code> · <code>more society</code>\n"
     "› <b>deeper &lt;n&gt;</b> — go deep on item #n from the last digest\n"
     "   <code>deeper 3</code>\n"
+    "› <b>players &lt;topic&gt;</b> — who's who in a field (company · country)\n"
+    "   <code>players space</code> · <code>players tech</code> · "
+    "<code>players minerals</code>\n"
     "› <b>help</b> — this message"
 )
 
@@ -79,6 +83,16 @@ def handle_text(text):
     if m:
         return deeper(int(m.group(1)))
 
+    m = re.match(r"(?:/)?(?:players|who|companies|landscape)\s+(.+)", low)
+    if m:
+        theme = resolve_theme(m.group(1))
+        if not theme:
+            return [f"Which field? Try <code>players space</code> / "
+                    f"<code>tech</code> / <code>minerals</code> / "
+                    f"<code>society</code>.\n\n{HELP}"]
+        out = players.render(theme)
+        return [out] if out else ["No player map for that field yet."]
+
     m = re.match(r"(?:/)?(?:more|more of|show|give me)\s+(.+)", low)
     if m:
         theme = resolve_theme(m.group(1))
@@ -107,8 +121,7 @@ def more_items(theme, n=3):
     nb.analyze_items({theme: picked})  # one Groq call, fills the voice fields
     header = f"{meta['emoji']} <b>MORE — {meta['title']}</b>"
     blocks = [nb.format_item(it, {}) for it in picked]  # no live prices in replies
-    return [header + "\n\n" + "\n\n".join(blocks) +
-            "\n\n<i>Not financial advice · tap a source to go deeper</i>"]
+    return [header + "\n\n" + "\n\n".join(blocks)]
 
 
 DEEPER_SYSTEM = """You help a curious reader (new to the domain) go DEEPER on ONE story, staying grounded in the article text provided. Use only facts in the text; if you add widely-known background, keep it accurate and general — never invent specifics.

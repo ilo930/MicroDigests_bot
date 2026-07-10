@@ -91,6 +91,7 @@ _GN_QUANTUM = _GN.format(q="%22quantum+computing%22")
 _GN_DEFENSE = _GN.format(q="(military+OR+defense)+technology+(hypersonic+OR+drone+OR+chip+OR+AI)")
 _GN_AIBIO = _GN.format(q="(AI+OR+%22machine+learning%22)+(drug+discovery+OR+bioprinting+OR+protein+OR+biotech)")
 _GN_SOCIETY = _GN.format(q="(space+OR+defense+OR+%22rare+earth%22+OR+quantum)+(policy+OR+geopolitics+OR+sanctions+OR+treaty+OR+%22export+controls%22)")
+_GN_NUCROBO = _GN.format(q="(space+OR+defense+OR+energy)+(%22nuclear+reactor%22+OR+SMR+OR+fusion+OR+robotics+OR+%22humanoid+robot%22)")
 
 FEEDS = [
     # SPACE — missions, launches, discoveries, and the off-world economy.
@@ -107,6 +108,7 @@ FEEDS = [
     {"theme": "tech",     "urls": ["https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml",
                                    _GN_DEFENSE]},
     {"theme": "tech",     "urls": [_GN_AIBIO]},
+    {"theme": "tech",     "urls": [_GN_NUCROBO]},
     # SOCIETY & POWER — geopolitics/policy of the frontier. Not a core theme, so it
     # only earns a digest slot when it scores high; also powers "more society".
     {"theme": "society",  "urls": [_GN_SOCIETY]},
@@ -137,6 +139,23 @@ THEMES = {
 }
 
 NOISE_KEYWORDS = ["podcast", "sponsored", "webinar", "advertisement"]
+
+# Rotating "state of play" facts shown in the header to ground the reader. Curated
+# (approximate, as of ~2025-26) rather than AI-guessed, so the numbers are real.
+CONTEXT_FACTS = [
+    "~11,000+ active satellites orbit Earth — over half are SpaceX Starlink.",
+    "~90 nations operate a satellite, but only a handful can launch their own.",
+    "Only 3 countries have launched humans to orbit on their own: Russia, the US, China.",
+    "China refines ~90% of the world's rare earths — the bottleneck is processing, not the rocks.",
+    "Taiwan's TSMC makes the majority of the world's most advanced chips.",
+    "One ASML EUV machine (needed for cutting-edge chips) costs ~$150M+ — only ASML makes them.",
+    "Today's quantum computers have ~100–1,000 qubits; useful ones need millions.",
+    "The Moon's south pole is the new race — water ice there could become rocket fuel.",
+    "The US, China and Russia account for most orbital launches each year.",
+    "Tens of thousands more satellites are planned this decade — low orbit is filling up.",
+    "Lithium, copper and rare earths are the 'oil' of the electric + AI era.",
+    "Reusable rockets cut launch cost ~10x — the reason spaceflight suddenly scaled.",
+]
 
 
 # ----------------------------------------------------------------------------
@@ -365,7 +384,7 @@ You will get a numbered list of candidate news items. Assign each a theme and a 
 Themes:
 - space     = missions, launches, spacecraft, astronomy discoveries, the space economy, ISRU, in-space manufacturing
 - minerals  = critical minerals, mining, rare earths, geology, materials, resource supply
-- tech      = quantum computing, semiconductors/chips, AI, military & defense TECHNOLOGY (the tech itself), and AI-driven biotech / medicine made in space
+- tech      = quantum computing, semiconductors/chips, AI, robotics & humanoids, nuclear & fusion energy tech, military & defense TECHNOLOGY (the tech itself), and AI-driven biotech / medicine made in space
 - society   = geopolitics, policy, economics — how space, minerals & tech reshape power and daily life
 
 For "tech", the DEFENSE angle means the TECHNOLOGY/HARDWARE itself (weapons systems, drones, lasers, hypersonics, chips, AI, satellites, sensors) — NOT troop movements, espionage/spy arrests, budgets, contracts, or personnel. Score those low, or tag them "society" if geopolitically important.
@@ -466,6 +485,8 @@ For EACH news item you receive (labelled "### ITEM <n>", with its full article t
 Keep it TIGHT — this is a glimpse meant to spark curiosity, not an essay. Every field is ONE short sentence; prefer concrete over flowery.
 
 - "i": the item's number <n>, copied exactly, so it can be matched back.
+- "topic": the single best subject tag from EXACTLY this list — quantum, chips, ai, robotics, nuclear, defense, bio, launch, satellite, exploration, astronomy, manufacturing, mining, materials, geology, energy, policy, other.
+- "country": ISO-2 code of the primary organization's home country (e.g. US, CN, JP, IN, DE, FR, GB, AU, CA, KR, TW, NL, RU), or "" if unclear/multinational.
 - "headline": a short, vivid, accurate title (max ~80 chars).
 - "scifi_hook": ONE punchy sentence (<= 22 words) capturing the wonder / novelty — cinematic but strictly real. The "whoa, we live in the future" line that also conveys what happened. (e.g. "A company is manufacturing medicine in orbit and parachuting it back to the desert.")
 - "eli5": ONE simple sentence (<= 22 words) explaining it like the reader is smart but brand-new — unpack any jargon (ISRU, qubit, rare-earth, polyhalite, etc.).
@@ -481,7 +502,7 @@ Rules:
 - Keep each field to ONE sentence. No markdown, no bullet characters inside fields.
 - The market read-through is speculative and must never be phrased as advice.
 
-Return ONLY JSON: {"items":[{"i":<n>, ...one object per input item...}]}"""
+Return ONLY JSON: {"items":[{"i":<n>, "topic":"...", "country":"...", ...one object per input item...}]}"""
 
 
 def analyze_items(selected):
@@ -525,6 +546,8 @@ def analyze_items(selected):
     for idx, c in enumerate(flat):
         a = by_i.get(idx, {})
         c["headline"] = a.get("headline") or c["title"]
+        c["topic"] = a.get("topic", "")
+        c["country"] = a.get("country", "")
         c["scifi_hook"] = a.get("scifi_hook", "")
         c["eli5"] = a.get("eli5", "")
         c["why"] = a.get("why", "")
@@ -538,6 +561,9 @@ def analyze_items(selected):
 
 def _mock_analyze(c):
     c["headline"] = c["title"][:90]
+    c["topic"] = {"space": "launch", "minerals": "mining", "tech": "quantum",
+                  "society": "policy"}.get(c["_theme"], "other")
+    c["country"] = "JP"
     c["scifi_hook"] = "The sci-fi part: this is real and happening right now (mock)."
     c["eli5"] = "In plain terms: a simple explanation for a newcomer (mock)."
     c["why"] = "Why it matters: it nudges the real world in a concrete way (mock)."
@@ -586,6 +612,23 @@ def esc(s):
     return html.escape(str(s or ""), quote=False)
 
 
+# Small subject icon per item so the topic is clear at a glance.
+TOPIC_EMOJI = {
+    "quantum": "⚛️", "chips": "🖥️", "ai": "🧠", "robotics": "🤖", "nuclear": "☢️",
+    "defense": "🛡️", "bio": "🧬", "launch": "🚀", "satellite": "🛰️",
+    "exploration": "🌘", "astronomy": "🔭", "manufacturing": "🏭", "mining": "⛏️",
+    "materials": "🧪", "geology": "🪨", "energy": "🔋", "policy": "🌍", "other": "🔹",
+}
+
+
+def iso_flag(iso):
+    """ISO-2 country code -> flag emoji ('' if unknown)."""
+    iso = (iso or "").strip().upper()
+    if len(iso) != 2 or not iso.isalpha():
+        return ""
+    return "".join(chr(0x1F1E6 + ord(c) - ord("A")) for c in iso)
+
+
 def _px(v):
     return f"{v:.0f}" if v >= 100 else f"{v:.2f}"
 
@@ -609,7 +652,11 @@ def fmt_market_line(item, prices):
 
 def format_item(item, prices):
     num = f"{item['n']}. " if item.get("n") else ""
-    lines = [f"▸ <b>{num}{esc(item.get('headline'))}</b>"]
+    tag = TOPIC_EMOJI.get(item.get("topic", ""), "")
+    flag = iso_flag(item.get("country", ""))
+    prefix = " ".join(x for x in (flag, tag) if x)
+    prefix = f"{prefix} " if prefix else ""
+    lines = [f"▸ {prefix}<b>{num}{esc(item.get('headline'))}</b>"]
     if item.get("scifi_hook"):
         lines.append(f"› <b>The sci-fi part:</b> {esc(item['scifi_hook'])}")
     if item.get("eli5"):
@@ -644,7 +691,6 @@ def build_theme_messages(analyzed, prices, date_str):
                            f"<i>(cont.)</i>\n\n" + block)
             else:
                 current = candidate
-        current += "\n\n<i>Not financial advice · tap a source to go deeper</i>"
         messages.append((theme, current))
     return messages
 
@@ -685,7 +731,8 @@ def persist(analyzed, prices, date_str, seen):
             seen[c["id"]] = now_iso
             flat.append({
                 "n": c.get("n"),
-                "theme": theme, "headline": c.get("headline"), "title": c["title"],
+                "theme": theme, "topic": c.get("topic"), "country": c.get("country"),
+                "headline": c.get("headline"), "title": c["title"],
                 "scifi_hook": c.get("scifi_hook"), "eli5": c.get("eli5"),
                 "why": c.get("why"), "tickers": c.get("tickers"),
                 "proxy_note": c.get("proxy_note"), "bias": c.get("bias"),
@@ -736,11 +783,11 @@ def main():
     prices = fetch_prices(all_t)
 
     messages = build_theme_messages(analyzed, prices, date_str)
+    fact = CONTEXT_FACTS[_now().timetuple().tm_yday % len(CONTEXT_FACTS)]
     lead = (f"🛰️ <b>REALITY SCI-FI CHECK</b> — <i>{date_str}</i>\n"
-            f"<i>Your window into the future that's already here — "
-            f"{len(messages)} dispatches incoming.</i>\n"
-            f"<i>Reply</i> <code>more tech</code> / <code>more space</code> / "
-            f"<code>deeper 3</code> <i>to dig in.</i>")
+            f"🌐 <i>{esc(fact)}</i>\n\n"
+            f"<i>{len(messages)} dispatches. Reply</i> <code>more tech</code> / "
+            f"<code>deeper 3</code> / <code>players space</code> <i>to dig in.</i>")
     ok = send_telegram(lead)
     for _theme, msg in messages:
         ok = send_telegram(msg) and ok
