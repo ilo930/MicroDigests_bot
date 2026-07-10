@@ -221,9 +221,10 @@ def fetch_candidates():
             body = body or entry.get("summary", "") or entry.get("description", "")
 
             link = entry.get("link", "")
-            # Google News items carry the real publisher under entry.source.
             src = domain_of(link) if link else domain_of(used_url)
-            if entry.get("source") and entry["source"].get("title"):
+            # Google News wraps the real publisher in entry.source; other feeds
+            # sometimes put tracking junk there, so only trust it for Google News.
+            if "news.google.com" in (used_url or "") and entry.get("source", {}).get("title"):
                 src = entry["source"]["title"]
 
             out.append({
@@ -239,8 +240,25 @@ def fetch_candidates():
 
     # Freshest first, so the per-minute LLM budget spends on recent news.
     out.sort(key=lambda c: c["published_dt"], reverse=True)
-    print(f"[fetch] {len(out)} candidates from {len(FEEDS)} feeds")
-    return out
+
+    # Drop near-duplicate stories that show up across feeds (same event twice).
+    deduped, keys = [], []
+    for c in out:
+        k = _title_key(c["title"])
+        if k and any(len(k & pk) / max(len(k | pk), 1) >= 0.6 for pk in keys):
+            continue
+        keys.append(k)
+        deduped.append(c)
+    if len(deduped) < len(out):
+        print(f"[fetch] merged {len(out) - len(deduped)} near-duplicate stories")
+
+    print(f"[fetch] {len(deduped)} candidates from {len(FEEDS)} feeds")
+    return deduped
+
+
+def _title_key(title):
+    """Significant-word set for cheap near-duplicate detection."""
+    return {w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) > 3}
 
 
 # ----------------------------------------------------------------------------
@@ -389,8 +407,9 @@ def select_items(candidates):
 
 ANALYZE_SYSTEM = """You are the narrator of a "Reality Sci-Fi Check" — a personal briefing that makes the reader FEEL like they live in the future, while staying 100% factual. The reader is new to this domain, so explain plainly.
 
-For EACH news item you receive (with its full article text), write these fields. Use ONLY facts present in the provided text — never invent details, numbers, or precedents.
+For EACH news item you receive (labelled "### ITEM <n>", with its full article text), write these fields. Use ONLY facts present in the provided text — never invent details, numbers, or precedents.
 
+- "i": the item's number <n>, copied exactly, so it can be matched back.
 - "headline": a short, vivid, accurate title (max ~90 chars).
 - "scifi_hook": ONE sentence capturing the wonder / novelty — cinematic but strictly real. This is the "whoa, we live in the future" line and also conveys what happened. (e.g. "A company is manufacturing medicine in orbit and parachuting it back to the desert.")
 - "eli5": ONE sentence explaining it like the reader is smart but brand-new to space/mining — unpack any jargon (ISRU, polymetallic nodule, rare-earth, etc.).
@@ -406,7 +425,7 @@ Rules:
 - Keep each field to ONE sentence. No markdown, no bullet characters inside fields.
 - The market read-through is speculative and must never be phrased as advice.
 
-Return ONLY JSON: {"items":[{...one object per input item, SAME order...}]}"""
+Return ONLY JSON: {"items":[{"i":<n>, ...one object per input item...}]}"""
 
 
 def analyze_items(selected):
@@ -436,8 +455,19 @@ def analyze_items(selected):
     if not results and raw:
         print(f"[analyze] unparseable head: {raw[:200]!r}")
 
+    # Match analyses to items by their echoed index — NOT by array position —
+    # so a reordered/short model response can never attach text to the wrong link.
+    by_i = {}
+    for r in results:
+        try:
+            by_i[int(r["i"])] = r
+        except (KeyError, ValueError, TypeError):
+            continue
+    if not by_i and results:  # model omitted indices; fall back to input order
+        by_i = dict(enumerate(results))
+
     for idx, c in enumerate(flat):
-        a = results[idx] if idx < len(results) else {}
+        a = by_i.get(idx, {})
         c["headline"] = a.get("headline") or c["title"]
         c["scifi_hook"] = a.get("scifi_hook", "")
         c["eli5"] = a.get("eli5", "")
@@ -519,7 +549,8 @@ def fmt_market_line(item, prices):
     tail = ""
     if item.get("rationale"):
         arrow = {"up": "↗", "down": "↘", "mixed": "↔"}.get(item.get("bias", "n/a"), "")
-        tail = f" — {arrow} {esc(item['rationale'])}"
+        prefix = f"{arrow} " if arrow else ""
+        tail = f" — {prefix}{esc(item['rationale'])}"
     conf = item.get("confidence", "low")
     return (f"📈 <b>Market</b> <i>(speculative, {esc(conf)} conf):</i> "
             f"{body}{tail} <i>Not advice.</i>")
