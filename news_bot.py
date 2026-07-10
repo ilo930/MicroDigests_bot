@@ -414,10 +414,10 @@ For EACH news item you receive (labelled "### ITEM <n>", with its full article t
 - "scifi_hook": ONE sentence capturing the wonder / novelty — cinematic but strictly real. This is the "whoa, we live in the future" line and also conveys what happened. (e.g. "A company is manufacturing medicine in orbit and parachuting it back to the desert.")
 - "eli5": ONE sentence explaining it like the reader is smart but brand-new to space/mining — unpack any jargon (ISRU, polymetallic nodule, rare-earth, etc.).
 - "why": ONE sentence on why it matters for society / the real world / the balance of power.
-- "tickers": array of ticker symbols from the WATCHLIST that could plausibly be affected. Use ONLY symbols from the watchlist. If the actual company is private or nothing fits, use [].
-- "proxy_note": short string. If the key company is private/unlisted, say so and optionally name the nearest listed read-through FROM THE WATCHLIST (e.g. "Varda is private — nearest read-through RKLB"). Else "".
+- "tickers": array of affected ticker symbols FROM THE WATCHLIST. Put EVERY applicable symbol here — including a nearest read-through (e.g. RKLB, LMT) when the key company is itself private. Do NOT name tickers only in prose. If truly nothing in the watchlist is relevant, use [].
+- "proxy_note": ONLY when the key company is private/unlisted — one short clause naming it (e.g. "SpaceX is private"). Otherwise "".
 - "bias": "up" | "down" | "mixed" | "n/a" — likely directional read-through for the tickers (speculative).
-- "rationale": ONE short sentence on the market read-through (speculative). No price targets.
+- "rationale": ONE short sentence on the market read-through (speculative). No price targets. If no watchlist ticker is affected, use "".
 - "confidence": "low" | "medium" | "high" — your confidence in the market read-through.
 
 Rules:
@@ -531,29 +531,28 @@ def esc(s):
 
 
 def fmt_market_line(item, prices):
-    tickers = item.get("tickers", [])
     parts = []
-    for t in tickers:
+    for t in item.get("tickers", []):
         p = prices.get(t)
-        if p:
-            parts.append(f"<code>{esc(t)}</code> ${p['last']} (1mo {p['low']}–{p['high']})")
-        else:
-            parts.append(f"<code>{esc(t)}</code>")
-    if parts:
-        body = ", ".join(parts)
-    elif item.get("proxy_note"):
-        body = esc(item["proxy_note"])
-    else:
-        body = "No clean public proxy"
+        parts.append(f"<code>{esc(t)}</code> ${p['last']} (1mo {p['low']}–{p['high']})"
+                     if p else f"<code>{esc(t)}</code>")
+    body = ", ".join(parts) if parts else "No clean public proxy"
 
+    note = (item.get("proxy_note") or "").strip()
+    if note and not parts:
+        body = esc(note)
+    elif note:
+        body += f" <i>({esc(note)})</i>"
+
+    rationale = (item.get("rationale") or "").strip().rstrip(".")
     tail = ""
-    if item.get("rationale"):
+    if rationale:
         arrow = {"up": "↗", "down": "↘", "mixed": "↔"}.get(item.get("bias", "n/a"), "")
         prefix = f"{arrow} " if arrow else ""
-        tail = f" — {prefix}{esc(item['rationale'])}"
+        tail = f" — {prefix}{esc(rationale)}"
     conf = item.get("confidence", "low")
     return (f"📈 <b>Market</b> <i>(speculative, {esc(conf)} conf):</i> "
-            f"{body}{tail} <i>Not advice.</i>")
+            f"{body}{tail}. <i>Not advice.</i>")
 
 
 def format_item(item, prices):
