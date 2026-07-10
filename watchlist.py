@@ -62,6 +62,31 @@ WATCHLIST = {
         ("ARKX", "ARK Space Exploration ETF",   "Space + adjacents basket"),
         ("ITA",  "iShares US Aerospace & Defense ETF", "Aerospace / defense basket"),
     ],
+    "quantum_computing": [
+        ("IONQ", "IonQ",                        "Trapped-ion quantum computing"),
+        ("RGTI", "Rigetti Computing",           "Superconducting quantum chips"),
+        ("QBTS", "D-Wave Quantum",              "Quantum annealing"),
+        ("ARQQ", "Arqit Quantum",               "Quantum-safe encryption"),
+    ],
+    "semiconductors_compute": [
+        ("NVDA", "Nvidia",                      "AI / compute GPUs"),
+        ("AMD",  "AMD",                         "CPUs / GPUs / AI accelerators"),
+        ("TSM",  "TSMC",                        "Leading-edge chip foundry"),
+        ("ASML", "ASML",                        "EUV lithography (chip-making)"),
+        ("SMH",  "VanEck Semiconductor ETF",    "Chip-sector basket"),
+    ],
+    "defense_tech": [
+        ("PLTR", "Palantir",                    "Defense / gov AI software"),
+        ("KTOS", "Kratos Defense",              "Drones, hypersonics, space"),
+        ("AVAV", "AeroVironment",               "Military drones / UAS"),
+        ("LDOS", "Leidos",                      "Defense IT / tech"),
+        ("GD",   "General Dynamics",            "Defense prime"),
+    ],
+    "ai_biotech": [
+        ("RXRX", "Recursion Pharmaceuticals",   "AI-driven drug discovery"),
+        ("SDGR", "Schrodinger",                 "Physics/ML drug design"),
+        ("TEM",  "Tempus AI",                   "AI diagnostics / precision medicine"),
+    ],
 }
 
 
