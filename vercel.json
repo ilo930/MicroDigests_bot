@@ -1,0 +1,7 @@
+{
+  "functions": {
+    "api/telegram.py": {
+      "includeFiles": "{news_bot,reply_core,watchlist}.py"
+    }
+  }
+}
