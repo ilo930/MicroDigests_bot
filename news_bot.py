@@ -7,7 +7,7 @@ the future now" wonder, explained like you're new to it, and grounded in the
 actual article text (never invented from a headline).
 
 Pipeline:
-  1. fetch      — parse full-text RSS feeds, collect recent items
+  1. fetch      — parse full-text RSS feeds (with fallbacks), collect recent items
   2. dedup      — drop anything already sent (state/seen.json)
   3. select     — LLM pass 1 ranks + tags items to the 4 themes, keeps the best few
   4. analyze    — LLM pass 2 writes each item in-voice (sci-fi hook + ELI5 +
@@ -21,7 +21,7 @@ Env:
   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, GROQ_API_KEY  — required to send/analyze
   DRY_RUN=1   — print messages to stdout instead of sending to Telegram
   MOCK_LLM=1  — skip Groq; fabricate structured output from real fetched items
-                (lets you test fetch/dedup/prices/formatting offline, no key)
+  DEBUG=1     — print raw LLM response heads for troubleshooting
 """
 
 import os
@@ -48,6 +48,7 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
 MOCK_LLM = os.environ.get("MOCK_LLM", "") == "1"
+DEBUG = os.environ.get("DEBUG", "") == "1"
 
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
@@ -58,20 +59,39 @@ LATEST_PATH = os.path.join(STATE_DIR, "latest_digest.json")
 
 # How far back to look (cadence is every 3 days; small overlap avoids gaps).
 LOOKBACK_DAYS = 4
-# Candidates pulled per feed before ranking.
-PER_FEED_LIMIT = 12
-# Items kept per theme after ranking.
-PER_THEME_KEEP = 2
+PER_FEED_LIMIT = 10        # candidates pulled per feed
+MAX_CANDIDATES = 22        # freshest N sent to the ranking LLM (free-tier TPM budget)
+PER_THEME_KEEP = 2         # items kept per theme after ranking
+SELECT_CHARS = 120         # summary chars per candidate in the ranking prompt
+ANALYZE_CHARS = 1400       # article chars per item in the analysis prompt
 TELEGRAM_LIMIT = 4096
 
-# Feeds tagged with a *default* theme (the model may re-tag to "society" when a
-# story is really about geopolitics/policy rather than a specific mission/mineral).
+# Groq free tier is ~8000 tokens/minute, so keep output reservations tight.
+SELECT_MAX_TOKENS = 800
+ANALYZE_MAX_TOKENS = 2000
+
+# Browser-ish headers — many news sites 403 the default feedparser UA.
+FEED_HEADERS = {
+    "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
+                   "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
+    "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+# Each feed lists its theme and a URL fallback chain: we use the first URL that
+# returns entries. mining.com is full-text but 403s from datacenter IPs (GitHub),
+# so it falls back to another full-text feed, then to a Google News RSS query.
+_GN_MINERALS = ("https://news.google.com/rss/search?q=%22critical+minerals%22+OR+"
+                "%22rare+earth%22+OR+lithium+mining+OR+copper+mine+when:7d"
+                "&hl=en-US&gl=US&ceid=US:en")
 FEEDS = [
-    ("https://spaceflightnow.com/feed/",   "space"),
-    ("https://arstechnica.com/space/feed/", "space"),
-    ("https://spacenews.com/feed/",         "space"),
-    ("https://payloadspace.com/feed/",      "resources"),
-    ("https://www.mining.com/feed/",        "minerals"),
+    {"theme": "space",     "urls": ["https://spaceflightnow.com/feed/"]},
+    {"theme": "space",     "urls": ["https://arstechnica.com/space/feed/"]},
+    {"theme": "space",     "urls": ["https://spacenews.com/feed/"]},
+    {"theme": "resources", "urls": ["https://payloadspace.com/feed/"]},
+    {"theme": "minerals",  "urls": ["https://www.mining.com/feed/",
+                                    "https://im-mining.com/feed/",
+                                    _GN_MINERALS]},
 ]
 
 # Theme presentation. Order = message order.
@@ -99,11 +119,6 @@ THEMES = {
 }
 
 NOISE_KEYWORDS = ["podcast", "sponsored", "webinar", "advertisement"]
-
-# Many news sites (Cloudflare etc.) 403 feedparser's default user-agent, so we
-# fetch the bytes ourselves with a browser UA and hand them to feedparser.
-BROWSER_UA = ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
-              "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36")
 
 
 # ----------------------------------------------------------------------------
@@ -158,29 +173,39 @@ def extract_json(text):
 # 1. Fetch
 # ----------------------------------------------------------------------------
 
+def _parse_feed(url):
+    """Fetch bytes with a browser UA and parse; return feedparser result or None."""
+    try:
+        resp = requests.get(url, headers=FEED_HEADERS, timeout=30)
+        resp.raise_for_status()
+        return feedparser.parse(resp.content)
+    except Exception as e:
+        print(f"[fetch] error {url}: {e}")
+        return None
+
+
 def fetch_candidates():
     cutoff = _now() - datetime.timedelta(days=LOOKBACK_DAYS)
     out = []
-    for feed_url, default_theme in FEEDS:
-        try:
-            resp = requests.get(feed_url, headers={"User-Agent": BROWSER_UA},
-                                timeout=30)
-            resp.raise_for_status()
-            feed = feedparser.parse(resp.content)
-        except Exception as e:
-            print(f"[fetch] error {feed_url}: {e}")
+    for feed in FEEDS:
+        default_theme = feed["theme"]
+        parsed = None
+        used_url = None
+        for url in feed["urls"]:
+            parsed = _parse_feed(url)
+            if parsed and parsed.entries:
+                used_url = url
+                break
+            print(f"[fetch] no entries from {url}, trying fallback…")
+        if not parsed or not parsed.entries:
+            print(f"[fetch] all sources failed for theme={default_theme}")
             continue
-        if not feed.entries:
-            print(f"[fetch] no entries: {feed_url}")
-            continue
-        for entry in feed.entries[:PER_FEED_LIMIT]:
+
+        for entry in parsed.entries[:PER_FEED_LIMIT]:
             title = (entry.get("title") or "").strip()
-            if not title:
-                continue
-            if any(k in title.lower() for k in NOISE_KEYWORDS):
+            if not title or any(k in title.lower() for k in NOISE_KEYWORDS):
                 continue
 
-            # Published date (best-effort; keep if unknown/recent).
             published_dt = None
             for key in ("published_parsed", "updated_parsed"):
                 if entry.get(key):
@@ -190,22 +215,30 @@ def fetch_candidates():
             if published_dt and published_dt < cutoff:
                 continue
 
-            # Full text: prefer content:encoded, fall back to summary.
             body = ""
             if entry.get("content"):
                 body = entry["content"][0].get("value", "")
             body = body or entry.get("summary", "") or entry.get("description", "")
 
             link = entry.get("link", "")
+            # Google News items carry the real publisher under entry.source.
+            src = domain_of(link) if link else domain_of(used_url)
+            if entry.get("source") and entry["source"].get("title"):
+                src = entry["source"]["title"]
+
             out.append({
                 "id": item_id(link, title),
                 "title": title,
                 "link": link,
-                "source": domain_of(link) if link else domain_of(feed_url),
+                "source": src,
                 "published": published_dt.isoformat() if published_dt else "",
+                "published_dt": published_dt or _now(),
                 "text": strip_html(body),
                 "default_theme": default_theme,
             })
+
+    # Freshest first, so the per-minute LLM budget spends on recent news.
+    out.sort(key=lambda c: c["published_dt"], reverse=True)
     print(f"[fetch] {len(out)} candidates from {len(FEEDS)} feeds")
     return out
 
@@ -223,7 +256,6 @@ def load_seen():
 
 
 def save_seen(seen):
-    # Prune anything older than 30 days to keep the file small.
     cutoff = (_now() - datetime.timedelta(days=30)).isoformat()
     seen = {k: v for k, v in seen.items() if v >= cutoff}
     os.makedirs(STATE_DIR, exist_ok=True)
@@ -238,10 +270,10 @@ def drop_seen(candidates, seen):
 
 
 # ----------------------------------------------------------------------------
-# Groq
+# Groq (rate-limit aware; free tier is ~8000 tokens/minute)
 # ----------------------------------------------------------------------------
 
-def groq_chat(system_prompt, user_prompt, temperature=0.3, max_tokens=4000):
+def groq_chat(system_prompt, user_prompt, temperature=0.3, max_tokens=2000, label=""):
     headers = {"Authorization": f"Bearer {GROQ_API_KEY}",
                "Content-Type": "application/json"}
     data = {
@@ -253,17 +285,33 @@ def groq_chat(system_prompt, user_prompt, temperature=0.3, max_tokens=4000):
         "temperature": temperature,
         "max_tokens": max_tokens,
     }
-    for attempt in range(3):
+    # gpt-oss reasoning models: keep the reasoning trace short to fit the TPM budget.
+    if GROQ_MODEL.startswith("openai/gpt-oss"):
+        data["reasoning_effort"] = "low"
+
+    for attempt in range(5):
         try:
-            r = requests.post(GROQ_URL, json=data, headers=headers, timeout=90)
+            r = requests.post(GROQ_URL, json=data, headers=headers, timeout=120)
             j = r.json()
             if "error" in j:
-                print(f"[groq] API error: {j['error']}")
+                err = j["error"]
+                msg = err.get("message", "")
+                if err.get("code") == "rate_limit_exceeded" or err.get("type") == "tokens":
+                    m = re.search(r"try again in ([0-9.]+)s", msg)
+                    wait = min((float(m.group(1)) + 1.5) if m else 20.0, 65.0)
+                    print(f"[groq{label}] rate limited; waiting {wait:.0f}s "
+                          f"(attempt {attempt + 1})")
+                    time.sleep(wait)
+                    continue
+                print(f"[groq{label}] API error: {err}")
                 return ""
-            return j["choices"][0]["message"]["content"]
+            content = j["choices"][0]["message"]["content"]
+            if DEBUG:
+                print(f"[groq{label}] raw head: {content[:200]!r}")
+            return content
         except Exception as e:
-            print(f"[groq] attempt {attempt + 1} failed: {e}")
-            time.sleep(2 * (attempt + 1))
+            print(f"[groq{label}] attempt {attempt + 1} failed: {e}")
+            time.sleep(3 * (attempt + 1))
     return ""
 
 
@@ -284,26 +332,27 @@ Themes:
 Score 0-10: 10 = jaw-dropping / high-impact / novel; 0 = routine, dull, or off-topic.
 Drop press-release fluff, minor personnel news, and pure stock-promotion.
 
-Return ONLY JSON:
+Return ONLY compact JSON, no prose:
 {"items":[{"i":<number>,"theme":"space|minerals|resources|society","score":<0-10>}]}"""
 
 
 def select_items(candidates):
     if not candidates:
         return {}
+    candidates = candidates[:MAX_CANDIDATES]
 
     if MOCK_LLM:
         for c in candidates:
             c["_theme"] = c["default_theme"]
         ranked = candidates
     else:
-        lines = []
-        for idx, c in enumerate(candidates):
-            summary = c["text"][:240]
-            lines.append(f"[{idx}] ({c['default_theme']}) {c['title']} — {summary}")
-        user = "Candidates:\n" + "\n".join(lines)
-        raw = groq_chat(SELECT_SYSTEM, user, temperature=0.2, max_tokens=1500)
+        lines = [f"[{i}] ({c['default_theme']}) {c['title']} — {c['text'][:SELECT_CHARS]}"
+                 for i, c in enumerate(candidates)]
+        raw = groq_chat(SELECT_SYSTEM, "Candidates:\n" + "\n".join(lines),
+                        temperature=0.2, max_tokens=SELECT_MAX_TOKENS, label=":select")
         parsed = extract_json(raw).get("items", [])
+        if not parsed and raw:
+            print(f"[select] unparseable ranking head: {raw[:200]!r}")
         score_by_idx = {}
         for it in parsed:
             try:
@@ -314,14 +363,13 @@ def select_items(candidates):
                 candidates[i]["_theme"] = it.get("theme") or candidates[i]["default_theme"]
                 score_by_idx[i] = float(it.get("score", 0))
         if not score_by_idx:
-            print("[select] model gave no usable ranking; falling back to recency")
+            print("[select] no usable ranking; falling back to recency")
             for i, c in enumerate(candidates):
                 c["_theme"] = c["default_theme"]
                 score_by_idx[i] = 5.0
         ranked = [candidates[i] for i in sorted(score_by_idx, key=score_by_idx.get,
                                                 reverse=True)]
 
-    # Keep the top N per theme (ranked is already best-first).
     by_theme = {t: [] for t in THEMES}
     for c in ranked:
         theme = c.get("_theme", c["default_theme"])
@@ -377,15 +425,16 @@ def analyze_items(selected):
         return selected
 
     allowed = all_tickers()
-    blocks = []
-    for idx, c in enumerate(flat):
-        blocks.append(f"### ITEM {idx} (theme: {c['_theme']}, source: {c['source']})\n"
-                      f"TITLE: {c['title']}\n"
-                      f"ARTICLE TEXT: {c['text'][:2500]}")
+    blocks = [f"### ITEM {i} (theme: {c['_theme']}, source: {c['source']})\n"
+              f"TITLE: {c['title']}\nARTICLE TEXT: {c['text'][:ANALYZE_CHARS]}"
+              for i, c in enumerate(flat)]
     user = ("WATCHLIST (only cite tickers from here):\n" + render_for_prompt() +
             "\n\n" + "\n\n".join(blocks))
-    raw = groq_chat(ANALYZE_SYSTEM, user, temperature=0.35, max_tokens=4000)
+    raw = groq_chat(ANALYZE_SYSTEM, user, temperature=0.35,
+                    max_tokens=ANALYZE_MAX_TOKENS, label=":analyze")
     results = extract_json(raw).get("items", [])
+    if not results and raw:
+        print(f"[analyze] unparseable head: {raw[:200]!r}")
 
     for idx, c in enumerate(flat):
         a = results[idx] if idx < len(results) else {}
@@ -397,7 +446,6 @@ def analyze_items(selected):
         c["bias"] = a.get("bias", "n/a")
         c["rationale"] = a.get("rationale", "")
         c["confidence"] = a.get("confidence", "low")
-        # Hard filter: keep only real watchlist tickers (kills invented symbols).
         c["tickers"] = [t for t in a.get("tickers", []) if t in allowed][:3]
     return selected
 
@@ -454,7 +502,6 @@ def esc(s):
 
 def fmt_market_line(item, prices):
     tickers = item.get("tickers", [])
-    proxy = item.get("proxy_note", "")
     parts = []
     for t in tickers:
         p = prices.get(t)
@@ -464,16 +511,15 @@ def fmt_market_line(item, prices):
             parts.append(f"<code>{esc(t)}</code>")
     if parts:
         body = ", ".join(parts)
-    elif proxy:
-        body = esc(proxy)
+    elif item.get("proxy_note"):
+        body = esc(item["proxy_note"])
     else:
         body = "No clean public proxy"
 
     tail = ""
-    rationale = item.get("rationale", "")
-    if rationale:
+    if item.get("rationale"):
         arrow = {"up": "↗", "down": "↘", "mixed": "↔"}.get(item.get("bias", "n/a"), "")
-        tail = f" — {arrow} {esc(rationale)}"
+        tail = f" — {arrow} {esc(item['rationale'])}"
     conf = item.get("confidence", "low")
     return (f"📈 <b>Market</b> <i>(speculative, {esc(conf)} conf):</i> "
             f"{body}{tail} <i>Not advice.</i>")
