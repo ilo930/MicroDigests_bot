@@ -122,23 +122,23 @@ FEEDS = [
 THEMES = {
     "space": {
         "emoji": "🚀",
-        "title": "SPACE",
-        "tagline": "Missions, launches, discoveries — and the off-world economy taking shape.",
+        "title": "Space",
+        "tagline": "What's flying, landing, and being discovered up there.",
     },
     "minerals": {
         "emoji": "⛏️",
-        "title": "MINERALS & MATERIALS",
-        "tagline": "The resource layer underneath the future economy.",
+        "title": "Minerals & Mining",
+        "tagline": "The raw materials the future is built from.",
     },
     "tech": {
         "emoji": "🔬",
-        "title": "FRONTIER TECH",
-        "tagline": "Quantum, chips, AI, defense tech and medicine leaving the lab.",
+        "title": "Frontier Tech",
+        "tagline": "Quantum, chips, AI, robots, and medicine leaving the lab.",
     },
     "society": {
         "emoji": "🌍",
-        "title": "SOCIETY & POWER",
-        "tagline": "How the frontier quietly reshapes power on the ground.",
+        "title": "Society & Power",
+        "tagline": "How the frontier reshapes who holds the cards.",
     },
 }
 
@@ -683,7 +683,7 @@ def build_theme_messages(analyzed, prices, date_str):
         items = analyzed.get(theme)
         if not items:
             continue
-        header = (f"{meta['emoji']} <b>{meta['title']}</b> · <i>{date_str}</i>\n"
+        header = (f"{meta['emoji']} <b>{esc(meta['title'])}</b>\n"
                   f"<i>{esc(meta['tagline'])}</i>")
         current = header
         for it in items:
