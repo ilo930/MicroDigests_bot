@@ -90,6 +90,7 @@ _GN_MINERALS = _GN.format(q="%22critical+minerals%22+OR+%22rare+earth%22+OR+lith
 _GN_QUANTUM = _GN.format(q="%22quantum+computing%22")
 _GN_DEFENSE = _GN.format(q="(military+OR+defense)+technology+(hypersonic+OR+drone+OR+chip+OR+AI)")
 _GN_AIBIO = _GN.format(q="(AI+OR+%22machine+learning%22)+(drug+discovery+OR+bioprinting+OR+protein+OR+biotech)")
+_GN_SOCIETY = _GN.format(q="(space+OR+defense+OR+%22rare+earth%22+OR+quantum)+(policy+OR+geopolitics+OR+sanctions+OR+treaty+OR+%22export+controls%22)")
 
 FEEDS = [
     # SPACE — missions, launches, discoveries, and the off-world economy.
@@ -106,6 +107,9 @@ FEEDS = [
     {"theme": "tech",     "urls": ["https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml",
                                    _GN_DEFENSE]},
     {"theme": "tech",     "urls": [_GN_AIBIO]},
+    # SOCIETY & POWER — geopolitics/policy of the frontier. Not a core theme, so it
+    # only earns a digest slot when it scores high; also powers "more society".
+    {"theme": "society",  "urls": [_GN_SOCIETY]},
 ]
 
 # Theme presentation. Order = message order.
@@ -198,11 +202,13 @@ def _parse_feed(url):
         return None
 
 
-def fetch_candidates():
+def fetch_candidates(only_theme=None):
     cutoff = _now() - datetime.timedelta(days=LOOKBACK_DAYS)
     out = []
     for feed in FEEDS:
         default_theme = feed["theme"]
+        if only_theme and default_theme != only_theme:
+            continue
         parsed = None
         used_url = None
         for url in feed["urls"]:
@@ -266,7 +272,8 @@ def fetch_candidates():
     if len(deduped) < len(out):
         print(f"[fetch] merged {len(out) - len(deduped)} near-duplicate stories")
 
-    print(f"[fetch] {len(deduped)} candidates from {len(FEEDS)} feeds")
+    scope = f" ({only_theme})" if only_theme else f" from {len(FEEDS)} feeds"
+    print(f"[fetch] {len(deduped)} candidates{scope}")
     return deduped
 
 
@@ -601,7 +608,8 @@ def fmt_market_line(item, prices):
 
 
 def format_item(item, prices):
-    lines = [f"▸ <b>{esc(item.get('headline'))}</b>"]
+    num = f"{item['n']}. " if item.get("n") else ""
+    lines = [f"▸ <b>{num}{esc(item.get('headline'))}</b>"]
     if item.get("scifi_hook"):
         lines.append(f"› <b>The sci-fi part:</b> {esc(item['scifi_hook'])}")
     if item.get("eli5"):
@@ -676,12 +684,14 @@ def persist(analyzed, prices, date_str, seen):
         for c in items:
             seen[c["id"]] = now_iso
             flat.append({
+                "n": c.get("n"),
                 "theme": theme, "headline": c.get("headline"), "title": c["title"],
                 "scifi_hook": c.get("scifi_hook"), "eli5": c.get("eli5"),
                 "why": c.get("why"), "tickers": c.get("tickers"),
                 "proxy_note": c.get("proxy_note"), "bias": c.get("bias"),
                 "rationale": c.get("rationale"), "confidence": c.get("confidence"),
                 "link": c["link"], "source": c["source"],
+                "text": (c.get("text") or "")[:1500],  # grounding for "deeper"
             })
     save_seen(seen)
     os.makedirs(STATE_DIR, exist_ok=True)
@@ -714,13 +724,23 @@ def main():
 
     analyzed = analyze_items(selected)
 
+    # Number items globally (in THEME order, same order persist writes them) so the
+    # reply bot's "deeper N" references line up with what's shown.
+    n = 0
+    for t in THEMES:
+        for c in analyzed.get(t, []):
+            n += 1
+            c["n"] = n
+
     all_t = [t for items in analyzed.values() for c in items for t in c.get("tickers", [])]
     prices = fetch_prices(all_t)
 
     messages = build_theme_messages(analyzed, prices, date_str)
     lead = (f"🛰️ <b>REALITY SCI-FI CHECK</b> — <i>{date_str}</i>\n"
             f"<i>Your window into the future that's already here — "
-            f"{len(messages)} dispatches incoming.</i>")
+            f"{len(messages)} dispatches incoming.</i>\n"
+            f"<i>Reply</i> <code>more tech</code> / <code>more space</code> / "
+            f"<code>deeper 3</code> <i>to dig in.</i>")
     ok = send_telegram(lead)
     for _theme, msg in messages:
         ok = send_telegram(msg) and ok

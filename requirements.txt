@@ -1,3 +1,5 @@
+# Core deps shared by the digest and the interactive reply webhook.
+# (yfinance is heavy and only the digest needs live prices, so the cron workflow
+#  installs it separately — keeping the Vercel function small and fast.)
 feedparser
 requests
-yfinance
