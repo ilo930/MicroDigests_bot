@@ -1,35 +1,58 @@
-name: News Bot
+name: Reality Sci-Fi Check
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 on:
   schedule:
-    - cron: '0 7 * * *'
+    # Every 3 days at 07:00 UTC (days 1,4,7,...; small gap at month boundaries).
+    - cron: '0 7 */3 * *'
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Preview only — print to the Actions log, do NOT send to Telegram"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # allow committing state/ back to the repo (dedup + latest digest)
 
 jobs:
   send-digest:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
-    
+    timeout-minutes: 15
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      
+
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
+
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install feedparser requests
-          
-      - name: Run news bot
+          pip install -r requirements.txt
+
+      - name: Run digest bot
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          DRY_RUN: ${{ (github.event.inputs.dry_run == 'true') && '1' || '' }}
         run: python news_bot.py
+
+      - name: Persist state (seen items + latest digest)
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add state/seen.json state/latest_digest.json
+          if git diff --cached --quiet; then
+            echo "No state changes to commit."
+          else
+            git commit -m "chore: update digest state [skip ci]"
+            git push
+          fi
