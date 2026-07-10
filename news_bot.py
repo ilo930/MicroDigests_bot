@@ -60,7 +60,8 @@ LATEST_PATH = os.path.join(STATE_DIR, "latest_digest.json")
 # How far back to look (cadence is every 3 days; small overlap avoids gaps).
 LOOKBACK_DAYS = 4
 PER_FEED_LIMIT = 10        # candidates pulled per feed
-MAX_CANDIDATES = 26        # freshest N sent to the ranking LLM (free-tier TPM budget)
+CANDIDATES_PER_THEME = 8   # freshest N per theme in the ranking pool (fair share)
+MAX_CANDIDATES = 24        # overall cap on the ranking pool (free-tier TPM budget)
 MAX_ITEMS_TOTAL = 7        # stories written up per digest (the "glimpse" budget)
 PER_THEME_MAX = 3          # cap any one bucket so it can't dominate the digest
 CORE_THEMES = ("space", "minerals", "tech")  # each guaranteed >=1 item if available
@@ -68,15 +69,16 @@ SELECT_CHARS = 120         # summary chars per candidate in the ranking prompt
 ANALYZE_CHARS = 1300       # article chars per item in the analysis prompt
 TELEGRAM_LIMIT = 4096
 
-# Groq free tier is ~8000 tokens/minute, so keep output reservations tight.
-SELECT_MAX_TOKENS = 800
+# Groq free tier is ~8000 tokens/minute; gpt-oss spends completion tokens on
+# reasoning too, so the ranking needs headroom or its JSON gets truncated.
+SELECT_MAX_TOKENS = 2200
 ANALYZE_MAX_TOKENS = 2000
 
 # Browser-ish headers — many news sites 403 the default feedparser UA.
 FEED_HEADERS = {
     "User-Agent": ("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) "
                    "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"),
-    "Accept": "application/rss+xml, application/atom+xml, application/xml;q=0.9, */*;q=0.8",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Accept-Language": "en-US,en;q=0.9",
 }
 
@@ -359,6 +361,8 @@ Themes:
 - tech      = quantum computing, semiconductors/chips, AI, military & defense TECHNOLOGY (the tech itself), and AI-driven biotech / medicine made in space
 - society   = geopolitics, policy, economics — how space, minerals & tech reshape power and daily life
 
+For "tech", the DEFENSE angle means the TECHNOLOGY/HARDWARE itself (weapons systems, drones, lasers, hypersonics, chips, AI, satellites, sensors) — NOT troop movements, espionage/spy arrests, budgets, contracts, or personnel. Score those low, or tag them "society" if geopolitically important.
+
 Score 0-10: 10 = jaw-dropping / high-impact / novel; 0 = routine, dull, or off-topic.
 Drop press-release fluff, minor personnel news, and pure stock-promotion.
 
@@ -369,7 +373,16 @@ Return ONLY compact JSON, no prose:
 def select_items(candidates):
     if not candidates:
         return {}
-    candidates = candidates[:MAX_CANDIDATES]
+
+    # Build the ranking pool with a fair share per theme (candidates are already
+    # freshest-first), so a fast feed can't crowd slower ones out of ranking.
+    seen_per_theme, pool = {}, []
+    for c in candidates:
+        t = c["default_theme"]
+        if seen_per_theme.get(t, 0) < CANDIDATES_PER_THEME:
+            seen_per_theme[t] = seen_per_theme.get(t, 0) + 1
+            pool.append(c)
+    candidates = pool[:MAX_CANDIDATES]
 
     if MOCK_LLM:
         for c in candidates:
@@ -382,7 +395,12 @@ def select_items(candidates):
                         temperature=0.2, max_tokens=SELECT_MAX_TOKENS, label=":select")
         parsed = extract_json(raw).get("items", [])
         if not parsed and raw:
-            print(f"[select] unparseable ranking head: {raw[:200]!r}")
+            # Salvage complete objects from a truncated/partial JSON response.
+            parsed = [{"i": int(m[0]), "theme": m[1], "score": float(m[2])}
+                      for m in re.findall(
+                          r'"i"\s*:\s*(\d+)\s*,\s*"theme"\s*:\s*"(\w+)"\s*,'
+                          r'\s*"score"\s*:\s*([\d.]+)', raw)]
+            print(f"[select] salvaged {len(parsed)} ranked items from partial JSON")
         score_by_idx = {}
         for it in parsed:
             try:
