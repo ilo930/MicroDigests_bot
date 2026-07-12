@@ -618,7 +618,7 @@ def esc(s):
 
 # Small subject icon per item so the topic is clear at a glance.
 TOPIC_EMOJI = {
-    "quantum": "🪄", "chips": "🖥️", "ai": "🔮", "robotics": "🤖", "nuclear": "🔅",
+    "quantum": "🪄", "chips": "⛵️", "ai": "🔮", "robotics": "🤖", "nuclear": "🔅",
     "energy": "⚡️", "defense": "🌐", "bio": "🧬", "launch": "🚀", "satellite": "🪐",
     "exploration": "🪐", "astronomy": "🔭", "manufacturing": "🏭", "mining": "💎",
     "materials": "💎", "geology": "💎", "society": "🌳", "policy": "🌐", "other": "🔹",
