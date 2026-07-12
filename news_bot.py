@@ -135,6 +135,7 @@ FEEDS = [
     {"theme": "tech",     "urls": [_GN_NUCROBO]},
     {"theme": "tech",     "urls": [_GN_IN_TECH]},    # India tech desk
     {"theme": "tech",     "urls": [_GN_AS_TECH]},    # Hong Kong / Asia (SCMP etc.)
+    {"theme": "tech",     "urls": ["https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms"]},  # India deep-tech
     # LIVING EARTH — the planet as a stakeholder: clean energy, ecosystems &
     # wildlife, water & oceans, weather science, and rare major climate flags.
     {"theme": "earth",    "urls": [_GN_CLEANENERGY]},
@@ -150,6 +151,7 @@ FEEDS = [
     # media ("pinch of salt"). Independent outlets still dominate the mix.
     {"theme": "society",  "urls": ["http://www.chinadaily.com.cn/rss/world_rss.xml"]},
     {"theme": "society",  "urls": ["https://www.cgtn.com/subscribe/rss/section/world.xml"]},
+    {"theme": "society",  "urls": ["http://en.people.cn/rss/China.xml"]},
     {"theme": "society",  "urls": ["https://www.rt.com/rss/news/"]},
 ]
 
@@ -534,6 +536,28 @@ def select_items(candidates):
             continue
         chosen.append(c); chosen_ids.add(c["id"]); counts[theme_of(c)] += 1
 
+    # User rule: at most 2 state-media items per digest. Keep the 2 best-ranked,
+    # drop the rest, and backfill freed slots with the next non-state candidates.
+    rank_pos = {c["id"]: i for i, c in enumerate(ranked)}
+    state_in = sorted((c for c in chosen if state_media_iso(c)),
+                      key=lambda c: rank_pos.get(c["id"], 10 ** 6))
+    if len(state_in) > 2:
+        keep_ids = {c["id"] for c in state_in[:2]}
+        chosen = [c for c in chosen
+                  if not state_media_iso(c) or c["id"] in keep_ids]
+        chosen_ids = {c["id"] for c in chosen}
+        counts = {t: 0 for t in THEMES}
+        for c in chosen:
+            counts[theme_of(c)] += 1
+        for c in ranked:
+            if len(chosen) >= MAX_ITEMS_TOTAL:
+                break
+            if c["id"] in chosen_ids or state_media_iso(c):
+                continue
+            if counts[theme_of(c)] >= PER_THEME_MAX:
+                continue
+            chosen.append(c); chosen_ids.add(c["id"]); counts[theme_of(c)] += 1
+
     by_theme = {t: [] for t in THEMES}
     for c in chosen:
         by_theme[theme_of(c)].append(c)
@@ -709,7 +733,9 @@ def iso_flag(iso):
 STATE_MEDIA = {
     "chinadaily": "CN", "china daily": "CN", "cgtn": "CN", "xinhua": "CN",
     "global times": "CN", "globaltimes": "CN", "people's daily": "CN",
-    "peoplesdaily": "CN", "china.org": "CN", "ecns": "CN",
+    "peoplesdaily": "CN", "people.cn": "CN", "china.org": "CN", "ecns": "CN",
+    "gmw.cn": "CN", "guangming": "CN", "stdaily": "CN", "cas.cn": "CN",
+    "scio.gov": "CN", "news.cn": "CN",
     "rt.com": "RU", "russia today": "RU", "tass": "RU", "sputnik": "RU",
     "ria novosti": "RU",
 }
@@ -752,11 +778,9 @@ def format_item(item, prices):
     flag = iso_flag(item.get("country", ""))
     prefix = " ".join(x for x in (flag, tag) if x)
     prefix = f"{prefix} " if prefix else ""
-    lines = [f"▸ {prefix}<b>{num}{esc(item.get('headline'))}</b>"]
-    sm = state_media_iso(item)
-    if sm:
-        lines.append(f"› ⚠️ <i>{iso_flag(sm)} state media — official view, "
-                     f"take with a pinch of salt.</i>")
+    # A bare ⚠️ before the line = state-controlled outlet; read with a pinch of salt.
+    warn = "⚠️ " if state_media_iso(item) else ""
+    lines = [f"▸ {warn}{prefix}<b>{num}{esc(item.get('headline'))}</b>"]
     # Climate flags are rendered sober and SHORT — one supporting line, no hype.
     if topic == "climate":
         note = item.get("why") or item.get("eli5") or item.get("scifi_hook")
