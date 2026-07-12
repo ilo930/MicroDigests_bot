@@ -145,6 +145,12 @@ FEEDS = [
     # SOCIETY & POWER — geopolitics/policy of the frontier. Not a core theme, so it
     # only earns a digest slot when it scores high; also powers "more society".
     {"theme": "society",  "urls": [_GN_SOCIETY]},
+    # STATE MEDIA — the DIRECT Chinese & Russian voice, deliberately included so you
+    # hear it firsthand, but every item is clearly labelled in the digest as state
+    # media ("pinch of salt"). Independent outlets still dominate the mix.
+    {"theme": "society",  "urls": ["http://www.chinadaily.com.cn/rss/world_rss.xml"]},
+    {"theme": "society",  "urls": ["https://www.cgtn.com/subscribe/rss/section/world.xml"]},
+    {"theme": "society",  "urls": ["https://www.rt.com/rss/news/"]},
 ]
 
 # Theme presentation. Order = message order.
@@ -697,6 +703,27 @@ def iso_flag(iso):
     return "".join(chr(0x1F1E6 + ord(c) - ord("A")) for c in iso)
 
 
+# State-controlled outlets — matched by source name OR domain (whether they came
+# from a dedicated feed or surfaced via Google News). Items from these get a clear
+# "pinch of salt" label: reliable for the OFFICIAL position, not neutral analysis.
+STATE_MEDIA = {
+    "chinadaily": "CN", "china daily": "CN", "cgtn": "CN", "xinhua": "CN",
+    "global times": "CN", "globaltimes": "CN", "people's daily": "CN",
+    "peoplesdaily": "CN", "china.org": "CN", "ecns": "CN",
+    "rt.com": "RU", "russia today": "RU", "tass": "RU", "sputnik": "RU",
+    "ria novosti": "RU",
+}
+
+
+def state_media_iso(item):
+    """Return ISO-2 of the state outlet if this item is from one, else ''."""
+    hay = ((item.get("source") or "") + " " + (item.get("link") or "")).lower()
+    for key, iso in STATE_MEDIA.items():
+        if key in hay:
+            return iso
+    return ""
+
+
 def _px(v):
     return f"{v:.0f}" if v >= 100 else f"{v:.2f}"
 
@@ -726,6 +753,10 @@ def format_item(item, prices):
     prefix = " ".join(x for x in (flag, tag) if x)
     prefix = f"{prefix} " if prefix else ""
     lines = [f"▸ {prefix}<b>{num}{esc(item.get('headline'))}</b>"]
+    sm = state_media_iso(item)
+    if sm:
+        lines.append(f"› ⚠️ <i>{iso_flag(sm)} state media — official view, "
+                     f"take with a pinch of salt.</i>")
     # Climate flags are rendered sober and SHORT — one supporting line, no hype.
     if topic == "climate":
         note = item.get("why") or item.get("eli5") or item.get("scifi_hook")
