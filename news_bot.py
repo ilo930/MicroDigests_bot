@@ -264,14 +264,24 @@ def extract_json(text):
 # ----------------------------------------------------------------------------
 
 def _parse_feed(url):
-    """Fetch bytes with a browser UA and parse; return feedparser result or None."""
-    try:
-        resp = requests.get(url, headers=FEED_HEADERS, timeout=30)
-        resp.raise_for_status()
-        return feedparser.parse(resp.content)
-    except Exception as e:
-        print(f"[fetch] error {url}: {e}")
-        return None
+    """Fetch bytes with a browser UA and parse; return feedparser result or None.
+    Retries once on a transient 429/503 — Google News rate-limits CI IPs when it
+    gets a burst of queries, and a short backoff usually clears it."""
+    for attempt in range(2):
+        try:
+            resp = requests.get(url, headers=FEED_HEADERS, timeout=30)
+            if resp.status_code in (429, 503) and attempt == 0:
+                time.sleep(4)
+                continue
+            resp.raise_for_status()
+            return feedparser.parse(resp.content)
+        except Exception as e:
+            if attempt == 0:
+                time.sleep(2)
+                continue
+            print(f"[fetch] error {url}: {e}")
+            return None
+    return None
 
 
 def fetch_candidates(only_theme=None):
@@ -284,6 +294,7 @@ def fetch_candidates(only_theme=None):
         parsed = None
         used_url = None
         for url in feed["urls"]:
+            time.sleep(0.3)  # gentle stagger so Google News doesn't burst-limit us
             parsed = _parse_feed(url)
             if parsed and parsed.entries:
                 used_url = url
