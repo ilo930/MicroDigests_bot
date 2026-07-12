@@ -489,7 +489,7 @@ For EACH news item you receive (labelled "### ITEM <n>", with its full article t
 Keep it TIGHT — this is a glimpse meant to spark curiosity, not an essay. Every field is ONE short sentence; prefer concrete over flowery.
 
 - "i": the item's number <n>, copied exactly, so it can be matched back.
-- "topic": the single best subject tag from EXACTLY this list — quantum, chips, ai, robotics, nuclear, defense, bio, launch, satellite, exploration, astronomy, manufacturing, mining, materials, geology, energy, policy, other.
+- "topic": the single best subject tag from EXACTLY this list — quantum, chips, ai, robotics, nuclear, energy, defense, bio, launch, satellite, exploration, astronomy, manufacturing, mining, materials, geology, society, policy, other. Use "energy" for power grids/electricity/helium-3/fusion-for-power; "nuclear" for reactors/SMRs; "society" for social & human-impact stories; "policy" for government/institutional/regulatory power; "defense" for defense TECHNOLOGY.
 - "country": ISO-2 code of the primary organization's home country (e.g. US, CN, JP, IN, DE, FR, GB, AU, CA, KR, TW, NL, RU), or "" if unclear/multinational.
 - "headline": a short, vivid, accurate title (max ~80 chars).
 - "scifi_hook": ONE punchy sentence (<= 22 words) capturing the wonder / novelty — cinematic but strictly real. The "whoa, we live in the future" line that also conveys what happened. (e.g. "A company is manufacturing medicine in orbit and parachuting it back to the desert.")
@@ -618,10 +618,10 @@ def esc(s):
 
 # Small subject icon per item so the topic is clear at a glance.
 TOPIC_EMOJI = {
-    "quantum": "⚛️", "chips": "🖥️", "ai": "🧠", "robotics": "🤖", "nuclear": "☢️",
-    "defense": "🛡️", "bio": "🧬", "launch": "🚀", "satellite": "🛰️",
-    "exploration": "🌘", "astronomy": "🔭", "manufacturing": "🏭", "mining": "⛏️",
-    "materials": "🧪", "geology": "🪨", "energy": "🔋", "policy": "🌍", "other": "🔹",
+    "quantum": "🪄", "chips": "🖥️", "ai": "🔮", "robotics": "🤖", "nuclear": "🔅",
+    "energy": "⚡️", "defense": "🌐", "bio": "🧬", "launch": "🚀", "satellite": "🪐",
+    "exploration": "🪐", "astronomy": "🔭", "manufacturing": "🏭", "mining": "💎",
+    "materials": "💎", "geology": "💎", "society": "🌳", "policy": "🌐", "other": "🔹",
 }
 
 
@@ -683,7 +683,7 @@ def build_theme_messages(analyzed, prices, date_str):
         items = analyzed.get(theme)
         if not items:
             continue
-        header = (f"{meta['emoji']} <b>{esc(meta['title'])}</b>\n"
+        header = (f"<b>{esc(meta['title'])}</b>\n"
                   f"<i>{esc(meta['tagline'])}</i>")
         current = header
         for it in items:
@@ -691,7 +691,7 @@ def build_theme_messages(analyzed, prices, date_str):
             candidate = current + "\n\n" + block
             if len(candidate) > TELEGRAM_LIMIT:
                 messages.append((theme, current))
-                current = (f"{meta['emoji']} <b>{meta['title']}</b> "
+                current = (f"<b>{esc(meta['title'])}</b> "
                            f"<i>(cont.)</i>\n\n" + block)
             else:
                 current = candidate
