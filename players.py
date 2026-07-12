@@ -93,6 +93,30 @@ PLAYERS = {
             ("Isomorphic Labs", "GB", "DeepMind's drug-design spinout"),
         ]),
     ],
+    "earth": [
+        ("Clean energy", [
+            ("LONGi", "CN", "world's largest solar-panel maker"),
+            ("Ørsted", "DK", "offshore-wind leader"),
+            ("NextEra", "US", "largest US renewables utility"),
+            ("Tesla Energy", "US", "batteries + grid storage"),
+        ]),
+        ("Ecosystems & wildlife", [
+            ("IUCN", "CH", "keeps the Red List of threatened species"),
+            ("WWF", "CH", "global conservation NGO"),
+            ("The Nature Conservancy", "US", "large habitat-protection NGO"),
+        ]),
+        ("Water & oceans", [
+            ("The Ocean Cleanup", "NL", "removing ocean & river plastic"),
+            ("Veolia", "FR", "global water-treatment giant"),
+            ("Xylem", "US", "water tech & infrastructure"),
+        ]),
+        ("Weather & climate science", [
+            ("ECMWF", "EU", "world's top medium-range forecasts"),
+            ("NOAA", "US", "US weather, ocean & climate agency"),
+            ("DeepMind (GraphCast)", "GB", "AI weather forecasting"),
+            ("IPCC", "CH", "UN climate-science body"),
+        ]),
+    ],
     "society": [
         ("Space agencies", [
             ("NASA", "US", "leads Artemis Accords bloc"),
@@ -105,8 +129,9 @@ PLAYERS = {
 }
 
 THEME_LABEL = {
-    "space": "🚀 SPACE", "minerals": "⛏️ MINERALS & MATERIALS",
-    "tech": "🔬 FRONTIER TECH", "society": "🌍 SOCIETY & POWER",
+    "space": "🚀 SPACE", "minerals": "💎 MINERALS & MINING",
+    "tech": "🔬 FRONTIER TECH", "earth": "🌱 LIVING EARTH",
+    "society": "🌍 SOCIETY & POWER",
 }
 
 

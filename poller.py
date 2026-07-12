@@ -33,6 +33,33 @@ def send(chat_id, text):
         print(f"[poller] send failed: {e}")
 
 
+# The tappable "/" menu shown in Telegram's compose bar.
+COMMANDS = [
+    {"command": "menu", "description": "Show all options"},
+    {"command": "deeper", "description": "Go deep on a post — e.g. deeper 6"},
+    {"command": "players", "description": "Who's who behind a post — e.g. players 6"},
+    {"command": "more", "description": "More stories in a section — e.g. more space"},
+    {"command": "help", "description": "How to talk to me"},
+]
+
+
+def setup_bot():
+    """Log the bot's @username (so we know where to DM it) and register the
+    native command menu. Idempotent — safe to run on every startup."""
+    try:
+        me = requests.get(f"{API}/getMe", timeout=10).json()
+        uname = (me.get("result") or {}).get("username")
+        print(f"[poller] bot is @{uname}" if uname else f"[poller] getMe: {me}")
+    except Exception as e:
+        print(f"[poller] getMe failed: {e}")
+    try:
+        r = requests.post(f"{API}/setMyCommands",
+                          json={"commands": COMMANDS}, timeout=10).json()
+        print(f"[poller] setMyCommands ok={r.get('ok')}")
+    except Exception as e:
+        print(f"[poller] setMyCommands failed: {e}")
+
+
 def main():
     if not TOKEN:
         raise SystemExit("TELEGRAM_BOT_TOKEN not set")
@@ -41,6 +68,8 @@ def main():
         requests.get(f"{API}/deleteWebhook", timeout=10)
     except Exception:
         pass
+
+    setup_bot()
 
     offset = None
     deadline = time.time() + RUN_SECONDS

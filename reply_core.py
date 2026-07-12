@@ -48,17 +48,15 @@ THEME_ALIASES = {
 }
 
 HELP = (
-    "🛰️ <b>Reality Sci-Fi Check</b> — talk to me:\n\n"
-    "› <b>more &lt;topic&gt;</b> — more fresh items in a bucket\n"
-    "   <code>more tech</code> · <code>more space</code> · "
-    "<code>more minerals</code> · <code>more earth</code> · "
-    "<code>more society</code>\n"
-    "› <b>deeper &lt;n&gt;</b> — go deep on item #n from the last digest\n"
-    "   <code>deeper 3</code>\n"
-    "› <b>players &lt;topic&gt;</b> — who's who in a field (company · country)\n"
-    "   <code>players space</code> · <code>players tech</code> · "
-    "<code>players minerals</code>\n"
-    "› <b>help</b> — this message"
+    "🛰️ <b>Reality Sci-Fi Check — menu</b>\n"
+    "<i>Reply with any of these. The number is a story's number in the digest.</i>\n\n"
+    "🔎 <b>deeper 6</b> — go deep on post #6 (how it works + what to watch)\n"
+    "👥 <b>players 6</b> — who's who behind post #6 (companies · countries)\n"
+    "➕ <b>more space</b> — a few more fresh stories in a section\n"
+    "      sections: <code>space</code> · <code>minerals</code> · <code>tech</code> · "
+    "<code>earth</code> · <code>society</code>\n"
+    "❓ <b>menu</b> — show this again\n\n"
+    "<i>Tip: you can also just send a number (e.g.</i> <code>6</code><i>) to go deeper on it.</i>"
 )
 
 
@@ -85,12 +83,22 @@ def resolve_theme(phrase):
 def handle_text(text):
     """Return a list of HTML reply strings for an incoming message."""
     low = (text or "").strip().lower()
-    if low in ("", "/start", "start", "help", "/help", "hi", "hello"):
+    if low in ("", "/start", "start", "help", "/help", "hi", "hello",
+               "menu", "/menu", "options", "/options"):
         return [HELP]
+
+    # A bare number ("6") is a shortcut for "deeper 6".
+    if low.isdigit():
+        return deeper(int(low))
 
     m = re.match(r"(?:/)?(?:deeper|deep|more on|expand)\s+#?(\d+)", low)
     if m:
         return deeper(int(m.group(1)))
+
+    # players <n> -> who's who behind the field of digest post #n.
+    m = re.match(r"(?:/)?(?:players|who|companies|landscape)\s+#?(\d+)\b", low)
+    if m:
+        return players_for_post(int(m.group(1)))
 
     m = re.match(r"(?:/)?(?:players|who|companies|landscape)\s+(.+)", low)
     if m:
@@ -98,7 +106,8 @@ def handle_text(text):
         if not theme:
             return [f"Which field? Try <code>players space</code> / "
                     f"<code>tech</code> / <code>minerals</code> / "
-                    f"<code>society</code>.\n\n{HELP}"]
+                    f"<code>society</code> — or a post number like "
+                    f"<code>players 6</code>.\n\n{HELP}"]
         out = players.render(theme)
         return [out] if out else ["No player map for that field yet."]
 
@@ -116,6 +125,26 @@ def handle_text(text):
     if theme:
         return more_items(theme)
     return [f"Didn't catch that.\n\n{HELP}"]
+
+
+def players_for_post(num):
+    """Show the who's-who for the FIELD of digest post #num."""
+    items = load_latest().get("items", [])
+    by_n = {it.get("n"): it for it in items if it.get("n")}
+    it = by_n.get(num) or (items[num - 1] if 1 <= num <= len(items) else None)
+    if not it:
+        return [f"Post #{num} isn't in the last digest (it had {len(items)} items).\n\n{HELP}"]
+    theme = it.get("theme")
+    out = players.render(theme) if theme else None
+    if not out:
+        meta = nb.THEMES.get(theme, {})
+        label = meta.get("title", theme or "that field")
+        return [f"No player map for <b>{nb.esc(label)}</b> yet — try "
+                f"<code>players space</code> / <code>tech</code> / "
+                f"<code>minerals</code>."]
+    intro = (f"👥 <b>Players behind post #{num}</b> "
+             f"<i>({nb.esc(nb.THEMES.get(theme, {}).get('title', theme))})</i>\n\n")
+    return [intro + out]
 
 
 def more_items(theme, n=3):
