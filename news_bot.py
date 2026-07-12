@@ -65,7 +65,7 @@ LATEST_PATH = os.path.join(STATE_DIR, "latest_digest.json")
 LOOKBACK_DAYS = 4
 PER_FEED_LIMIT = 10        # candidates pulled per feed
 CANDIDATES_PER_THEME = 8   # freshest N per theme in the ranking pool (fair share)
-MAX_CANDIDATES = 24        # overall cap on the ranking pool (free-tier TPM budget)
+MAX_CANDIDATES = 30        # overall cap on the ranking pool (free-tier TPM budget)
 MAX_ITEMS_TOTAL = 7        # stories written up per digest (the "glimpse" budget)
 PER_THEME_MAX = 3          # cap any one bucket so it can't dominate the digest
 CORE_THEMES = ("space", "minerals", "tech", "earth")  # each guaranteed >=1 if available
@@ -424,15 +424,29 @@ def select_items(candidates):
     if not candidates:
         return {}
 
-    # Build the ranking pool with a fair share per theme (candidates are already
-    # freshest-first), so a fast feed can't crowd slower ones out of ranking.
-    seen_per_theme, pool = {}, []
+    # Build the ranking pool with a fair share per theme. Candidates are already
+    # freshest-first; we cap each theme, then ROUND-ROBIN across themes so the
+    # global MAX_CANDIDATES cut can never starve a slow feed (e.g. minerals via a
+    # Google-News fallback with older items) just because faster feeds produced
+    # newer stories. Every theme keeps representation up to the cap.
+    per_theme = {}
     for c in candidates:
-        t = c["default_theme"]
-        if seen_per_theme.get(t, 0) < CANDIDATES_PER_THEME:
-            seen_per_theme[t] = seen_per_theme.get(t, 0) + 1
-            pool.append(c)
-    candidates = pool[:MAX_CANDIDATES]
+        per_theme.setdefault(c["default_theme"], []).append(c)
+    for t in per_theme:
+        per_theme[t] = per_theme[t][:CANDIDATES_PER_THEME]
+    pool, depth = [], 0
+    while len(pool) < MAX_CANDIDATES:
+        added = False
+        for lst in per_theme.values():
+            if depth < len(lst):
+                pool.append(lst[depth])
+                added = True
+                if len(pool) >= MAX_CANDIDATES:
+                    break
+        if not added:
+            break
+        depth += 1
+    candidates = pool
 
     if MOCK_LLM:
         for c in candidates:
