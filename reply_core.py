@@ -37,13 +37,22 @@ THEME_ALIASES = {
     "bio": "tech", "biotech": "tech", "medicine": "tech", "compute": "tech",
     "society": "society", "power": "society", "geopolitics": "society",
     "policy": "society", "politics": "society",
+    "earth": "earth", "planet": "earth", "nature": "earth", "climate": "earth",
+    "ecosystem": "earth", "ecosystems": "earth", "wildlife": "earth",
+    "biodiversity": "earth", "animals": "earth", "water": "earth",
+    "ocean": "earth", "oceans": "earth", "weather": "earth",
+    "cleanenergy": "earth", "renewable": "earth", "renewables": "earth",
+    "solar": "earth", "wind": "earth", "clean": "earth", "energy": "earth",
+    "grid": "earth", "coral": "earth", "reef": "earth", "marine": "earth",
+    "meteorology": "earth", "forecast": "earth", "conservation": "earth",
 }
 
 HELP = (
     "🛰️ <b>Reality Sci-Fi Check</b> — talk to me:\n\n"
     "› <b>more &lt;topic&gt;</b> — more fresh items in a bucket\n"
     "   <code>more tech</code> · <code>more space</code> · "
-    "<code>more minerals</code> · <code>more society</code>\n"
+    "<code>more minerals</code> · <code>more earth</code> · "
+    "<code>more society</code>\n"
     "› <b>deeper &lt;n&gt;</b> — go deep on item #n from the last digest\n"
     "   <code>deeper 3</code>\n"
     "› <b>players &lt;topic&gt;</b> — who's who in a field (company · country)\n"
