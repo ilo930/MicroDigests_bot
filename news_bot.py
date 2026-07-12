@@ -68,7 +68,7 @@ CANDIDATES_PER_THEME = 8   # freshest N per theme in the ranking pool (fair shar
 MAX_CANDIDATES = 24        # overall cap on the ranking pool (free-tier TPM budget)
 MAX_ITEMS_TOTAL = 7        # stories written up per digest (the "glimpse" budget)
 PER_THEME_MAX = 3          # cap any one bucket so it can't dominate the digest
-CORE_THEMES = ("space", "minerals", "tech")  # each guaranteed >=1 item if available
+CORE_THEMES = ("space", "minerals", "tech", "earth")  # each guaranteed >=1 if available
 SELECT_CHARS = 120         # summary chars per candidate in the ranking prompt
 ANALYZE_CHARS = 1300       # article chars per item in the analysis prompt
 TELEGRAM_LIMIT = 4096
@@ -96,6 +96,13 @@ _GN_DEFENSE = _GN.format(q="(military+OR+defense)+technology+(hypersonic+OR+dron
 _GN_AIBIO = _GN.format(q="(AI+OR+%22machine+learning%22)+(drug+discovery+OR+bioprinting+OR+protein+OR+biotech)")
 _GN_SOCIETY = _GN.format(q="(space+OR+defense+OR+%22rare+earth%22+OR+quantum)+(policy+OR+geopolitics+OR+sanctions+OR+treaty+OR+%22export+controls%22)")
 _GN_NUCROBO = _GN.format(q="(space+OR+defense+OR+energy)+(%22nuclear+reactor%22+OR+SMR+OR+fusion+OR+robotics+OR+%22humanoid+robot%22)")
+# LIVING EARTH — good news for the planet: clean energy, ecosystems, water, weather
+# science, and (rarely) a major climate development.
+_GN_CLEANENERGY = _GN.format(q="(solar+OR+wind+OR+geothermal+OR+%22grid+battery%22+OR+renewable)+energy+(record+OR+breakthrough+OR+milestone)")
+_GN_ECOSYSTEMS = _GN.format(q="(wildlife+OR+biodiversity+OR+conservation+OR+rewilding+OR+%22coral+reef%22+OR+species)+(recovery+OR+comeback+OR+protected+OR+restored)")
+_GN_WATER = _GN.format(q="(ocean+OR+%22freshwater%22+OR+river+OR+aquifer+OR+desalination+OR+%22water+supply%22)+(discovery+OR+cleanup+OR+restored+OR+breakthrough)")
+_GN_WEATHER = _GN.format(q="(%22weather+forecasting%22+OR+meteorology+OR+%22weather+model%22+OR+%22weather+satellite%22)+(AI+OR+breakthrough+OR+advance+OR+launch)")
+_GN_CLIMATE = _GN.format(q="climate+change+(record+OR+extreme+OR+tipping+point+OR+milestone)")
 
 FEEDS = [
     # SPACE — missions, launches, discoveries, and the off-world economy.
@@ -113,6 +120,13 @@ FEEDS = [
                                    _GN_DEFENSE]},
     {"theme": "tech",     "urls": [_GN_AIBIO]},
     {"theme": "tech",     "urls": [_GN_NUCROBO]},
+    # LIVING EARTH — the planet as a stakeholder: clean energy, ecosystems &
+    # wildlife, water & oceans, weather science, and rare major climate flags.
+    {"theme": "earth",    "urls": [_GN_CLEANENERGY]},
+    {"theme": "earth",    "urls": [_GN_ECOSYSTEMS]},
+    {"theme": "earth",    "urls": [_GN_WATER]},
+    {"theme": "earth",    "urls": [_GN_WEATHER]},
+    {"theme": "earth",    "urls": [_GN_CLIMATE]},
     # SOCIETY & POWER — geopolitics/policy of the frontier. Not a core theme, so it
     # only earns a digest slot when it scores high; also powers "more society".
     {"theme": "society",  "urls": [_GN_SOCIETY]},
@@ -134,6 +148,11 @@ THEMES = {
         "emoji": "🔬",
         "title": "Frontier Tech",
         "tagline": "Quantum, chips, AI, robots, and medicine leaving the lab.",
+    },
+    "earth": {
+        "emoji": "🌍",
+        "title": "Living Earth",
+        "tagline": "Good news for the planet — clean energy, wildlife, water, and the science of weather.",
     },
     "society": {
         "emoji": "🌍",
@@ -389,6 +408,7 @@ Themes:
 - space     = missions, launches, spacecraft, astronomy discoveries, the space economy, ISRU, in-space manufacturing
 - minerals  = critical minerals, mining, rare earths, geology, materials, resource supply
 - tech      = quantum computing, semiconductors/chips, AI, robotics & humanoids, nuclear & fusion energy tech, military & defense TECHNOLOGY (the tech itself), and AI-driven biotech / medicine made in space
+- earth     = the living planet as a stakeholder: clean/renewable energy, ecosystems & wildlife & biodiversity, oceans & water, meteorology / weather science, and (rarely, only if MAJOR) a serious climate development. Strongly favour GOOD news for the planet and other species — not just human interests.
 - society   = geopolitics, policy, economics — how space, minerals & tech reshape power and daily life
 
 For "tech", the DEFENSE angle means the TECHNOLOGY/HARDWARE itself (weapons systems, drones, lasers, hypersonics, chips, AI, satellites, sensors) — NOT troop movements, espionage/spy arrests, budgets, contracts, or personnel. Score those low, or tag them "society" if geopolitically important.
@@ -397,7 +417,7 @@ Score 0-10: 10 = jaw-dropping / high-impact / novel; 0 = routine, dull, or off-t
 Drop press-release fluff, minor personnel news, and pure stock-promotion.
 
 Return ONLY compact JSON, no prose:
-{"items":[{"i":<number>,"theme":"space|minerals|tech|society","score":<0-10>}]}"""
+{"items":[{"i":<number>,"theme":"space|minerals|tech|earth|society","score":<0-10>}]}"""
 
 
 def select_items(candidates):
@@ -458,10 +478,20 @@ def select_items(candidates):
     chosen, chosen_ids, counts = [], set(), {t: 0 for t in THEMES}
 
     for t in CORE_THEMES:
+        picked = False
         for c in ranked:
             if c["id"] not in chosen_ids and theme_of(c) == t:
                 chosen.append(c); chosen_ids.add(c["id"]); counts[t] += 1
-                break
+                picked = True; break
+        if not picked:
+            # The LLM may have re-tagged this bucket's items into other themes
+            # (or scored them all low). If the bucket's OWN feed returned anything,
+            # still surface its best, so a core theme is never silently starved.
+            for c in ranked:
+                if c["id"] not in chosen_ids and c["default_theme"] == t:
+                    c["_theme"] = t
+                    chosen.append(c); chosen_ids.add(c["id"]); counts[t] += 1
+                    break
     for c in ranked:
         if len(chosen) >= MAX_ITEMS_TOTAL:
             break
@@ -489,7 +519,7 @@ For EACH news item you receive (labelled "### ITEM <n>", with its full article t
 Keep it TIGHT — this is a glimpse meant to spark curiosity, not an essay. Every field is ONE short sentence; prefer concrete over flowery.
 
 - "i": the item's number <n>, copied exactly, so it can be matched back.
-- "topic": the single best subject tag from EXACTLY this list — quantum, chips, ai, robotics, nuclear, energy, defense, bio, launch, satellite, exploration, astronomy, manufacturing, mining, materials, geology, society, policy, other. Use "energy" for power grids/electricity/helium-3/fusion-for-power; "nuclear" for reactors/SMRs; "society" for social & human-impact stories; "policy" for government/institutional/regulatory power; "defense" for defense TECHNOLOGY.
+- "topic": the single best subject tag from EXACTLY this list — quantum, chips, ai, robotics, nuclear, energy, defense, bio, launch, satellite, exploration, astronomy, manufacturing, mining, materials, geology, cleanenergy, ecosystems, water, weather, climate, society, policy, other. Use "cleanenergy" for renewables/solar/wind/grid-battery good news; "ecosystems" for wildlife/biodiversity/conservation; "water" for oceans/rivers/freshwater; "weather" for meteorology / forecasting science; "climate" ONLY for a serious, major climate development; "energy" for grids/electricity/helium-3/fusion-for-power; "nuclear" for reactors/SMRs; "society" for social & human-impact stories; "policy" for government/institutional/regulatory power; "defense" for defense TECHNOLOGY.
 - "country": ISO-2 code of the primary organization's home country (e.g. US, CN, JP, IN, DE, FR, GB, AU, CA, KR, TW, NL, RU), or "" if unclear/multinational.
 - "headline": a short, vivid, accurate title (max ~80 chars).
 - "scifi_hook": ONE punchy sentence (<= 22 words) capturing the wonder / novelty — cinematic but strictly real. The "whoa, we live in the future" line that also conveys what happened. (e.g. "A company is manufacturing medicine in orbit and parachuting it back to the desert.")
@@ -505,6 +535,8 @@ Rules:
 - Every sentence must be defensible from the article text.
 - Keep each field to ONE sentence. No markdown, no bullet characters inside fields.
 - The market read-through is speculative and must never be phrased as advice.
+- For "climate" items: stay sober and factual — no wonder framing, no alarmism, no doom. It is shown as a single line, so make "why" a calm, precise statement of what changed and why it's important.
+- For other "earth" items (cleanenergy, ecosystems, water, weather): let the wonder be about the living planet — a species recovering, a reef regrowing, a cleaner grid — not just markets.
 
 Return ONLY JSON: {"items":[{"i":<n>, "topic":"...", "country":"...", ...one object per input item...}]}"""
 
@@ -566,7 +598,7 @@ def analyze_items(selected):
 def _mock_analyze(c):
     c["headline"] = c["title"][:90]
     c["topic"] = {"space": "launch", "minerals": "mining", "tech": "quantum",
-                  "society": "policy"}.get(c["_theme"], "other")
+                  "earth": "ecosystems", "society": "policy"}.get(c["_theme"], "other")
     c["country"] = "JP"
     c["scifi_hook"] = "The sci-fi part: this is real and happening right now (mock)."
     c["eli5"] = "In plain terms: a simple explanation for a newcomer (mock)."
@@ -621,7 +653,10 @@ TOPIC_EMOJI = {
     "quantum": "🪄", "chips": "⛵️", "ai": "🔮", "robotics": "🤖", "nuclear": "🔅",
     "energy": "⚡️", "defense": "🌐", "bio": "🧬", "launch": "🚀", "satellite": "🪐",
     "exploration": "🪐", "astronomy": "🔭", "manufacturing": "🏭", "mining": "💎",
-    "materials": "💎", "geology": "💎", "society": "🌳", "policy": "🌐", "other": "🔹",
+    "materials": "💎", "geology": "💎", "society": "🌳", "policy": "🌐",
+    # Living Earth
+    "cleanenergy": "🌱", "ecosystems": "🦋", "water": "💧", "weather": "🌤",
+    "climate": "🌡️", "other": "🔹",
 }
 
 
@@ -656,11 +691,21 @@ def fmt_market_line(item, prices):
 
 def format_item(item, prices):
     num = f"{item['n']}. " if item.get("n") else ""
-    tag = TOPIC_EMOJI.get(item.get("topic", ""), "")
+    topic = item.get("topic", "")
+    tag = TOPIC_EMOJI.get(topic, "")
     flag = iso_flag(item.get("country", ""))
     prefix = " ".join(x for x in (flag, tag) if x)
     prefix = f"{prefix} " if prefix else ""
     lines = [f"▸ {prefix}<b>{num}{esc(item.get('headline'))}</b>"]
+    # Climate flags are rendered sober and SHORT — one supporting line, no hype.
+    if topic == "climate":
+        note = item.get("why") or item.get("eli5") or item.get("scifi_hook")
+        if note:
+            lines.append(f"› {esc(note)}")
+        if item.get("link"):
+            href = html.escape(item["link"], quote=True)
+            lines.append(f"› <a href=\"{href}\">{esc(item['source'])} ↗</a>")
+        return "\n".join(lines)
     if item.get("scifi_hook"):
         lines.append(f"› <b>The sci-fi part:</b> {esc(item['scifi_hook'])}")
     if item.get("eli5"):
