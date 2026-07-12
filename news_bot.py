@@ -121,6 +121,9 @@ FEEDS = [
     {"theme": "space",    "urls": ["https://arstechnica.com/space/feed/"]},
     {"theme": "space",    "urls": ["https://spacenews.com/feed/"]},
     {"theme": "space",    "urls": ["https://payloadspace.com/feed/"]},
+    {"theme": "space",    "urls": ["https://www.nasa.gov/feed/"]},                              # NASA (primary)
+    {"theme": "space",    "urls": ["https://www.esa.int/rssfeed/Our_Activities/Space_Science"]},  # ESA (primary)
+    {"theme": "space",    "urls": ["https://global.jaxa.jp/rss/press.rdf"]},                    # JAXA (primary)
     {"theme": "space",    "urls": [_GN_IN_SPACE]},   # India/Asia space desk
     # MINERALS & MATERIALS — mining.com is full-text but 403s from CI, so it falls
     # back to another full-text feed, then a Google News query.
@@ -136,6 +139,8 @@ FEEDS = [
     {"theme": "tech",     "urls": [_GN_IN_TECH]},    # India tech desk
     {"theme": "tech",     "urls": [_GN_AS_TECH]},    # Hong Kong / Asia (SCMP etc.)
     {"theme": "tech",     "urls": ["https://economictimes.indiatimes.com/tech/rssfeeds/13357270.cms"]},  # India deep-tech
+    {"theme": "tech",     "urls": ["https://quantumzeitgeist.com/feed/"]},   # independent quantum
+    {"theme": "tech",     "urls": ["https://phys.org/rss-feed/"]},           # independent science (broad)
     # LIVING EARTH — the planet as a stakeholder: clean energy, ecosystems &
     # wildlife, water & oceans, weather science, and rare major climate flags.
     {"theme": "earth",    "urls": [_GN_CLEANENERGY]},
@@ -143,6 +148,7 @@ FEEDS = [
     {"theme": "earth",    "urls": [_GN_WATER]},
     {"theme": "earth",    "urls": [_GN_WEATHER]},
     {"theme": "earth",    "urls": [_GN_CLIMATE]},
+    {"theme": "earth",    "urls": ["https://www.ctvc.co/feed"]},   # Sightline Climate (indie climate-tech)
     # SOCIETY & POWER — geopolitics/policy of the frontier. Not a core theme, so it
     # only earns a digest slot when it scores high; also powers "more society".
     {"theme": "society",  "urls": [_GN_SOCIETY]},
@@ -201,6 +207,8 @@ CONTEXT_FACTS = [
     "Tens of thousands more satellites are planned this decade — low orbit is filling up.",
     "Lithium, copper and rare earths are the 'oil' of the electric + AI era.",
     "Reusable rockets cut launch cost ~10x — the reason spaceflight suddenly scaled.",
+    "In the Global Innovation Index, Switzerland, Sweden and the US lead — China is the fastest-rising major economy.",
+    "On Harvard's Critical & Emerging Technologies Index, the US ranks #1 and China #2 — the tech era's two-horse race.",
 ]
 
 
@@ -438,6 +446,8 @@ For "tech", the DEFENSE angle means the TECHNOLOGY/HARDWARE itself (weapons syst
 
 Score 0-10: 10 = jaw-dropping / high-impact / novel; 0 = routine, dull, or off-topic.
 Drop press-release fluff, minor personnel news, and pure stock-promotion.
+
+PRIORITISE genuine SCIENCE and TECHNOLOGY substance — discoveries, breakthroughs, missions, launches, hard results — and INDEPENDENT / primary reporting (space agencies, research, specialist outlets). DOWN-rank pure politics, opinion, geopolitics-as-sport, and propaganda/spin unless the underlying development is itself genuinely consequential. Judge every item — state-media included — on its substance, not its framing.
 
 Return ONLY compact JSON, no prose:
 {"items":[{"i":<number>,"theme":"space|minerals|tech|earth|society","score":<0-10>}]}"""
