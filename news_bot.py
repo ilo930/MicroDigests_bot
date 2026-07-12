@@ -158,7 +158,6 @@ FEEDS = [
     {"theme": "society",  "urls": ["http://www.chinadaily.com.cn/rss/world_rss.xml"]},
     {"theme": "society",  "urls": ["https://www.cgtn.com/subscribe/rss/section/world.xml"]},
     {"theme": "society",  "urls": ["http://en.people.cn/rss/China.xml"]},
-    {"theme": "society",  "urls": ["https://www.rt.com/rss/news/"]},
 ]
 
 # Theme presentation. Order = message order.
