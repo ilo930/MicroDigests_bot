@@ -1,22 +1,26 @@
 name: Reply Bot (interactive)
 
-# Listens for your Telegram messages ("more tech", "deeper 3", "help") and answers.
-# A short job every 5 minutes long-polls for ~4.5 min then exits; concurrency keeps
-# exactly one listener alive at a time. Free (public repo = unlimited Actions).
+# Listens for your Telegram DMs ("menu", "deeper 6", "players 6", "more space").
+# GitHub throttles frequent crons (a */5 schedule really fires every 1-3h), which
+# made replies feel dead. Instead each run long-polls for ~5.5h; concurrency keeps
+# exactly one listener alive, and when it ends the queued run starts immediately —
+# so a listener is essentially always live and replies arrive in seconds. The
+# hourly cron is just a backstop that restarts the chain if a run ever dies early.
+# Free: public repo = unlimited Actions minutes.
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 * * * *'
   workflow_dispatch:
 
 concurrency:
   group: telegram-reply
-  cancel-in-progress: false   # let the active listener finish before the next starts
+  cancel-in-progress: false   # the live listener finishes; the next waits, then takes over
 
 jobs:
   poll:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 350        # just under GitHub's 6h job ceiling
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -26,4 +30,5 @@ jobs:
       - env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          RUN_SECONDS: '19800'  # ~5.5h of continuous listening per run
         run: python poller.py
