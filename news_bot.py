@@ -104,22 +104,37 @@ _GN_WATER = _GN.format(q="(ocean+OR+%22freshwater%22+OR+river+OR+aquifer+OR+desa
 _GN_WEATHER = _GN.format(q="(%22weather+forecasting%22+OR+meteorology+OR+%22weather+model%22+OR+%22weather+satellite%22)+(AI+OR+breakthrough+OR+advance+OR+launch)")
 _GN_CLIMATE = _GN.format(q="climate+change+(record+OR+extreme+OR+tipping+point+OR+milestone)")
 
+# NON-WESTERN DESKS — same reliable Google-News mechanism but non-US editions, so
+# the digest carries more than one civilization's framing. India (a top space/tech/
+# minerals nation) and Hong Kong (surfaces SCMP & broader Asia coverage), in English.
+def _gnr(q, hl, gl):
+    return (f"https://news.google.com/rss/search?q={q}+when:7d"
+            f"&hl={hl}&gl={gl}&ceid={gl}:{hl.split('-')[0]}")
+_GN_IN_SPACE = _gnr("space+OR+ISRO+OR+satellite+OR+launch", "en-IN", "IN")
+_GN_IN_TECH = _gnr("(quantum+OR+semiconductor+OR+chip+OR+AI+OR+robot)", "en-IN", "IN")
+_GN_IN_MIN = _gnr("(%22rare+earth%22+OR+lithium+OR+copper+OR+%22critical+minerals%22+OR+mining)", "en-IN", "IN")
+_GN_AS_TECH = _gnr("(China+OR+Asia)+(quantum+OR+chip+OR+semiconductor+OR+AI+OR+space+OR+%22rare+earth%22)", "en-HK", "HK")
+
 FEEDS = [
     # SPACE — missions, launches, discoveries, and the off-world economy.
     {"theme": "space",    "urls": ["https://spaceflightnow.com/feed/"]},
     {"theme": "space",    "urls": ["https://arstechnica.com/space/feed/"]},
     {"theme": "space",    "urls": ["https://spacenews.com/feed/"]},
     {"theme": "space",    "urls": ["https://payloadspace.com/feed/"]},
+    {"theme": "space",    "urls": [_GN_IN_SPACE]},   # India/Asia space desk
     # MINERALS & MATERIALS — mining.com is full-text but 403s from CI, so it falls
     # back to another full-text feed, then a Google News query.
     {"theme": "minerals", "urls": ["https://www.mining.com/feed/",
                                    "https://im-mining.com/feed/", _GN_MINERALS]},
+    {"theme": "minerals", "urls": [_GN_IN_MIN]},     # India/Asia minerals desk
     # FRONTIER TECH — quantum, chips/AI, defense tech, AI-driven bio / space medicine.
     {"theme": "tech",     "urls": ["https://thequantuminsider.com/feed/", _GN_QUANTUM]},
     {"theme": "tech",     "urls": ["https://www.defensenews.com/arc/outboundfeeds/rss/?outputType=xml",
                                    _GN_DEFENSE]},
     {"theme": "tech",     "urls": [_GN_AIBIO]},
     {"theme": "tech",     "urls": [_GN_NUCROBO]},
+    {"theme": "tech",     "urls": [_GN_IN_TECH]},    # India tech desk
+    {"theme": "tech",     "urls": [_GN_AS_TECH]},    # Hong Kong / Asia (SCMP etc.)
     # LIVING EARTH — the planet as a stakeholder: clean energy, ecosystems &
     # wildlife, water & oceans, weather science, and rare major climate flags.
     {"theme": "earth",    "urls": [_GN_CLEANENERGY]},
