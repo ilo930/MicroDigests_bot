@@ -1,41 +1,31 @@
 {
-  "date": "2026-07-19",
-  "generated_at": "2026-07-19T09:01:14.945266+00:00",
+  "date": "2026-07-22",
+  "generated_at": "2026-07-22T09:20:44.986077+00:00",
   "prices": {
-    "AMD": {
-      "last": 495.76,
-      "low": 495.76,
-      "high": 580.91
+    "FCX": {
+      "last": 62.56,
+      "low": 57.36,
+      "high": 69.04
     },
-    "BA": {
-      "last": 214.03,
-      "low": 214.03,
-      "high": 234.54
+    "NOC": {
+      "last": 512.29,
+      "low": 496.02,
+      "high": 549.04
     },
-    "LMT": {
-      "last": 508.77,
-      "low": 491.64,
-      "high": 545.91
+    "SCCO": {
+      "last": 188.01,
+      "low": 167.21,
+      "high": 189.91
     },
-    "NVDA": {
-      "last": 202.81,
-      "low": 192.53,
-      "high": 212.5
+    "SQM": {
+      "last": 68.84,
+      "low": 66.33,
+      "high": 78.65
     },
-    "RKLB": {
-      "last": 67.62,
-      "low": 67.35,
-      "high": 107.24
-    },
-    "RTX": {
-      "last": 193.51,
-      "low": 181.83,
-      "high": 201.37
-    },
-    "TSM": {
-      "last": 398.37,
-      "low": 398.37,
-      "high": 477.57
+    "TECK": {
+      "last": 56.83,
+      "low": 54.5,
+      "high": 63.54
     }
   },
   "items": [
@@ -43,148 +33,142 @@
       "n": 1,
       "theme": "space",
       "topic": "launch",
-      "country": "IN",
-      "headline": "India launches its first private orbital rocket",
-      "title": "India launches first private rocket into space - DW.com",
-      "scifi_hook": "A privately built Indian rocket blasts off, marking the country's commercial space debut.",
-      "eli5": "India's first non\u2011government rocket reached space, showing private companies can launch satellites.",
-      "why": "It opens a new commercial market and reduces reliance on foreign launch services.",
+      "country": "US",
+      "headline": "SpaceX flies DARPA-backed mission to refuel aging geostationary satellites",
+      "title": "SpaceX launches Northrop mission to extend the life of aging satellites",
+      "scifi_hook": "A private rocket docks with three old satellites to give them new propulsion pods in orbit.",
+      "eli5": "SpaceX sent a spacecraft that attaches thrusters to three old satellites so they can stay in space longer.",
+      "why": "Extending satellite life reduces launch costs and space debris.",
       "tickers": [
-        "RKLB"
+        "NOC"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "private launch growth",
+      "rationale": "Northrop may see contract revenue growth",
       "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOQ2FFbjNMMjJQa0pDcWFpSmViRk5GYk9Bc1FOaUo4bnlyTzZfamliX0s4VkVjU09iZF90ejFPOFExMkI5SFYyRDlPOFZDNFFFWVRsMFBDd1JOV1kxV0pGNXJHOEFIakx5MC1IUEJPMUNzLVVvYVFIOGZXVkZQZm9pMWRYSVpVUdIBhgFBVV95cUxQbVgzOXpmYXozb1FhRjRQbnRpcFdZRjhnN2c1SDU0WnA1RGhhcFdoN2xGdXdLN0VhRmFpb3dGeXdjYllFdDBKTW1MUHlDVkp2ZlBYcURneW8yLXhrMm5pb29LWGNCZms4czZKcUxrT3dmX0hSYnhyV0RRQnRuWnlnc1JGQldfUQ?oc=5",
-      "source": "DW.com",
-      "text": "India launches first private rocket into space DW.com"
+      "link": "https://spacenews.com/spacex-launches-northrop-mission-to-extend-the-life-of-aging-satellites/",
+      "source": "spacenews.com",
+      "text": "DARPA-backed vehicle will install propulsion pods on three commercial satellites in geostationary orbit The post SpaceX launches Northrop mission to extend the life of aging satellites appeared first on SpaceNews ."
     },
     {
       "n": 2,
       "theme": "space",
-      "topic": "launch",
-      "country": "IN",
-      "headline": "India achieves milestone with first private\u2011sector orbital launch",
-      "title": "India achieves milestone with launch of first private-sector orbital rocket - Al Jazeera",
-      "scifi_hook": "A home\u2011grown private rocket carries a payload into orbit, a first for India.",
-      "eli5": "A privately funded Indian rocket successfully placed a satellite in space.",
-      "why": "It signals a shift toward a domestic commercial launch industry.",
-      "tickers": [
-        "RKLB"
-      ],
+      "topic": "satellite",
+      "country": "US",
+      "headline": "NISAR radar captures \u2018Hummingbird\u2019 image of Antarctic ice flow",
+      "title": "NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica",
+      "scifi_hook": "A joint US\u2011India radar satellite snaps a vivid picture of a mountain poking through Antarctic ice.",
+      "eli5": "The NISAR satellite used radar waves to map a nunatak that looks like a hummingbird in the ice.",
+      "why": "Helps scientists understand ice stress and potential sea\u2011level rise.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "new launch provider",
-      "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPeVFXT1pFVGRJVWU4WEZ6NU9tMXJyemdndWhPUTJiQjBLeUZxYnNFeDl2dUd5aXZXbmV5ci1XUVhBUDZiNUNTUE9BXzJrTUZIdkg4YmdaRlhUVFkyUUMzX0lYZnNGSHBueE8yMDdJaG5nM2J2cWZYY2VDSEJlZV9NMUVJQlQ0RmF6aFdnRU1sUU5DMzRwS3lSckw3dS1idjkydmY5cEdUNTF5dGdLTjBjMkVzOEthcW_SAbwBQVVfeXFMTm1aRGJsWG1kNXZWUGVjMkI2RmFueG1veDRmNEhPdFR3dURBNmtfcmNIc2NOSmpGQU01MXhBLW41Mi1SZWZkYWZ1VFZfR1ZoUm84Y3NjYUVPUkljV25IanZCanY5NlZhekdXenlZS3BIMUMzTmtGUkRteTNJejhUU05LQlBDMHBWOEdkenVld1NnOXltb1YtaVpoV2FCTnRxeHczU090VmlWWTE1ZXhGZnVyQWxuME15UzJEQW0?oc=5",
-      "source": "Al Jazeera",
-      "text": "India achieves milestone with launch of first private-sector orbital rocket Al Jazeera"
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://science.nasa.gov/photojournal/nisars-l-band-radar-reveals-hummingbird-in-antarctica/",
+      "source": "science.nasa.gov",
+      "text": "2 Min Read NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica PIA26617 Credits: NASA/JPL-Caltech Photojournal Navigation Science Photojournal NISAR\u2019s L-Band Radar Reveals\u2026 Photojournal Home Photojournal Search Latest Content Galleries Feedback RSS About Downloads NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica PNG (43.77 MB) PIA26617 Figure A JPEG (29.10 MB) Description Data from the Earth-orbiting U.S.-India NISAR (NASA-ISRO Synthetic Aperture Radar) satellite\u2019s L-band radar was used to produce an image of Nunatak Zaterjavshijsja \u2014 a mountaintop in East Antarctica \u2014 poking out amid a stream of ice flowing northeast to the ocean. The obstruction causes stresses in the ice, heavily fracturing the surrounding surfaces with deep cracks, called crevasses, which show as sharp green lines in the image. Produced in August 2025, the image has been nicknamed \u201cthe hummingbird\u201d by NISAR scientists. The colors show differences in the way polarized microwave signals, which vibrate in different directions, interact with and reflect from the ice. Over Antarctica, NISAR transmits radar waves toward Earth with a horizontal polarization. The orientation of the signals that return, either horizontal, vertical, or both, provide clues about the object or surface that reflected them. Signals that come back with a horizontal polarization likely bounced off a more regular surface, such as smooth ice. Those signals appear magenta in the image. Signals that return with vertical polariza"
     },
     {
       "n": 3,
       "theme": "space",
-      "topic": "launch",
-      "country": "IN",
-      "headline": "First private orbital launch lifts off from Sriharikota",
-      "title": "First private orbital launch lifts off from Sriharikota - ISRO",
-      "scifi_hook": "From Sriharikota, India's inaugural private rocket ignites, joining the global launch arena.",
-      "eli5": "A privately built rocket launched from India's spaceport and reached orbit.",
-      "why": "It diversifies launch options and could lower costs for satellite owners.",
-      "tickers": [
-        "RKLB"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "expanded launch capacity",
-      "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxNNVRMR004TVRpMGljNVRQbFdnWnhvSmJzVHBPNnJEbDZnNkl6WFgwbXhwN3JaRnhJV1pKX3JQczhpU0VTWnlCY0RKcVJnQmhWcldnUWFiQTdYVFh2eTBxc2FPZ2xmWnFlNkY4cGZrNG54ZmJZTC1wdTE3dWtSaUROYkc1VXR2MHM?oc=5",
-      "source": "ISRO",
-      "text": "First private orbital launch lifts off from Sriharikota ISRO"
-    },
-    {
-      "n": 4,
-      "theme": "minerals",
-      "topic": "mining",
-      "country": "CA",
-      "headline": "Agnico Eagle\u2019s LaRonde mine uses world\u2011first automated rod magazine",
-      "title": "Agnico Eagle Mines\u2019 LaRonde operation becomes first to use Epiroc Diamec Automated Rod Magazine",
-      "scifi_hook": "Robotic arms now feed drill rods deep underground, keeping workers out of danger.",
-      "eli5": "A new machine automatically moves drilling rods in a Canadian gold mine, reducing manual work.",
-      "why": "It improves safety and productivity in underground mining operations.",
+      "topic": "other",
+      "country": "",
+      "headline": "New Zealand startup Zenno Astronautics moves to the United States",
+      "title": "Zenno Astronautics to relocate to the United States",
+      "scifi_hook": "A Kiwi firm with superconducting magnets for spacecraft control relocates to America.",
+      "eli5": "Zenno Astronautics, which uses powerful magnets to steer rockets, is shifting its base to the US.",
+      "why": "U.S. relocation may give the company better funding and market access.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "low",
-      "link": "https://im-mining.com/2026/07/17/agnico-eagle-mines-laronde-operation-becomes-first-to-use-epiroc-diamec-automated-rod-magazine/",
+      "link": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states/",
+      "source": "spacenews.com",
+      "text": "SAN FRANCISCO \u2013 Zenno Astronautics, a New Zealand startup focused on applying superconducting magnets for spacecraft attitude control and acceleration, plans to redomicile to the United States. \u201cIt is obvious [\u2026] The post Zenno Astronautics to relocate to the United States appeared first on SpaceNews ."
+    },
+    {
+      "n": 4,
+      "theme": "minerals",
+      "topic": "water",
+      "country": "",
+      "headline": "Two\u2011thirds of global mines face serious water\u2011stress risk, ICMM finds",
+      "title": "Majority of mining and metals facilities face significant water risk, ICMM study shows",
+      "scifi_hook": "A new study shows most mining sites sit on water\u2011scarce ground, threatening future production.",
+      "eli5": "About 66% of mines are in places where water is already limited or over\u2011used.",
+      "why": "Water scarcity could constrain supply of critical minerals for clean\u2011energy technologies.",
+      "tickers": [
+        "FCX",
+        "SCCO",
+        "TECK"
+      ],
+      "proxy_note": "",
+      "bias": "down",
+      "rationale": "Water risk may pressure operating costs",
+      "confidence": "medium",
+      "link": "https://im-mining.com/2026/07/22/majority-of-mining-and-metals-facilities-face-significant-water-risk-icmm-study-shows/",
       "source": "im-mining.com",
-      "text": "Located west of Val-d\u2019Or, Quebec, the LaRonde mine, owned by Agnico Eagle Mines, has become the first underground mine in the world to use Epiroc\u2019s new Diamec Automated Rod Magazine (ARM), first showcased at PDAC in Toronto earlier this year. Introduced and operated in the underground environment by drilling contractor Machines Roger International (MRI) crews, the ARM is an automated rod handling system designed to position operators further away from risk zones while improving operational efficiency. The system automates rod handling functions, including rods, swivel rods and inner tube handling, while reducing manual intervention and operator exposure to repetitive and potentially hazardous tasks, according to Epiroc. The project was carried out through close collaboration between Agnico Eagle\u2019s LaRonde geology and operations teams, MRI\u2019s underground drilling crews operating the equipment on site, and Epiroc\u2019s technical and automation teams who completed this world-first commissioning. \u201cWe\u2019re excited to partner with MRI on this project,\u201d Michelle White, Business Line Manager Ore Body Solutions at Epiroc, says. \u201cThis collaboration showcases the benefits of utilising new technology to safely enhance the drilling experience underground.\u201d The post Agnico Eagle Mines\u2019 LaRonde operation becomes first to use Epiroc Diamec Automated Rod Magazine appeared first on International Mining ."
+      "text": "Nearly two-thirds of mining and metals facilities worldwide are located in areas facing significant physical water risk, according to new analysis by the ICMM. Its Global Mining and Metals Water Dataset and report also reveals that competition for water between mining and metals operations and other industrial and domestic users is the greatest physical water risk facing the industry. It highlights the importance of coordinated integrated land and water use planning at regional scales, as demand grows for the materials needed for clean energy systems. Minerals and metals are essential to the energy transition and the low-carbon economy of the future, but this analysis shows that the conditions needed to produce them are constrained by physical water risks, the ICMM says. Key findings include: 65.7% of mining and metals facilities globally are exposed to high levels of at least one physical water risk indicator; 38.2% of facilities are located in catchments with high or extremely high baseline water stress, or in arid areas where water is functionally unavailable; 27.4% of facilities globally are exposed to high or extremely high baseline water depletion; 27% of facilities globally are exposed to high drought risk, making drought the second most prevalent physical water risk analysed; 14% of facilities globally are exposed to high or extremely high flood risk, although exposure is higher for alumina refining, aluminium smelting, molybdenum production and steel production; 16.2"
     },
     {
       "n": 5,
-      "theme": "tech",
-      "topic": "defense",
-      "country": "US",
-      "headline": "Pentagon awards $7.1\u202fM to boost U.S. satellite cover\u2011glass production",
-      "title": "Pentagon awards $7.1 million to expand U.S. production of cover glass for satellites",
-      "scifi_hook": "A small U.S. firm will mass\u2011produce radiation\u2011proof glass for next\u2011gen spacecraft.",
-      "eli5": "The U.S. government gave money to a company to make special glass for satellite parts.",
-      "why": "It strengthens domestic supply chains for critical space hardware.",
+      "theme": "minerals",
+      "topic": "lithium",
+      "country": "CL",
+      "headline": "Covalent Lithium to double Mt Holland spodumene output by 2030",
+      "title": "Covalent Lithium to double spodumene output from Mt Holland",
+      "scifi_hook": "A joint venture will double lithium\u2011rich ore production, adding a new ore\u2011sorting plant.",
+      "eli5": "The project will increase lithium concentrate from 380,000 to 760,000 tonnes per year and add a plant to process more ore.",
+      "why": "Higher output supports growing demand for lithium batteries.",
       "tickers": [
-        "LMT",
-        "BA",
-        "RTX"
+        "SQM"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "defense supply boost",
-      "confidence": "low",
-      "link": "https://spacenews.com/pentagon-awards-7-1-million-to-expand-u-s-production-of-cover-glass-for-satellites/",
-      "source": "spacenews.com",
-      "text": "Defense Production Act funding was awarded to Martin Materials Solutions, a small business that makes radiation-resistant cover glass used on spacecraft solar arrays and thermal-control systems The post Pentagon awards $7.1 million to expand U.S. production of cover glass for satellites appeared first on SpaceNews ."
+      "rationale": "SQM gains higher lithium sales",
+      "confidence": "high",
+      "link": "https://im-mining.com/2026/07/22/covalent-lithium-to-double-spodumene-output-from-mt-holland/",
+      "source": "im-mining.com",
+      "text": "Wesfarmers Limited, together with Sociedad Quimica y Minera de Chile S.A (SQM), has announced the joint approval of the final investment decision to expand the Mt Holland lithium project, comprising the mine, concentrator and a new integrated ore sorting facility. The expansion will double spodumene concentrate production, lower unit operating costs and accelerate cash flows, the companies say. Covalent Lithium, the joint venture company owned by Wesfarmers and SQM, has completed a definitive feasibility study for the expansion project, which will increase nameplate spodumene concentrate production from approximately 380,000 t/y to 760,000 t/y on a 100% basis. An ore sorting facility will also be constructed to recover stockpiled material currently unsuitable for processing, adding approximately 3 Mt of spodumene concentrate production over the life of the operation. Construction of a second concentrator is expected to commence in the second half of calendar year 2027, with the first spodumene concentrate production volumes from the expansion expected in the first half of calendar year 2030. Wesfarmers\u2019 share of capital expenditure for the project is estimated to be between $450 million and $500 million in nominal terms and excluding capitalised interest, and will be funded using existing cash and debt facilities. The necessary government and regulatory approvals have either been secured or are underway. The expanded production volumes are expected to be sold as spodumene con"
     },
     {
       "n": 6,
       "theme": "tech",
       "topic": "ai",
-      "country": "CN",
-      "headline": "Pocket\u2011size AI phones showcased at China show",
-      "title": "Pocket-size AI: Powerful phones star at China show",
-      "scifi_hook": "Smartphones with built\u2011in AI agents can obey voice commands like personal assistants on steroids.",
-      "eli5": "New phones in China can run AI helpers that understand speech and perform tasks for you.",
-      "why": "They could drive a surge in AI\u2011driven hardware demand worldwide.",
-      "tickers": [
-        "NVDA",
-        "AMD",
-        "TSM"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "AI hardware demand",
-      "confidence": "medium",
-      "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/pocket-size-ai-powerful-phones-star-at-china-show/articleshow/132490679.cms",
-      "source": "economictimes.indiatimes.com",
-      "text": "Tech firms are developing AI agent smartphones that could revolutionize mobile use. These advanced phones aim to perform tasks using voice commands and AI. Major app companies are restricting access, which hinders the AI agent's functionality. Companies like Nubia, Honor, and StepFun are showcasing these new devices. Experts predict a fundamental change in digital economies and business models."
-    },
-    {
-      "n": 7,
-      "theme": "earth",
-      "topic": "cleanenergy",
       "country": "US",
-      "headline": "U.S. hits solar power milestone as fossil fuel use falls",
-      "title": "U.S. reaches solar power milestone amid fossil fuel decline - Kiowa County Press",
-      "scifi_hook": "Solar farms now generate more electricity than ever, edging out coal and gas.",
-      "eli5": "The United States has added enough solar capacity to set a new record while using less fossil fuel.",
-      "why": "It marks a tangible shift toward renewable electricity generation.",
+      "headline": "AI could add $228\u202fbillion annually to US construction sector by 2030",
+      "title": "AI could unlock $228 billion in annual value for US AEC sector by 2030: McKinsey",
+      "scifi_hook": "Artificial intelligence promises a trillion\u2011dollar boost to building design and engineering.",
+      "eli5": "Using AI tools could create $228\u202fbillion of extra value each year for U.S. architects, engineers and builders.",
+      "why": "Automation can cut costs and speed up project delivery.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
-      "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOM2R4MUIxYzZRbFhkcTk0SHdGSEx4bW83Y3pFZFBoNWprN2JfUHYtRGVFSUlzWlZLc2h5RmVrZ1EwdXE1LTFQMGR1Tm94TFFjNkFRa1F0VFJ0UFZfTFVHZUpwUjI1T0NUYWhmQTlwdy1FM0xmemtrcHFvUjhaUU50TGtBQmFERml0SnB0bHdVRFJldFFSSll0WjZ3?oc=5",
-      "source": "Kiowa County Press",
-      "text": "U.S. reaches solar power milestone amid fossil fuel decline Kiowa County Press"
+      "confidence": "medium",
+      "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-could-unlock-228-billion-in-annual-value-for-us-aec-sector-by-2030-mckinsey/articleshow/132554700.cms",
+      "source": "economictimes.indiatimes.com",
+      "text": "Artificial intelligence (AI) and other automation technologies could unlock around $228 billion in annual value for the US architecture, engineering and construction (AEC) sector by 2030, while AI's impact on the European construction sector alone could reach approximately $126 billion, according to a McKinsey report."
+    },
+    {
+      "n": 7,
+      "theme": "earth",
+      "topic": "weather",
+      "country": "",
+      "headline": "AI accelerates global weather\u2011forecasting capabilities",
+      "title": "How AI is advancing global weather forecasting services - news.cgtn.com",
+      "scifi_hook": "Machine\u2011learning models are sharpening predictions of storms and climate events worldwide.",
+      "eli5": "Artificial intelligence helps meteorologists predict weather more accurately by processing huge data sets.",
+      "why": "Better forecasts improve safety and economic planning across sectors.",
+      "tickers": [],
+      "proxy_note": "",
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPT1A5UldFaVE0WjlCV3ZpMXJuNHVoZDFPZlBjQUh3NTdpSmg0SVRNV1M1dEMxSllDallXUWdJMk9CSENXak91OHdCLV9sSEluOGROUUxiSHpPSUdXbGh1N2ZqMHRhdjJLZGpGS2dpZUF2SXpnSzlXaEcxaHFrVHpxZlVDTXB1SGJyaXM3Um54cGx1RUF2UUhoZE12Mnk2aE8yczRFZ05UQVNrb19FNkM2clZB?oc=5",
+      "source": "news.cgtn.com",
+      "text": "How AI is advancing global weather forecasting services news.cgtn.com"
     }
   ]
 }
