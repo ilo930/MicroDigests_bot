@@ -1,31 +1,31 @@
 {
-  "date": "2026-07-22",
-  "generated_at": "2026-07-22T09:20:44.986077+00:00",
+  "date": "2026-07-25",
+  "generated_at": "2026-07-25T08:54:36.453785+00:00",
   "prices": {
     "FCX": {
-      "last": 62.56,
+      "last": 62.6,
       "low": 57.36,
-      "high": 69.04
+      "high": 65.0
     },
-    "NOC": {
-      "last": 512.29,
-      "low": 496.02,
-      "high": 549.04
+    "LYC.AX": {
+      "last": 14.79,
+      "low": 14.79,
+      "high": 19.34
+    },
+    "RKLB": {
+      "last": 63.91,
+      "low": 63.91,
+      "high": 101.65
     },
     "SCCO": {
-      "last": 188.01,
+      "last": 179.29,
       "low": 167.21,
-      "high": 189.91
-    },
-    "SQM": {
-      "last": 68.84,
-      "low": 66.33,
-      "high": 78.65
+      "high": 195.48
     },
     "TECK": {
-      "last": 56.83,
+      "last": 60.19,
       "low": 54.5,
-      "high": 63.54
+      "high": 61.45
     }
   },
   "items": [
@@ -34,141 +34,143 @@
       "theme": "space",
       "topic": "launch",
       "country": "US",
-      "headline": "SpaceX flies DARPA-backed mission to refuel aging geostationary satellites",
-      "title": "SpaceX launches Northrop mission to extend the life of aging satellites",
-      "scifi_hook": "A private rocket docks with three old satellites to give them new propulsion pods in orbit.",
-      "eli5": "SpaceX sent a spacecraft that attaches thrusters to three old satellites so they can stay in space longer.",
-      "why": "Extending satellite life reduces launch costs and space debris.",
+      "headline": "SpaceX\u2019s Super Heavy-Starship completes 13th test flight with hard splashdown",
+      "title": "Super Heavy-Starship rocket chalks up mostly successful test flight",
+      "scifi_hook": "The world\u2011largest rocket roared to space and its booster splashed hard off the Texas Gulf.",
+      "eli5": "SpaceX fired 33 methane engines to lift a two\u2011stage rocket, then the booster landed in the ocean.",
+      "why": "Successful tests keep the company ahead in heavy\u2011lift launch capability.",
       "tickers": [
-        "NOC"
+        "RKLB"
       ],
-      "proxy_note": "",
+      "proxy_note": "SpaceX is private",
       "bias": "up",
-      "rationale": "Northrop may see contract revenue growth",
+      "rationale": "Launch sector demand may rise",
       "confidence": "medium",
-      "link": "https://spacenews.com/spacex-launches-northrop-mission-to-extend-the-life-of-aging-satellites/",
-      "source": "spacenews.com",
-      "text": "DARPA-backed vehicle will install propulsion pods on three commercial satellites in geostationary orbit The post SpaceX launches Northrop mission to extend the life of aging satellites appeared first on SpaceNews ."
+      "link": "https://spaceflightnow.com/2026/07/25/super-heavy-starship-rocket-chalks-up-mostly-successful-test-flight/",
+      "source": "spaceflightnow.com",
+      "text": "SpaceX\u2019s Super Heavy-Starship, the most powerful rocket ever built, blasts off on the program\u2019s 13th test flight in another critical milestone for Elon Musk\u2019s rocket company. Image: SpaceX SpaceX launched it\u2019s 13th Super Heavy-Starship rocket Friday, with the giant booster chalking up an on-target but \u201chard\u201d splashdown off the Texas Gulf Coast while the Starship upper stage carried out a successful sub-orbital hop to the Indian Ocean. Powered by 33 methane-fueled Raptor engines, the 397-foot-tall two-stage rocket blasted off from SpaceX\u2019s \u201cStarbase,\u201d Texas, launch site at 5:51 p.m. EDT, putting on a spectacular show for area residents and tourists as it climbed away atop some 16 million pounds of thrust. A launch attempt July 16 ended with a last-second computer-commanded abort when four Raptors failed to start properly. Those issues were addressed and the launch was reset for Thursday, only to have low clouds prompt a 24-hour delay. But the weather cooperated Friday, all 33 first stage engines fired up normally and the rocket thundered away through a mostly clear sky. A spectacular view looking down the side of the Super Heavy-Starship a little more than one minute after liftoff from SpaceX\u2019s Starbase facility on the Texas coast. Image: SpaceX It was the second test flight of a third-generation Super Heavy-Starship, building on lessons learned during the initial flight of a \u201cV3\u201d rocket in May when the booster missed its landing target and the Starship suffered an early engin"
     },
     {
       "n": 2,
       "theme": "space",
-      "topic": "satellite",
+      "topic": "launch",
       "country": "US",
-      "headline": "NISAR radar captures \u2018Hummingbird\u2019 image of Antarctic ice flow",
-      "title": "NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica",
-      "scifi_hook": "A joint US\u2011India radar satellite snaps a vivid picture of a mountain poking through Antarctic ice.",
-      "eli5": "The NISAR satellite used radar waves to map a nunatak that looks like a hummingbird in the ice.",
-      "why": "Helps scientists understand ice stress and potential sea\u2011level rise.",
+      "headline": "SpaceX conducts 13th Starship sub\u2011orbital test, deploys satellites",
+      "title": "SpaceX conducts 13th Starship test flight",
+      "scifi_hook": "Starship flew again, fixing prior glitches and released working satellites on its way down.",
+      "eli5": "The Starship vehicle lifted off, flew a short path in space, and dropped small satellites that turned on.",
+      "why": "Demonstrates re\u2011usable launch and satellite deployment capability.",
+      "tickers": [
+        "RKLB"
+      ],
+      "proxy_note": "SpaceX is private",
+      "bias": "up",
+      "rationale": "Positive impact on launch market",
+      "confidence": "medium",
+      "link": "https://spacenews.com/spacex-conducts-13th-starship-test-flight/",
+      "source": "spacenews.com",
+      "text": "SpaceX launched Starship on its 13th suborbital test flight July 24, correcting some of the issues seen on the previous flight while deploying functioning satellites for the first time. The post SpaceX conducts 13th Starship test flight appeared first on SpaceNews ."
+    },
+    {
+      "n": 3,
+      "theme": "space",
+      "topic": "astronomy",
+      "country": "US",
+      "headline": "NASA\u2019s ESCAPADE spacecraft snaps rare Earth\u2011Moon portrait in visible and infrared",
+      "title": "NASA\u2019s ESCAPADE Snaps Family Portrait of Earth, Moon",
+      "scifi_hook": "A tiny probe far from home photographed Earth and Moon as glowing crescents in heat and light.",
+      "eli5": "A spacecraft near Mars took pictures of Earth and the Moon in normal light and in heat\u2011glow.",
+      "why": "Shows spacecraft imaging capabilities for future deep\u2011space missions.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://science.nasa.gov/photojournal/nisars-l-band-radar-reveals-hummingbird-in-antarctica/",
+      "link": "https://science.nasa.gov/image-article/centers-and-facilities/goddard/nasas-escapade-snaps-family-portrait-of-earth-moon/",
       "source": "science.nasa.gov",
-      "text": "2 Min Read NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica PIA26617 Credits: NASA/JPL-Caltech Photojournal Navigation Science Photojournal NISAR\u2019s L-Band Radar Reveals\u2026 Photojournal Home Photojournal Search Latest Content Galleries Feedback RSS About Downloads NISAR\u2019s L-Band Radar Reveals \u2018Hummingbird\u2019 in Antarctica PNG (43.77 MB) PIA26617 Figure A JPEG (29.10 MB) Description Data from the Earth-orbiting U.S.-India NISAR (NASA-ISRO Synthetic Aperture Radar) satellite\u2019s L-band radar was used to produce an image of Nunatak Zaterjavshijsja \u2014 a mountaintop in East Antarctica \u2014 poking out amid a stream of ice flowing northeast to the ocean. The obstruction causes stresses in the ice, heavily fracturing the surrounding surfaces with deep cracks, called crevasses, which show as sharp green lines in the image. Produced in August 2025, the image has been nicknamed \u201cthe hummingbird\u201d by NISAR scientists. The colors show differences in the way polarized microwave signals, which vibrate in different directions, interact with and reflect from the ice. Over Antarctica, NISAR transmits radar waves toward Earth with a horizontal polarization. The orientation of the signals that return, either horizontal, vertical, or both, provide clues about the object or surface that reflected them. Signals that come back with a horizontal polarization likely bounced off a more regular surface, such as smooth ice. Those signals appear magenta in the image. Signals that return with vertical polariza"
-    },
-    {
-      "n": 3,
-      "theme": "space",
-      "topic": "other",
-      "country": "",
-      "headline": "New Zealand startup Zenno Astronautics moves to the United States",
-      "title": "Zenno Astronautics to relocate to the United States",
-      "scifi_hook": "A Kiwi firm with superconducting magnets for spacecraft control relocates to America.",
-      "eli5": "Zenno Astronautics, which uses powerful magnets to steer rockets, is shifting its base to the US.",
-      "why": "U.S. relocation may give the company better funding and market access.",
-      "tickers": [],
-      "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://spacenews.com/zenno-astronautics-to-relocate-to-the-united-states/",
-      "source": "spacenews.com",
-      "text": "SAN FRANCISCO \u2013 Zenno Astronautics, a New Zealand startup focused on applying superconducting magnets for spacecraft attitude control and acceleration, plans to redomicile to the United States. \u201cIt is obvious [\u2026] The post Zenno Astronautics to relocate to the United States appeared first on SpaceNews ."
+      "text": "On July 3, one of NASA\u2019s two Mars-destined ESCAPADE (Escape and Plasma Acceleration and Dynamics Explorers) spacecraft captured photos of Earth and the Moon in visible and thermal infrared light. At the time, the spacecraft was 363,250 miles (584,600 kilometers) from Earth and 115,600 miles (186,100 kilometers) from the Moon, making the Moon appear relatively large. Taken with the Sun only partly illuminating Earth and the Moon, the visible light image shows the two bodies as crescents, with only around 8% of each face sunlit. Yet in the thermal infrared image, the shadowed hemisphere of Earth is illuminated by its own heat from both the atmosphere and surface, glowing at minus 10 to minus 44 degrees Fahrenheit (250 to 280 kelvins). Without the insulating blankets of oceans and atmospheres, the Moon\u2019s far side remains at a much cooler minus 280 degrees Fahrenheit (100 kelvins). visible light thermal infrared light Caption: In these images from NASA\u2019s ESCAPADE mission, Earth (left) and Moon (right) can be seen. The image to the left of the slider shows visible light reflected by the Sun while the infrared image to the right shows the bodies\u2019 emitted energy. White rings have been added in the thermal image to show the actual size of Earth and the Moon. Credit: NASA/UCB-SSL/NAU-Radiant/Lucint NASA/UCB-SSL/NAU-Radiant/Lucint In these images from NASA\u2019s ESCAPADE mission, Earth (left) and Moon (right) can be seen. The image to the left of the slider shows visible light reflected by"
     },
     {
       "n": 4,
       "theme": "minerals",
       "topic": "water",
       "country": "",
-      "headline": "Two\u2011thirds of global mines face serious water\u2011stress risk, ICMM finds",
-      "title": "Majority of mining and metals facilities face significant water risk, ICMM study shows",
-      "scifi_hook": "A new study shows most mining sites sit on water\u2011scarce ground, threatening future production.",
-      "eli5": "About 66% of mines are in places where water is already limited or over\u2011used.",
-      "why": "Water scarcity could constrain supply of critical minerals for clean\u2011energy technologies.",
+      "headline": "Two\u2011thirds of global mining sites face significant water risk, ICMM reports",
+      "title": "Two-thirds of global mining facilities face significant water risk, ICMM report says - Down To Earth",
+      "scifi_hook": "A majority of mines worldwide now sit on the brink of water shortages.",
+      "eli5": "The International Council says most mines could run out of water needed for operations.",
+      "why": "Water scarcity could limit production and raise costs for miners.",
       "tickers": [
         "FCX",
-        "SCCO",
-        "TECK"
+        "TECK",
+        "SCCO"
       ],
       "proxy_note": "",
       "bias": "down",
-      "rationale": "Water risk may pressure operating costs",
+      "rationale": "Water constraints hurt miners",
       "confidence": "medium",
-      "link": "https://im-mining.com/2026/07/22/majority-of-mining-and-metals-facilities-face-significant-water-risk-icmm-study-shows/",
-      "source": "im-mining.com",
-      "text": "Nearly two-thirds of mining and metals facilities worldwide are located in areas facing significant physical water risk, according to new analysis by the ICMM. Its Global Mining and Metals Water Dataset and report also reveals that competition for water between mining and metals operations and other industrial and domestic users is the greatest physical water risk facing the industry. It highlights the importance of coordinated integrated land and water use planning at regional scales, as demand grows for the materials needed for clean energy systems. Minerals and metals are essential to the energy transition and the low-carbon economy of the future, but this analysis shows that the conditions needed to produce them are constrained by physical water risks, the ICMM says. Key findings include: 65.7% of mining and metals facilities globally are exposed to high levels of at least one physical water risk indicator; 38.2% of facilities are located in catchments with high or extremely high baseline water stress, or in arid areas where water is functionally unavailable; 27.4% of facilities globally are exposed to high or extremely high baseline water depletion; 27% of facilities globally are exposed to high drought risk, making drought the second most prevalent physical water risk analysed; 14% of facilities globally are exposed to high or extremely high flood risk, although exposure is higher for alumina refining, aluminium smelting, molybdenum production and steel production; 16.2"
+      "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxPU0ppWS03WmVTYk1VcFVxYi1xR0FlMVpzOW9DQmQwN1RHaWRwVXVadUpxWjNybU40cjc1RU5KZlJqSkM1ckpKOE1RanJHbmh6WkRiY09VU2dNX01mX3JVdkp4NkhwZnJoaU5YZDFQdlY1cS1aLUhieGJYZlpYQ3EzN3AwLUtaZER4M3pMSjBlWU8teDBqWXVhOXhXc04ta3FoT1ZVQTdvZUJTUlRxUm16RVgtekhMUGVQMWhqNU9sNVZzN2R1bC1ESDZtMXpPQ2s4dGfSAdIBQVVfeXFMT1NKaVktN1plU2JNVXBVcWItcUdBZTFaczlvQ0JkMDdUR2lkcFV1WnVKcVozcm1ONHI3NUVOSmZSakpDNXJKSjhNUWpyR25oelpEYmNPVVNnTV9NZl9yVXZKeDZIcGZyaGlOWGQxUHZWNXEtWi1IYnhiWGZaWENxMzdwMC1LWmREeDN6TEowZVlPLXgwall1YTl4V3NOLWtxaE9WVUE3b2VCU1JUcVJtekVYLXpITFBlUDFoajVPbDVWczdkdWwtREg2bTF6T0NrOHRn?oc=5",
+      "source": "Down To Earth",
+      "text": "Two-thirds of global mining facilities face significant water risk, ICMM report says Down To Earth"
     },
     {
       "n": 5,
       "theme": "minerals",
-      "topic": "lithium",
-      "country": "CL",
-      "headline": "Covalent Lithium to double Mt Holland spodumene output by 2030",
-      "title": "Covalent Lithium to double spodumene output from Mt Holland",
-      "scifi_hook": "A joint venture will double lithium\u2011rich ore production, adding a new ore\u2011sorting plant.",
-      "eli5": "The project will increase lithium concentrate from 380,000 to 760,000 tonnes per year and add a plant to process more ore.",
-      "why": "Higher output supports growing demand for lithium batteries.",
+      "topic": "minerals",
+      "country": "SE",
+      "headline": "Sweden eases mining permits to reduce reliance on Chinese minerals",
+      "title": "Sweden eases mining permits to cut China minerals reliance - DW.com",
+      "scifi_hook": "Swedish reforms open new mines, aiming to shift supply away from China.",
+      "eli5": "Sweden is speeding up approvals for new mines so it can get minerals without depending on China.",
+      "why": "Could boost non\u2011Chinese rare\u2011earth supply chains.",
       "tickers": [
-        "SQM"
+        "LYC.AX"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "SQM gains higher lithium sales",
-      "confidence": "high",
-      "link": "https://im-mining.com/2026/07/22/covalent-lithium-to-double-spodumene-output-from-mt-holland/",
-      "source": "im-mining.com",
-      "text": "Wesfarmers Limited, together with Sociedad Quimica y Minera de Chile S.A (SQM), has announced the joint approval of the final investment decision to expand the Mt Holland lithium project, comprising the mine, concentrator and a new integrated ore sorting facility. The expansion will double spodumene concentrate production, lower unit operating costs and accelerate cash flows, the companies say. Covalent Lithium, the joint venture company owned by Wesfarmers and SQM, has completed a definitive feasibility study for the expansion project, which will increase nameplate spodumene concentrate production from approximately 380,000 t/y to 760,000 t/y on a 100% basis. An ore sorting facility will also be constructed to recover stockpiled material currently unsuitable for processing, adding approximately 3 Mt of spodumene concentrate production over the life of the operation. Construction of a second concentrator is expected to commence in the second half of calendar year 2027, with the first spodumene concentrate production volumes from the expansion expected in the first half of calendar year 2030. Wesfarmers\u2019 share of capital expenditure for the project is estimated to be between $450 million and $500 million in nominal terms and excluding capitalised interest, and will be funded using existing cash and debt facilities. The necessary government and regulatory approvals have either been secured or are underway. The expanded production volumes are expected to be sold as spodumene con"
+      "rationale": "Alternative sources benefit Lynas",
+      "confidence": "low",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOU1BMaWk2alhSZUVsc1hhMUFBRW1USFM3MFd0cEJrQTVVZkc1ZzJtTEVNT2VkYlFwR0ZuRUVPODlFelRlRWhkem1MVnYwUGs5VDZCUFVrRW9VRVl2V0NPVUVmLTBkMGN5M1JGOTRjV1YwMGt6dDdQUGpOcTZnVExZSXBzSm82dnpCaHotMFVjNmRxOTF1MWfSAZYBQVVfeXFMT2h5MVV5d0hKdzBrMzVNQS1ISUVQUURDTEFiU25tb0hEZXJhN2dscE1kNUx3cmotNTJ2WG1NbFJTRWhBbEZzeXh1Z0U4U2I1ZmxxV1hFMW13bXgxb2lpMnFmUnY0bllsN3AydmI4bzVSLTRYbm5ldW1DLXRudmNIYkhaU09mdlRJekVSTW9lSFB5YmZUQmpB?oc=5",
+      "source": "DW.com",
+      "text": "Sweden eases mining permits to cut China minerals reliance DW.com"
     },
     {
       "n": 6,
       "theme": "tech",
-      "topic": "ai",
-      "country": "US",
-      "headline": "AI could add $228\u202fbillion annually to US construction sector by 2030",
-      "title": "AI could unlock $228 billion in annual value for US AEC sector by 2030: McKinsey",
-      "scifi_hook": "Artificial intelligence promises a trillion\u2011dollar boost to building design and engineering.",
-      "eli5": "Using AI tools could create $228\u202fbillion of extra value each year for U.S. architects, engineers and builders.",
-      "why": "Automation can cut costs and speed up project delivery.",
+      "topic": "chips",
+      "country": "KR",
+      "headline": "SK Hynix and Samsung sign $950\u202fbillion memory chip supply deal with US tech firms",
+      "title": "South Korea's SK Hynix, Samsung Electronics sign $950 billion partnership with US big tech",
+      "scifi_hook": "South Korean chip giants lock in massive long\u2011term memory shipments to U.S. companies.",
+      "eli5": "SK Hynix will provide $750\u202fbillion and Samsung $200\u202fbillion worth of memory chips to U.S. tech makers.",
+      "why": "Secures a huge demand pipeline for memory manufacturers.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
-      "confidence": "medium",
-      "link": "https://economictimes.indiatimes.com/tech/artificial-intelligence/ai-could-unlock-228-billion-in-annual-value-for-us-aec-sector-by-2030-mckinsey/articleshow/132554700.cms",
+      "confidence": "low",
+      "link": "https://economictimes.indiatimes.com/tech/technology/south-koreas-sk-hynix-samsung-electronics-sign-950-billion-partnership-with-us-big-tech/articleshow/132619135.cms",
       "source": "economictimes.indiatimes.com",
-      "text": "Artificial intelligence (AI) and other automation technologies could unlock around $228 billion in annual value for the US architecture, engineering and construction (AEC) sector by 2030, while AI's impact on the European construction sector alone could reach approximately $126 billion, according to a McKinsey report."
+      "text": "The partnership includes the long-term supply of $750 \u200bbillion in memory \u200bchips to US companies by SK Hynix \u200cand $200 billion in chips \u200bby Samsung \u200bElectronics \u2060to Broadcom, the presidential adviser, Kim Yong-beom, \u200bsaid at a briefing."
     },
     {
       "n": 7,
       "theme": "earth",
       "topic": "weather",
       "country": "",
-      "headline": "AI accelerates global weather\u2011forecasting capabilities",
-      "title": "How AI is advancing global weather forecasting services - news.cgtn.com",
-      "scifi_hook": "Machine\u2011learning models are sharpening predictions of storms and climate events worldwide.",
-      "eli5": "Artificial intelligence helps meteorologists predict weather more accurately by processing huge data sets.",
-      "why": "Better forecasts improve safety and economic planning across sectors.",
+      "headline": "Researchers develop AI method to improve forecasts weeks ahead",
+      "title": "Researchers develop AI-driven method to improve forecasts weeks in advance - Phys.org",
+      "scifi_hook": "New AI model can predict weather patterns several weeks into the future with higher accuracy.",
+      "eli5": "Scientists used artificial intelligence to make weather forecasts that work better for weeks ahead.",
+      "why": "Long\u2011range forecasts can aid agriculture, disaster planning and energy management.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPT1A5UldFaVE0WjlCV3ZpMXJuNHVoZDFPZlBjQUh3NTdpSmg0SVRNV1M1dEMxSllDallXUWdJMk9CSENXak91OHdCLV9sSEluOGROUUxiSHpPSUdXbGh1N2ZqMHRhdjJLZGpGS2dpZUF2SXpnSzlXaEcxaHFrVHpxZlVDTXB1SGJyaXM3Um54cGx1RUF2UUhoZE12Mnk2aE8yczRFZ05UQVNrb19FNkM2clZB?oc=5",
-      "source": "news.cgtn.com",
-      "text": "How AI is advancing global weather forecasting services news.cgtn.com"
+      "link": "https://news.google.com/rss/articles/CBMic0FVX3lxTE1NS3k0V1FwYlJVWkV0RWhlZUZTOGpFUFdHY3RTaXNCMlB3Y2dfakowb3JXbDhTalRWdFVZbVFVWnV0bVdqbzdVZVplaXhuN3FZanVBWldmUFFFWW9VRVhIYmxWX29jRGI5dmN2YTVzdTdQWlE?oc=5",
+      "source": "Phys.org",
+      "text": "Researchers develop AI-driven method to improve forecasts weeks in advance Phys.org"
     }
   ]
 }
