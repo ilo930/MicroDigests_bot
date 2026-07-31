@@ -1,179 +1,174 @@
 {
-  "date": "2026-07-28",
-  "generated_at": "2026-07-28T09:30:23.609900+00:00",
+  "date": "2026-07-31",
+  "generated_at": "2026-07-31T09:37:12.219324+00:00",
   "prices": {
-    "ASTS": {
-      "last": 58.29,
-      "low": 55.01,
-      "high": 88.86
-    },
-    "GSAT": {
-      "last": 79.03,
-      "low": 79.03,
-      "high": 81.29
-    },
     "IONQ": {
-      "last": 35.92,
-      "low": 32.84,
-      "high": 53.88
+      "last": 35.77,
+      "low": 31.99,
+      "high": 53.26
     },
-    "IRDM": {
-      "last": 45.96,
-      "low": 45.96,
-      "high": 55.72
+    "LYC.AX": {
+      "last": 14.09,
+      "low": 13.81,
+      "high": 18.22
     },
-    "QBTS": {
-      "last": 19.51,
-      "low": 16.21,
-      "high": 23.99
+    "MP": {
+      "last": 41.66,
+      "low": 38.1,
+      "high": 56.01
     },
-    "RGTI": {
-      "last": 15.64,
-      "low": 14.1,
-      "high": 19.44
+    "REMX": {
+      "last": 66.45,
+      "low": 64.59,
+      "high": 88.5
+    },
+    "TECK": {
+      "last": 62.49,
+      "low": 54.5,
+      "high": 62.49
     }
   },
   "items": [
     {
       "n": 1,
       "theme": "space",
-      "topic": "other",
-      "country": "US",
-      "headline": "Experts say Starship\u2019s ceramic heat shield may block rapid reuse",
-      "title": "Experts warn current Starship heat shield tech is a \"dead end\" for rapid reuse",
-      "scifi_hook": "SpaceX\u2019s giant rocket could land on a tower, but its tile shield might be a dead\u2011end.",
-      "eli5": "Starship uses 18,000 ceramic tiles to survive re\u2011entry, and experts worry they can\u2019t be reused cheaply.",
-      "why": "Reusable rockets need cheap, reliable heat protection to lower launch costs.",
+      "topic": "satellite",
+      "country": "",
+      "headline": "Rules needed for orbital data center constellations",
+      "title": "Rules of the road needed for orbital data center constellations",
+      "scifi_hook": "Satellites become floating data centers, prompting new traffic rules in orbit.",
+      "eli5": "Companies plan satellites that act as data centers, so rules are needed to keep space safe.",
+      "why": "Ensures safe operation of growing space traffic.",
       "tickers": [],
-      "proxy_note": "SpaceX is private",
+      "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://arstechnica.com/space/2026/07/despite-recent-successes-rapid-reuse-of-starship-remains-a-tough-nut-to-crack/",
-      "source": "arstechnica.com",
-      "text": "SpaceX successfully launched its Starship vehicle on Friday and appeared to demonstrate important and credible steps toward fulfilling the massive rocket's immense promise. As soon as the vehicle's next flight, Starship could go orbital, begin delivering satellites into space, and potentially return to the launch site to be 'caught' by the tower. All of this is impressive engineering on a gigantic scale. But despite the marked progress with the 13th test flight of Starship, one key issue\u2014probably the key issue when it comes to Starship's future\u2014remains unresolved. This concerns Starship's heat shield, the roughly 18,000 ceramic tiles that protect the vehicle's underbelly during its fiery return through Earth's atmosphere. And some experts say SpaceX's current approach may not get Starship to its ultimate goal of flying frequently, at low cost. Read full article Comments"
+      "link": "https://spacenews.com/rules-of-the-road-needed-for-orbital-data-center-constellations/",
+      "source": "spacenews.com",
+      "text": "As companies develop large constellations of orbital data center satellites, experts say now is the time to start thinking about some critical space safety topics and rules of the road. The post Rules of the road needed for orbital data center constellations appeared first on SpaceNews ."
     },
     {
       "n": 2,
       "theme": "space",
-      "topic": "satellite",
-      "country": "US",
-      "headline": "FCC plans $6\u202fbillion upper C\u2011band auction to boost GEO satellites",
-      "title": "Upper C-band auction offers another lift for GEO industry",
-      "scifi_hook": "A new spectrum sale could flood geostationary orbit with fresh broadband constellations.",
-      "eli5": "The FCC will auction high\u2011frequency radio bands, letting satellite companies buy more space for GEO signals.",
-      "why": "More spectrum enables new satellite services and revenue growth.",
-      "tickers": [
-        "ASTS",
-        "IRDM",
-        "GSAT"
-      ],
+      "topic": "launch",
+      "country": "",
+      "headline": "Europe boosts launch cadence with Avio and Arianespace",
+      "title": "Payload Field Guide: European Launchers",
+      "scifi_hook": "New rockets from Europe promise more frequent trips to space, like a busy airport.",
+      "eli5": "Europe has two launch companies that are working to launch rockets more often.",
+      "why": "Increases regional access to space and competition.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "spectrum sale lifts satellite revenues",
-      "confidence": "medium",
-      "link": "https://spacenews.com/upper-c-band-auction-offers-another-lift-for-geo-industry/",
-      "source": "spacenews.com",
-      "text": "Satellite operators have welcomed the prospect of reaping more than $6 billion for quickly clearing upper C-band spectrum the FCC aims to auction next year, with billions more set to cover new geostationary spacecraft and other transition costs. The post Upper C-band auction offers another lift for GEO industry appeared first on SpaceNews ."
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://payloadspace.com/payload-field-guide-european-launchers/",
+      "source": "payloadspace.com",
+      "text": "Europe is firing on all fronts to stand up new launch capabilities, but the continent isn\u2019t moving as fast as it might hope. Across the region, a slew of relatively young launch startups are making headway developing their new launch vehicles, with many projecting debut launches in the coming year. Even outside of Europe, rocket progress is rarely linear. You have to crawl before you can walk, and despite progress, \u201ccrawl\u201d best describes the current pace. Here\u2019s where Europe\u2019s launch capabilities stand: Not for nothing: Europe today has two demonstrated launch providers in Arianespace and Avio\u2014both launching multiple times a year. Avio is scheduled to launch its next mission to orbit Sept. 14 from Europe\u2019s Spaceport in Kourou, French Guiana\u2014carrying the European Commission\u2019s Copernicus Sentinel-3C and ESA\u2019s FLuorescence EXplorer (FLEX) sat. Avio is focused \u201centirely on scaling up operations and launch frequency out of the Guiana Space Centre,\u201d according to a company spokesperson, and recently took over an integration building in Kourou to increase its future launch cadence. Avio is also scaling its development of a heavier-lift Vega-E configuration, powered by a newly developed MR-10 engine, which has passed \u201call the firing test[s] so far.\u201d Arianespace notched a big win in February launching its heavy-lift Ariane 64 configuration for the first time. In June, Ariane 64 launched using Avio\u2019s P160C solid rocket motor for the first time, \u201cfurther enhancing the launcher\u2019s performa"
     },
     {
       "n": 3,
       "theme": "minerals",
-      "topic": "water",
-      "country": "",
-      "headline": "Zero\u2011valent copper filter proposed for sustainable aquaculture",
-      "title": "Advancing sustainable aquaculture with a zero-valent copper filter system - Nature",
-      "scifi_hook": "Copper\u2011based filters could keep fish farms clean without chemicals.",
-      "eli5": "A copper filter that doesn\u2019t dissolve can kill microbes in fish tanks, reducing waste and chemicals.",
-      "why": "Cleaner aquaculture improves food safety and reduces environmental impact.",
-      "tickers": [],
+      "topic": "materials",
+      "country": "IN",
+      "headline": "India may need 4\u201110\u00d7 more critical minerals by 2047",
+      "title": "India\u2019s critical minerals demand may rise 4-10x by 2047: Grant Thornton Bharat - ET EnergyWorld",
+      "scifi_hook": "India\u2019s future tech boom could drive a tenfold surge in rare\u2011earth hunger.",
+      "eli5": "India\u2019s need for critical minerals could grow up to ten times by 2047.",
+      "why": "Signals huge future demand for rare\u2011earth and other strategic metals.",
+      "tickers": [
+        "MP",
+        "LYC.AX",
+        "REMX"
+      ],
       "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTFB1NnRhVHUxLV9rbENPVWtNMTNwVlpMUF9ET3dXbFQ4TktVVG53NjMtRzU3bDVXOTM0a2VfRWd3RmRrQnY2WUI5UmlGbW1xZkNMclZDbklKalpxTTU2NUJz?oc=5",
-      "source": "Nature",
-      "text": "Advancing sustainable aquaculture with a zero-valent copper filter system Nature"
+      "bias": "up",
+      "rationale": "higher demand lifts miners",
+      "confidence": "medium",
+      "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxOb1kxVVd5VjgwRXFWVVF1TFVPOUpsVGowanNCWXNHZlhxU1NtbGh5aFFaNVhMVk1teHhGM0JjWUE5M3VUeHZGWjc1aGtMWFlmYlE3ZUxjY1RaYkktUDVjY00xNmFybi1NR3doYnV4czFyZ3h6WklZZ1dqMmVrR2xyYVVIT2hhYWVoaFBNUDRXd3ItUmRqS3JndEpaN2tRZTJNRDVmb3dFN244SDkyZWRsNG5nV3dNczgxWFBvcG5JVU4tZ19GT2VmYVFRUENSM2hNR29LNHM4S0pVNVpyOHFSek11cnI4aWRRQWZZ0gHwAUFVX3lxTE1xR3NjQm9yblQ5cWhMSDZvRFNSNl9HdGgwbEtBQTF3cHNRWU5BcDVDaUcxaWR1c2RkX0RQVmpJS3UtZUZiMjZvQUdHdnhzRExCVnJUVmp3R0lVX3hMdGVPdWRxQklxV0ZwU0JfUEZkZDRoYldoYWFGVHpFQU9oSHgxNEZtX1E5MTFRYzBBcmo2dC1xWE1paXZrRUtSWkFJcFBYdzRzNlkzN3lGc1FGQnowd28xb1NIcUFGNnBIS3AtMW5nQnk2TjkyY25oQUlwTUpnM3RQMjVveTcyb2w1ZEltSVpKT3owbFB5SXZNOU9rYQ?oc=5",
+      "source": "ET EnergyWorld",
+      "text": "India\u2019s critical minerals demand may rise 4-10x by 2047: Grant Thornton Bharat ET EnergyWorld"
     },
     {
       "n": 4,
-      "theme": "tech",
-      "topic": "materials",
-      "country": "",
-      "headline": "Scientists reshape molecules from inside to make chiral nanocarbons",
-      "title": "Scientists cut and rebuild molecules from the inside to create new chiral nanocarbons",
-      "scifi_hook": "Researchers can now edit the core of a molecule to craft new carbon nanostructures.",
-      "eli5": "Instead of attaching carbon pieces at the edges, scientists break and rebuild bonds inside a molecule to create twisted carbon shapes.",
-      "why": "New nanocarbons could lead to stronger, lighter materials for many technologies.",
-      "tickers": [],
+      "theme": "minerals",
+      "topic": "mining",
+      "country": "CN",
+      "headline": "China launches first bidirectional cabless electric mining robot",
+      "title": "Bidirectional, cabless & autonomous electric truck goes into operation at SPIC\u2019s South coal mine",
+      "scifi_hook": "A driverless, two\u2011way electric truck now hauls ore without a cab in China\u2019s mines.",
+      "eli5": "A robot truck can move forward and backward without a driver and runs on electricity.",
+      "why": "Improves efficiency and cuts emissions in open\u2011pit mining.",
+      "tickers": [
+        "TECK"
+      ],
       "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://phys.org/news/2026-07-scientists-rebuild-molecules-chiral-nanocarbons.html",
-      "source": "phys.org",
-      "text": "Nanocarbons are molecular-scale carbon structures considered to be the building blocks for next-generation materials. Until now, scientists have built them by fusing small, flat carbon molecules together at their edges. Modifying the inside of a molecule was considered challenging because inner bonds are locked into flat, rigid structures that resist change."
+      "bias": "up",
+      "rationale": "automation boosts miner productivity",
+      "confidence": "medium",
+      "link": "https://im-mining.com/2026/07/30/bidrectional-cabless-autonomous-electric-truck-goes-into-operation-at-spic-south-pit/",
+      "source": "im-mining.com",
+      "text": "On July 30, 2026 \u2013 the AT-150 \u2013 China\u2019s first all electric, bidirectional, unmanned rigid mining truck, jointly developed by energy company and coal miner State Power Investment Corporation (SPIC) in collaboration with mining truck OEM Inner Mongolia North Hauler (NHL) and OEM-agnostic AHS tech major EACON, was successfully put into operation at SPIC\u2019s South open-pit coal mine in Inner Mongolia. EACON states: \u201cThis vehicle completely eliminates the traditional cab and adopts a completely no-cab design, becoming a true \u2018mining transport robot.\u2019 Relying on the country\u2019s first two-way autonomous driving decision-making system provided by EACON, it breaks the traditional physical boundary between the front and rear of mining trucks.\u201d It adds: \u201cIt can travel in both directions within narrow work surfaces without U-turns, and achieves fully closed-loop unmanned operations such as automatic loading, autonomous driving, precise unloading, autonomous obstacle avoidance, and automatic parking. This fully delivers mobility and operational efficiency under heavy load conditions, and also provides a new practical path for green intelligent transportation in large open-pit mines.\u201d IM Editorial Director Paul Moore recently had the chance to see the AT-150 truck up close at SPIC\u2019s operation in Inner Mongolia This vehicle has a rated load capacity of 136 t and integrates three major technological breakthroughs: pure electric drive, bidirectional driving, and autonomous driving. It is mainly d"
     },
     {
       "n": 5,
       "theme": "tech",
       "topic": "quantum",
-      "country": "HK",
-      "headline": "Hong Kong banks lag on post\u2011quantum cryptography readiness",
-      "title": "Hong Kong Banks Face Long Road to Quantum Security, White Paper Finds",
-      "scifi_hook": "Banks are racing to protect data before quantum computers can crack today\u2019s codes.",
-      "eli5": "Hong Kong banks know quantum computers could break current encryption, but most haven\u2019t started updating their security systems.",
-      "why": "Future quantum attacks could expose financial data, prompting demand for quantum\u2011safe solutions.",
+      "country": "US",
+      "headline": "UC San Diego creates quantum metamaterial boosting optical conversion 1,000\u00d7",
+      "title": "UC San Diego Advances Quantum Metamaterials for Ultrafast Optical Computing",
+      "scifi_hook": "Scientists craft a quantum\u2011engineered material that turns infrared light into visible at unprecedented speed.",
+      "eli5": "A new material uses quantum wells to change infrared light into visible light far more efficiently.",
+      "why": "Could enable ultracompact optical computing systems.",
       "tickers": [
-        "IONQ",
-        "RGTI",
-        "QBTS"
+        "IONQ"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "banks may buy quantum security services",
+      "rationale": "quantum tech may benefit quantum firms",
       "confidence": "low",
-      "link": "https://thequantuminsider.com/2026/07/28/hong-kong-banks-face-long-road-to-quantum-security-white-paper-finds/",
+      "link": "https://thequantuminsider.com/2026/07/31/uc-san-diego-advances-quantum-metamaterials-for-ultrafast-optical-computing/",
       "source": "thequantuminsider.com",
-      "text": "Insider Brief A Hong Kong Monetary Authority-supported white paper found that most banks in Hong Kong recognize the strategic importance of quantum computing but remain in the early stages of preparing for post-quantum cryptography (PQC). The report identifies quantum-enabled cyber threats, including \u201cHarvest Now, Decrypt Later\u201d attacks, as an immediate concern and recommends that banks begin migration planning well before cryptographically relevant quantum computers become available. The paper calls for banks to establish governance, inventory cryptographic assets, engage technology vendors on PQC roadmaps and integrate quantum readiness into long-term cybersecurity and operational resilience programs. Uncertain. Uneven. Unready. Hong Kong\u2019s banking sector has begun preparing for quantum computing, but most institutions remain in the early stages of protecting their systems against future quantum-enabled cyber threats, according to a new white paper supported by the Hong Kong Monetary Authority (HKMA). The report concludes that awareness of quantum computing is growing across Hong Kong\u2019s banking industry, yet practical implementation of post-quantum cryptography (PQC) remains limited. While a small number of banks have established governance structures, pilot projects and migration planning, most are still building foundational capabilities needed for what the report describes as a years-long transition. The study was prepared with support from KPMG and Quinlan & Associates."
+      "text": "Insider Brief UC San Diego researchers are advancing quantum metamaterials that use nanoscale quantum materials to create smaller, faster and more controllable optical devices with applications ranging from imaging to optical computing. The research builds on UC San Diego \u2018s pioneering demonstrations of negative refraction in metamaterials, extending the field by using quantum materials as active building blocks to manipulate electromagnetic properties at visible-light wavelengths. Researchers reported that a quantum metamaterial based on multiple metallic quantum wells converted ultrafast infrared light into visible light with more than 1,000 times the efficiency of conventional metal structures, potentially enabling ultracompact optical computing systems. Image: UC San Diego MRSEC researchers Deanna Diaz Aguilara (left) and Luke Herman (right) measure the dynamic response of a quantum metamaterial using ultrafast laser spectroscopy in the laboratory of electrical and computer engineering professor Zhaowei Liu. (Michael J. Sailor) PRESS RELEASE \u2014 Quantum metamaterials are one of the two research themes of the UC San Diego Materials Research Science and Engineering Center (MRSEC), which is supported by the U.S. National Science Foundation (NSF) . Quantum metamaterials are a cutting-edge subset of metamaterials. In general, metamaterials control how light moves through the material \u2014 amplifying the light, bending it, and changing its speed. Although metamaterials were invented"
     },
     {
       "n": 6,
       "theme": "earth",
-      "topic": "ecosystems",
+      "topic": "weather",
       "country": "US",
-      "headline": "Mass Audubon adds new sanctuary to expand October Mountain corridor",
-      "title": "Mass Audubon\u2019s newly acquired wildlife sanctuary will bolster large protected corridor around October Mountain - The Berkshire Edge",
-      "scifi_hook": "A fresh wildlife preserve stitches together habitats for countless species.",
-      "eli5": "Mass Audubon bought land that connects existing protected areas, creating a larger safe zone for wildlife.",
-      "why": "Larger connected habitats improve biodiversity and ecosystem resilience.",
+      "headline": "AI improves accuracy of everyday weather forecasts",
+      "title": "How AI weather prediction is making your forecast better - The Weather Company",
+      "scifi_hook": "Artificial intelligence now fine\u2011tunes your morning forecast like a digital meteorologist.",
+      "eli5": "AI models analyze data to give better, more precise weather predictions.",
+      "why": "Better forecasts help agriculture, travel, and safety.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxNT25GQ2xPU3NpZGtIYVl2NVRscERwaTNnT29VQ05yOFJNMXcxcGtVdTBSczJGNFpIOExVcXNvbXhObGZXTGxsS3VrUlVyOWtCeXowMDFUdWd4b3NhRnc4em1ZcXlWUkZpVHVwTmJnanRaaHN3SDZrNUF1T2FOWHRPUy0tNS1KZjJBYi1lQmpSSW5KdlVuUUszWlgzeVhVdC05dklsS3J5RlpaakE4dTB3ZV9CbGhBeTRaX3lqa3ZiZUx6RjZLZkZMeVVYUmVaSzNxczFMSWlB?oc=5",
-      "source": "The Berkshire Edge",
-      "text": "Mass Audubon\u2019s newly acquired wildlife sanctuary will bolster large protected corridor around October Mountain The Berkshire Edge"
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOdkNGRlB3TUx4RU9VeVY1bkNzanVtbk9oY0NfUFVzWWhmNEpHY0NmNEs1SmNRZzU0azI3VWpLZVczNFp0ZXpVLUVxSjdmd25VRjNvc1RDcTFLY2VMUDhfRHY3LS1icDlHWEZYM29XenRDclQ0QXZXOXFlMDVlajBydmpGTlJMdTVRSkloN2x4VlVueGI3cnpKTA?oc=5",
+      "source": "The Weather Company",
+      "text": "How AI weather prediction is making your forecast better The Weather Company"
     },
     {
       "n": 7,
       "theme": "earth",
-      "topic": "climate",
-      "country": "US",
-      "headline": "Scripps oceanographer explains impact of rising ocean temperatures",
-      "title": "What do higher ocean temps mean for the climate? A Q&A with Scripps Oceanographer Art Miller - Times of San Diego",
-      "scifi_hook": "Warmer seas could reshape weather patterns and marine life worldwide.",
-      "eli5": "Higher ocean heat changes how heat moves around the planet, affecting storms and ecosystems.",
-      "why": "Understanding ocean warming helps predict climate effects and guide mitigation.",
+      "topic": "energy",
+      "country": "CN",
+      "headline": "Coal drops below half of China\u2019s electricity generation",
+      "title": "China Crosses Energy Milestone as Coal Falls Below 50% of Power - Energy Connects",
+      "scifi_hook": "China\u2019s grid now runs on less than 50% coal, edging toward cleaner power.",
+      "eli5": "Coal now provides less than half of the electricity China produces.",
+      "why": "Marks a shift toward a cleaner energy mix in the world\u2019s biggest power system.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORzdLYlVOSS01c2ZXc1ZLT0ZLdlA4VzBNM1hOMUhoeWRNbFFBOExsb2ZlcU40V2lmb1lhOXN5dG9SdHlyV0phaFJsRnJROXRyUWt2UTZ3WDl0WWluXzBnSmxhS2pZSVdOZjBBX1FGUi1DOWJXS2R5MkV6MmtiZ19oT3E0RDJjb0VQUEtZVm5mbnlfR3Brbm9pOGlTYnhZSHl4?oc=5",
-      "source": "Times of San Diego",
-      "text": "What do higher ocean temps mean for the climate? A Q&A with Scripps Oceanographer Art Miller Times of San Diego"
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPV3FWZHJOaWlNZ0tEcTQ2Q2pIajdHU3RvZXlpbWQ2MjdZcE1oR3pRSGpHa1NFSTA4anIyVUJ2dHBSazRYNGpNWHpCNF8wVl82SVRzS2RVYjFscncwVGltRURRXzZJM0hYUmVJYWZPSG1YcGVsRk50OWN0WEhsMi1NZXhDeTdYMEttVFAyNkdKR1pMOE1uQS1sSmR1c0NBVS0wN1BxSDBjZGtjdzhNa3FQdmFfdjJrVUlrYXVLcg?oc=5",
+      "source": "Energy Connects",
+      "text": "China Crosses Energy Milestone as Coal Falls Below 50% of Power Energy Connects"
     }
   ]
 }
