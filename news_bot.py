@@ -747,10 +747,10 @@ def iso_flag(iso):
     return "".join(chr(0x1F1E6 + ord(c) - ord("A")) for c in iso)
 
 
-# State-controlled outlets — matched by source name OR domain (whether they came
-# from a dedicated feed or surfaced via Google News). Items from these get a clear
-# "pinch of salt" label: reliable for the OFFICIAL position, not neutral analysis.
-STATE_MEDIA = {
+# Outlets whose editorial line is set by their government. This set drives the
+# per-digest cap in select_items() only; it is a sourcing rule about how much of
+# one digest any single government's newsroom may occupy.
+STATE_CONTROLLED = {
     "chinadaily": "CN", "china daily": "CN", "cgtn": "CN", "xinhua": "CN",
     "global times": "CN", "globaltimes": "CN", "people's daily": "CN",
     "peoplesdaily": "CN", "people.cn": "CN", "china.org": "CN", "ecns": "CN",
@@ -760,14 +760,49 @@ STATE_MEDIA = {
     "ria novosti": "RU",
 }
 
+# Every outlet a government pays for, whichever government that is. This is what
+# the reader sees: the ⚠️ label says who funds the newsroom and nothing more, and
+# it is applied to the BBC and to RT on exactly the same terms. Keys are matched
+# as substrings of "source name + link", so keep them specific enough not to
+# collide with ordinary words.
+STATE_FUNDED = dict(STATE_CONTROLLED)
+STATE_FUNDED.update({
+    "bbc.co.uk": "GB", "bbc.com": "GB", "bbc news": "GB",
+    "dw.com": "DE", "deutsche welle": "DE",
+    "france24": "FR", "rfi.fr": "FR", "radio france": "FR",
+    "aljazeera": "QA", "al jazeera": "QA",
+    "voanews": "US", "voice of america": "US", "rferl": "US", "rfa.org": "US",
+    "nhk.or.jp": "JP", "nhk world": "JP",
+    "cbc.ca": "CA",
+    "abc.net.au": "AU",
+    "rainews": "IT", "rai.it": "IT",
+    "rtve": "ES",
+    "trtworld": "TR", "trt world": "TR", "anadolu": "TR", "aa.com.tr": "TR",
+    "presstv": "IR", "irna.ir": "IR", "mehrnews": "IR",
+    "kbs.co.kr": "KR", "yonhap": "KR",
+    "ddnews": "IN", "prasarbharati": "IN", "pib.gov": "IN",
+})
 
-def state_media_iso(item):
-    """Return ISO-2 of the state outlet if this item is from one, else ''."""
+
+def _match_iso(item, table):
     hay = ((item.get("source") or "") + " " + (item.get("link") or "")).lower()
-    for key, iso in STATE_MEDIA.items():
+    for key, iso in table.items():
         if key in hay:
             return iso
     return ""
+
+
+def state_media_iso(item):
+    """ISO-2 if this item comes from a state-CONTROLLED outlet, else ''.
+
+    Used for the per-digest cap. Deliberately narrower than state_funded_iso.
+    """
+    return _match_iso(item, STATE_CONTROLLED)
+
+
+def state_funded_iso(item):
+    """ISO-2 if a government funds this outlet, else ''. Drives the 🏛 label."""
+    return _match_iso(item, STATE_FUNDED)
 
 
 def _px(v):
@@ -798,8 +833,11 @@ def format_item(item, prices):
     flag = iso_flag(item.get("country", ""))
     prefix = " ".join(x for x in (flag, tag) if x)
     prefix = f"{prefix} " if prefix else ""
-    # A bare ⚠️ before the line = state-controlled outlet; read with a pinch of salt.
-    warn = "⚠️ " if state_media_iso(item) else ""
+    # A bare ⚠️ before the line = a government pays for this newsroom. Applied to
+    # every state-funded outlet alike, so it describes funding rather than judging
+    # any particular country's reporting. (🏛 was tried and rejected: the whole
+    # point of the mark is that it catches the eye.)
+    warn = "⚠️ " if state_funded_iso(item) else ""
     lines = [f"▸ {warn}{prefix}<b>{num}{esc(item.get('headline'))}</b>"]
     # Climate flags are rendered sober and SHORT — one supporting line, no hype.
     if topic == "climate":

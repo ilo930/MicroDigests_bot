@@ -1,0 +1,21 @@
+name: microdigests
+context: personal
+stage: product
+audience: autres
+brief: "Reality Sci-Fi Check" digest to @cosmic_spill every 3 days — grounded, free on GitHub Actions; DM the bot for deeper/players
+enrolled: 2026-07-20
+
+items:
+  - what: Built before cockpit existed; enrolled retroactively — full pipeline doc linked
+    owner: done
+    since: 2026-07-20
+    evidence: "obsidian://open?vault=%2ABlueMantis_1&file=01_PROJECTS%2Fclaude%20-%20SpaceTech%20Channel"
+  - what: Add a smoke test, a subscribe page, ARCHITECTURE.md and a v1.0 tag so the status board can see the bot is live
+    owner: done-check-me
+    trust: notify
+    since: 2026-08-03
+    evidence: smoke_test.py
+  - what: Decide whether a deployed service counts as packaged in the status scanner
+    owner: talk-about
+    since: 2026-08-03
+    evidence: ARCHITECTURE.md
