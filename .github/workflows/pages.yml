@@ -1,0 +1,47 @@
+# Publishes the landing page to the web.
+#
+# Runs whenever something in site/ reaches main. It checks the pages are intact
+# before publishing, so a broken page never goes live — it fails here instead,
+# and the address keeps showing the last good version.
+name: Publish the landing page
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+# Only what publishing needs, nothing more.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Two pushes in a row: the second wins rather than racing the first.
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the pages before publishing them
+        run: python3 site/verify_pages.py
+
+      - uses: actions/configure-pages@v5
+
+      # site/ is published as-is. index.html forwards to the chosen version.
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -34,11 +34,21 @@ texte ne peut pas casser le design, et l'inverse non plus.
 
 ---
 
+## Format Instagram
+
+- [ ] **Une version verticale du site pour Instagram.** Une capture vidéo du
+      scroll, remise en page en vertical (1080 × 1920). À faire une fois les
+      retouches finies, sinon la vidéo sera à refaire.
+      À décider au moment venu : durée, si le texte reste lisible une fois
+      recadré, et si on filme la grumpy ou les deux.
+
+---
+
 ## Décisions qui t'appartiennent
 
-- [ ] **Quelle mascotte est la publique ?** Aujourd'hui c'est la cute
-      (`framed.html`). Pour passer à la grumpy, c'est une adresse à changer
-      dans `site/index.html`, rien d'autre.
+- [x] **Quelle mascotte est la publique ?** La **grumpy**, décidé le 4 août.
+      `site/index.html` renvoie vers `framed-mascot02.html`. La cute reste
+      entière dans le projet, tu dois encore la retoucher.
 - [ ] **Basculer sur `main` ?** Tout le travail est sur la branche
       `landing-page-and-mascots`. Tant que ce n'est pas sur `main`, c'est rangé
       de côté. Le bot, lui, tourne depuis `main` et n'est pas concerné.
@@ -47,13 +57,19 @@ texte ne peut pas casser le design, et l'inverse non plus.
 
 ## Mettre le site en ligne
 
-Le site n'existe que sur ton disque. Pour qu'il vive sur internet :
+Le site n'existe que sur ton disque. **Rien de la page n'est encore sur GitHub**
+— le dépôt ne contient que le bot. Vérifié le 4 août.
 
-- [ ] **Activer GitHub Pages.** Le dépôt est déjà public, donc c'est gratuit.
-      Le site est dans `site/`, et Pages ne sait servir que la racine ou un
-      dossier `docs/`. Deux solutions : renommer le dossier, ou ajouter un
-      workflow qui publie `site/`. Je recommande le workflow, ça évite de
-      renommer ce que tu connais déjà.
+Dans l'ordre :
+
+- [x] **Le workflow de publication est écrit** : `.github/workflows/pages.yml`.
+      Il publie `site/` à chaque fois qu'une modification arrive sur `main`, et
+      il refuse de publier si `verify_pages.py` échoue. Une page cassée ne peut
+      donc pas partir en ligne : c'est l'ancienne qui reste affichée.
+- [ ] **Envoyer le travail sur GitHub** (`git push`). Rien n'est en ligne tant
+      que ce n'est pas fait.
+- [ ] **Activer Pages dans les réglages du dépôt**, source « GitHub Actions ».
+      Un seul réglage à changer, une fois pour toutes.
       Adresse obtenue, sans rien payer : `ilo930.github.io/MicroDigests_bot`
 - [ ] **Acheter un nom de domaine** (optionnel, ~10 à 15 € par an). Tu le
       déclares dans les réglages Pages, tu fais pointer le domaine vers GitHub,
