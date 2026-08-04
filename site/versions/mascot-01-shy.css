@@ -1,0 +1,99 @@
+/* Mascot 01: the shy mouse.
+   The whole signature in the right margin: the mouse, the coffee
+   button and its speech bubble. Change anything here and only this
+   version changes; the page itself is untouched.
+   Loaded after page.css, so it overrides what it needs to. */
+
+:root{--fr-right:clamp(128px,13vw,210px);}
+
+/* Floating, not clamped to the edge: it sits off the margin with a shadow, and
+   drifts up and down its own vertical line as the reel plays, so it belongs to
+   the motion rather than being furniture stuck to the glass. */
+/* Both of these live in the margin, outside the window, the way the reference
+   hangs its little square badges off the edge of its panel. */
+/* One mark, not two objects. The mouse sits inside the link beside the cup so
+   the pair reads as a single signature and drifts together; clicking either
+   half goes to the same place, which is the whole point of having a mascot
+   next to the button. */
+.dock{position:fixed;right:0;top:0;bottom:0;width:var(--fr-right);z-index:50;
+  pointer-events:none;display:grid;align-content:center;justify-items:center}
+.dock>*{pointer-events:auto}
+/* The mouse hides behind the cup. Only its face clears the rim and its tail
+   pokes out to the left, so it reads as one little creature holding the
+   button rather than two objects side by side. */
+.lockup{position:relative;display:block;width:86px;height:132px}
+
+.resupply{position:relative;z-index:1;display:grid;justify-items:center;gap:.45rem;
+  text-decoration:none;padding:0;background:none;box-shadow:none;will-change:transform}
+.resupply .cup{position:absolute;left:22px;bottom:24px;z-index:1;
+  display:grid;place-items:center;width:50px;height:50px;
+  background:var(--btn-box);border:2px solid var(--btn-edge);border-radius:4px;
+  box-shadow:0 10px 22px -14px rgba(24,24,24,.5);
+  transition:background .25s,border-color .25s,box-shadow .3s}
+.resupply:hover .cup,.resupply:focus-visible .cup{
+  box-shadow:0 14px 26px -12px rgba(24,24,24,.45);transform:translateY(-2px)}
+.resupply .cup{transition:box-shadow .3s,transform .25s}
+.resupply .cup svg{display:block;width:30px;height:30px;shape-rendering:crispEdges}
+.resupply .cup .steam rect{fill:var(--btn-s0);opacity:0;transform-box:fill-box;
+  transform-origin:bottom center;animation:steam 3.2s ease-in-out infinite}
+@keyframes steam{
+  0%{opacity:0;transform:translateY(2px) scaleY(.6);fill:var(--btn-s0)}
+  30%{opacity:.95;fill:var(--btn-s1)}
+  65%{opacity:.85;fill:var(--btn-s2)}
+  100%{opacity:0;transform:translateY(-6px) scaleY(1.2);fill:var(--btn-s3)}}
+.resupply .cup .steam rect:nth-child(2){animation-delay:-1.1s}
+.resupply .cup .steam rect:nth-child(3){animation-delay:-2.2s}
+.resupply .cup .mug rect{fill:var(--btn-mug)}
+.resupply .cup .brew{fill:var(--btn-brew)}
+
+/* At the start this is only a hot coffee. At the end the mouse says it: a
+   pixel speech bubble that leans back over the frame edge, in the margin
+   where there is nothing to cover. */
+.resupply b{position:absolute;right:calc(100% + 32px);bottom:72px;z-index:3;
+  width:max-content;max-width:12.5rem;
+  font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.02em;
+  line-height:1.35;text-align:center;color:var(--btn-edge);
+  background:var(--btn-box);border:2px solid var(--btn-edge);border-radius:7px;
+  padding:.55rem .75rem;
+  opacity:0;transform:translateX(6px) scale(.94);transform-origin:center right;
+  pointer-events:none;transition:opacity .35s,transform .35s}
+/* Pointing right, at the mouse. Aimed at the floor it said nothing. */
+.resupply b::after{content:"";position:absolute;right:-7px;top:50%;
+  width:11px;height:11px;margin-top:-6px;background:var(--btn-box);
+  border-top:2px solid var(--btn-edge);border-right:2px solid var(--btn-edge);
+  transform:rotate(45deg)}
+.resupply.open b,.resupply:hover b,.resupply:focus-visible b{
+  opacity:1;transform:none;pointer-events:auto}
+
+/* The mascot. Big enough that its face clears the cup, tucked behind it. */
+.mouse{position:absolute;left:0;bottom:20px;width:86px;z-index:0;
+  shape-rendering:crispEdges;overflow:visible;
+  animation:mouse-hop 2.4s steps(1) infinite}
+.mouse .head{transform-origin:10px 13px;animation:mouse-nod 3.4s ease-in-out infinite}
+.mouse .eye{animation:mouse-blink 3.6s steps(1) infinite;transform-origin:center}
+/* It watches the page for a while, then turns and looks at you. */
+.mouse .gaze{animation:mouse-gaze 7.5s ease-in-out infinite}
+.mouse .tail{animation:mouse-tail 1.9s steps(1) infinite}
+.mouse .happy,.mouse .tailheart{opacity:0;transition:opacity .25s}
+.mouse .tailtip{transition:opacity .25s}
+.mouse .eye{transition:opacity .25s}
+/* And it smiles once the words arrive. */
+.resupply.open .happy,.resupply:hover .happy,
+.resupply.open .tailheart,.resupply:hover .tailheart{opacity:1}
+.resupply.open .eye,.resupply:hover .eye,
+.resupply.open .tailtip,.resupply:hover .tailtip{opacity:0}
+.dock.excited .mouse{animation-duration:.7s}
+.dock.excited .mouse .head{animation-duration:1.3s}
+.dock.excited .mouse .tail{animation-duration:.9s}
+.dock.excited .mouse .gaze{animation:none;transform:none}
+
+@keyframes mouse-hop{0%,44%{transform:translateY(0)}48%,64%{transform:translateY(-3px)}
+  68%,100%{transform:translateY(0)}}
+@keyframes mouse-nod{0%,64%,100%{transform:rotate(0)}78%{transform:rotate(4deg)}90%{transform:rotate(-1deg)}}
+@keyframes mouse-blink{0%,42%{transform:scaleY(1)}43%,45%{transform:scaleY(.1)}
+  46%,100%{transform:scaleY(1)}}
+@keyframes mouse-gaze{0%,30%{transform:translateX(-1.6px)}
+  42%,92%{transform:translateX(0)}100%{transform:translateX(-1.6px)}}
+@keyframes mouse-tail{0%,49%{transform:rotate(0)}50%,100%{transform:rotate(-7deg)}}
+@media (prefers-reduced-motion:reduce){.mouse,.mouse *{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.tail{display:none}}

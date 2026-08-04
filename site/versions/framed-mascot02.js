@@ -42,6 +42,12 @@
   const tin = document.querySelector('.resupply');
   const dock = document.querySelector('.dock');
 
+  // Her eyes. Looked up once here rather than on every frame, and if the
+  // drawing ever loses this group she stops looking around, which is easy to
+  // miss by eye. So it says so instead of failing quietly.
+  const gaze = document.querySelector('.mouse .gaze');
+  if (!gaze) console.warn('The mouse has no .gaze group, so her eyes cannot move.');
+
   // The mouse perks up when you reach for the tin, and again when it opens on
   // its own at the end.
   let hovering = false;
@@ -127,8 +133,7 @@
 
     // Looking at you at the top, at the page through the middle, back at you
     // by the end.
-    const eye = document.querySelector('.mouse .gaze');
-    if (eye) eye.style.transform =
+    if (gaze) gaze.style.transform =
       (g > 0.28 && g < 0.72) ? 'translateX(-1px)' : 'translateX(0)';
     dock.classList.toggle('excited', open || hovering);
 

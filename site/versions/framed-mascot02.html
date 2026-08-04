@@ -14,7 +14,10 @@
 <noscript><link rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap"></noscript>
 
-<link rel="stylesheet" href="framed-mascot02.css">
+<!-- The page first, then this version's mascot on top of it. Order matters:
+     the mascot file is allowed to override the page, never the reverse. -->
+<link rel="stylesheet" href="page.css">
+<link rel="stylesheet" href="mascot-02-grumpy.css">
 <script>
 /* The tip jar changes colour between visits: one of three, chosen once per
    page load and never mid-session. It only ever touches the cup, the bubble

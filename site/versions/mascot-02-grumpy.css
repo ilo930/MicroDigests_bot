@@ -1,0 +1,85 @@
+/* Mascot 02: the grumpy mouse.
+   The whole signature in the right margin: the mouse, the coffee
+   button and its speech bubble. Change anything here and only this
+   version changes; the page itself is untouched.
+   Loaded after page.css, so it overrides what it needs to. */
+
+:root{--fr-right:clamp(120px,12vw,190px);}
+
+/* Floating, not clamped to the edge: it sits off the margin with a shadow, and
+   drifts up and down its own vertical line as the reel plays, so it belongs to
+   the motion rather than being furniture stuck to the glass. */
+/* Both of these live in the margin, outside the window, the way the reference
+   hangs its little square badges off the edge of its panel. */
+/* The arrangement from the screenshot: the cup above, the mouse below it,
+   two separate things stacked in the margin. She is small; she holds nothing
+   and reacts to nothing. */
+.dock{position:fixed;right:0;top:50%;transform:translateY(calc(-50% + 33px));
+  width:var(--fr-right);z-index:50;pointer-events:none;
+  display:grid;justify-items:center}
+.dock>*{pointer-events:auto}
+.lockup{position:relative;display:grid;justify-items:center;gap:15px;width:70px}
+
+.resupply{position:relative;z-index:1;display:grid;justify-items:center;gap:.45rem;
+  text-decoration:none;padding:0;background:none;box-shadow:none;will-change:transform}
+.resupply .cup{position:relative;z-index:3;order:2;
+  display:grid;place-items:center;width:50px;height:50px;
+  background:var(--btn-box);border:2px solid var(--btn-edge);border-radius:4px;
+  box-shadow:0 10px 22px -14px rgba(24,24,24,.5);
+  transition:background .25s,border-color .25s,box-shadow .3s}
+.resupply:hover .cup,.resupply:focus-visible .cup{
+  box-shadow:0 14px 26px -12px rgba(24,24,24,.45);transform:translateY(-2px)}
+.resupply .cup{transition:box-shadow .3s,transform .9s cubic-bezier(.4,0,.3,1)}
+.resupply .cup svg{display:block;width:30px;height:30px;shape-rendering:crispEdges}
+.resupply .cup .steam rect{fill:var(--btn-s0);opacity:0;transform-box:fill-box;
+  transform-origin:bottom center;animation:steam 3.2s ease-in-out infinite}
+@keyframes steam{
+  0%{opacity:0;transform:translateY(2px) scaleY(.6);fill:var(--btn-s0)}
+  30%{opacity:.95;fill:var(--btn-s1)}
+  65%{opacity:.85;fill:var(--btn-s2)}
+  100%{opacity:0;transform:translateY(-6px) scaleY(1.2);fill:var(--btn-s3)}}
+.resupply .cup .steam rect:nth-child(2){animation-delay:-1.1s}
+.resupply .cup .steam rect:nth-child(3){animation-delay:-2.2s}
+.resupply .cup .mug rect{fill:var(--btn-mug)}
+.resupply .cup .brew{fill:var(--btn-brew)}
+
+/* At the start this is only a hot coffee. At the end the mouse says it: a
+   pixel speech bubble that leans back over the frame edge, in the margin
+   where there is nothing to cover. */
+.resupply b{position:absolute;right:calc(100% + 16px);top:14px;z-index:3;
+  width:max-content;max-width:12.5rem;
+  font-family:var(--mono);font-size:.72rem;font-weight:700;letter-spacing:.02em;
+  line-height:1.35;text-align:center;color:var(--btn-edge);
+  background:var(--btn-box);border:2px solid var(--btn-edge);border-radius:7px;
+  padding:.55rem .75rem;
+  opacity:0;transform:translateX(6px) scale(.94);transform-origin:center right;
+  pointer-events:none;transition:opacity .35s,transform .35s}
+/* Pointing right, at the mouse. Aimed at the floor it said nothing. */
+
+.resupply.open b,.resupply:hover b,.resupply:focus-visible b{
+  opacity:1;transform:none;pointer-events:auto}
+
+/* Mascot 02, the original. She carries nothing and reacts to nothing: the
+   cup drifts beside her on the right, the words arrive on her left, and she
+   just sits there. She does not smile, and that is the joke. */
+.mouse{position:relative;width:58px;z-index:2;order:1;
+  shape-rendering:crispEdges;overflow:visible;
+  animation:mouse-hop 2.4s steps(1) infinite}
+.mouse .eye{animation:mouse-blink 3.6s steps(1) infinite;transform-origin:center}
+.mouse .tail{animation:mouse-tail 1.9s steps(1) infinite}
+/* At the end she tips over and speeds up. She leans AWAY from the bubble,
+   which sits on her left, so she is not crowding the thing she just said. */
+/* Her gaze follows the scroll: you, then the page on her left, then you
+   again. One cell of travel is the whole range her eye whites allow. */
+.mouse .gaze{transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.mouse .lean{transform-origin:9px 19px;
+  transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.resupply.open .lean,.resupply:hover .lean{transform:rotate(8deg) translateX(1.2px)}
+.dock.excited .mouse{animation-duration:.7s}
+@keyframes mouse-hop{0%,44%{transform:translateY(0)}48%,64%{transform:translateY(-3px)}
+  68%,100%{transform:translateY(0)}}
+@keyframes mouse-blink{0%,42%{transform:scaleY(1)}43%,45%{transform:scaleY(.1)}
+  46%,100%{transform:scaleY(1)}}
+@keyframes mouse-tail{0%,49%{transform:rotate(0)}50%,100%{transform:rotate(-7deg)}}
+@media (prefers-reduced-motion:reduce){.mouse,.mouse *{animation:none!important}}
+@media (prefers-reduced-motion:reduce){.tail{display:none}}

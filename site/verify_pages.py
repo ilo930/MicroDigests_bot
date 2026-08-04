@@ -18,8 +18,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 PAGES = os.path.join(HERE, "versions")
 
 # What each page must have to be considered working, in plain terms.
+# Each page loads the shared page design, then its own mascot on top.
+MASCOT_SHEET = {"framed": "mascot-01-shy",
+                "framed-mascot02": "mascot-02-grumpy"}
+
 CHECKS = [
-    ("its stylesheet is linked",      lambda h, n: f'href="{n}.css"' in h),
+    ("it uses the shared page design", lambda h, n: 'href="page.css"' in h),
+    ("its own mascot is linked",      lambda h, n: f'href="{MASCOT_SHEET[n]}.css"' in h),
+    ("the page loads before the mascot",
+     lambda h, n: h.index('href="page.css"') < h.index(f'href="{MASCOT_SHEET[n]}.css"')),
     ("its script is linked",          lambda h, n: f'src="{n}.js"' in h),
     ("the mascot is drawn",           lambda h, n: h.count("<rect") > 40),
     ("the mascot can blink",          lambda h, n: 'class="eye"' in h),
@@ -52,11 +59,15 @@ def read(path):
 def check_page(name):
     """Returns (passed, failed, missing_files) for one page."""
     html = read(os.path.join(PAGES, name + ".html"))
-    css = read(os.path.join(PAGES, name + ".css"))
+    page_css = read(os.path.join(PAGES, "page.css"))
+    mascot_css = read(os.path.join(PAGES, MASCOT_SHEET[name] + ".css"))
     js = read(os.path.join(PAGES, name + ".js"))
 
-    missing = [f"{name}.{ext}" for ext, src in
-               (("html", html), ("css", css), ("js", js)) if src is None]
+    missing = [f for f, src in ((name + ".html", html),
+                                ("page.css", page_css),
+                                (MASCOT_SHEET[name] + ".css", mascot_css),
+                                (name + ".js", js)) if src is None]
+    css = (page_css or "") + (mascot_css or "")
     if missing:
         return [], [], missing
 

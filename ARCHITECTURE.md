@@ -16,9 +16,14 @@ prices → format → send → persist, and a message comes out. Each stage hand
 result to the next and knows nothing about the others.
 
 The **landing page under `site/versions/` is not part of that pipeline** and does
-not share its style. Each page is a self-contained trio — one HTML, one
-stylesheet, one script — that opens by double-clicking, with no server and no
-build step. That constraint is deliberate: the user opens these from Finder.
+not share its style. It opens by double-clicking, with no server and no build
+step. That constraint is deliberate: the user opens these from Finder.
+
+Its files are split by **what changes together**, not by size. The page design —
+frame, scroll, scenes, palette — lives once in `page.css` and is shared by both
+versions. Everything about a mascot lives in that mascot's own file. So a change
+to the scroll touches one file and both pages follow; a change to one mascot
+cannot reach the other.
 
 ## Map
 
@@ -34,9 +39,12 @@ build step. That constraint is deliberate: the user opens these from Finder.
 | `state/latest_digest.json` | The last digest, written only after a real send — the reply bot and the smoke test both read it |
 | `.github/workflows/news-bot.yml` | The cron that sends the digest every three days, then commits `state/` back |
 | `.github/workflows/reply-bot.yml` | Keeps exactly one listener alive around the clock |
-| `site/index.html` | The original plain page: what the channel is, and the subscribe link |
-| `site/versions/framed.html` + `.css` + `.js` | The landing page, cute-mouse version. Markup, look, behaviour in three files |
-| `site/versions/framed-mascot02.html` + `.css` + `.js` | Same page, grumpy-mouse version |
+| `site/index.html` | The front door. No design of its own: it forwards to the chosen version, so anything opening `site/` lands on the current page |
+| `site/versions/page.css` | The page itself: frame, scroll, scenes, palette. **Shared by both versions** |
+| `site/versions/mascot-01-shy.css` | Only the shy mouse and her coffee button |
+| `site/versions/mascot-02-grumpy.css` | Only the grumpy mouse and her coffee button |
+| `site/versions/framed.html` + `.js` | The shy-mouse version: what's on the page, and how it reacts to scrolling |
+| `site/versions/framed-mascot02.html` + `.js` | The grumpy-mouse version |
 | `site/versions/_mascots/` | The two mascots on their own, SVG plus CSS, so either page can be rebuilt from them |
 | `site/verify_pages.py` | The one command that says whether both pages are still intact |
 | `smoke_test.py` | The one command that says whether it all still works |
@@ -60,10 +68,16 @@ code, and `.env` is gitignored.
 
 Newest first.
 
-- The landing page keeps **one self-contained trio per version** rather than a
-  shared base plus overrides. Sharing would remove real duplication, but these
-  pages are opened straight from Finder and a broken relative path would leave a
-  blank screen with no clue why.
+- **The page design is shared, the mascots are not.** This reverses the earlier
+  choice of one self-contained trio per version. The two stylesheets had grown to
+  345 and 331 lines with only one value genuinely different between their page
+  halves, so a colour change meant editing both and any miss would let the pages
+  drift apart unnoticed. `site/verify_pages.py` now checks both pages load
+  `page.css` and load it before their mascot, which is the risk that split
+  introduced.
+- The earlier worry that sharing a file would break the double-click-from-Finder
+  habit turned out not to apply: a second `<link>` beside the first resolves the
+  same way as the first.
 - The coffee button picks one of three palettes **once per page load**, never
   mid-session, and `?palette=mint|gum|lilac` forces one for screenshots.
 - Two transforms must never share an element in the mascot: `.eye` owns the
