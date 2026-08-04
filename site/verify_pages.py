@@ -93,6 +93,24 @@ def main():
             print(f"  BROKEN  {label}")
         broken += len(failed)
 
+    # site/index.html is the front door: it forwards to the chosen version.
+    # If it ever points at a page that no longer exists, anything showing the
+    # site (a browser, the dashboard preview) silently shows the wrong thing.
+    front = read(os.path.join(HERE, "index.html"))
+    target = re.search(r'url=([^"\s>]+)', front or "")
+    if not front:
+        print("\nFront door: MISSING — site/index.html is gone")
+        broken += 1
+    elif not target:
+        print("\nFront door: BROKEN — site/index.html forwards nowhere")
+        broken += 1
+    elif not os.path.exists(os.path.join(HERE, target.group(1))):
+        print(f"\nFront door: BROKEN — it points at {target.group(1)}, "
+              "which does not exist")
+        broken += 1
+    else:
+        print(f"\nFront door: opening site/ shows {target.group(1)}")
+
     # The mascots are kept separately so either page can be rebuilt from them.
     saved = os.path.join(PAGES, "_mascots")
     kept = sorted(os.listdir(saved)) if os.path.isdir(saved) else []
