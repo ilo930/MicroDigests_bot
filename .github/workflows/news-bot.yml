@@ -5,8 +5,10 @@ env:
 
 on:
   schedule:
-    # Every 3 days at 07:00 UTC (days 1,4,7,...; small gap at month boundaries).
-    - cron: '0 7 */3 * *'
+    # Fires DAILY at 07:00 UTC; news_bot.py's cadence gate keeps actual sends at
+    # every 3 days. A missed day (GitHub outage, dropped cron) then only delays
+    # the digest until tomorrow instead of skipping a whole cycle.
+    - cron: '0 7 * * *'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -42,6 +44,8 @@ jobs:
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           DRY_RUN: ${{ (github.event.inputs.dry_run == 'true') && '1' || '' }}
+          # Manual runs are always deliberate — skip the every-3-days cadence gate.
+          FORCE_SEND: ${{ (github.event_name == 'workflow_dispatch') && '1' || '' }}
         run: python news_bot.py
 
       - name: Persist state (seen items + latest digest)

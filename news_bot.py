@@ -20,6 +20,7 @@ Pipeline:
 Env:
   TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, GROQ_API_KEY  — required to send/analyze
   DRY_RUN=1   — print messages to stdout instead of sending to Telegram
+  FORCE_SEND=1 — skip the every-3-days cadence gate (used by manual workflow runs)
   MOCK_LLM=1  — skip Groq; fabricate structured output from real fetched items
   DEBUG=1     — print raw LLM response heads for troubleshooting
 """
@@ -53,6 +54,11 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
 DRY_RUN = os.environ.get("DRY_RUN", "") == "1"
 MOCK_LLM = os.environ.get("MOCK_LLM", "") == "1"
 DEBUG = os.environ.get("DEBUG", "") == "1"
+FORCE_SEND = os.environ.get("FORCE_SEND", "") == "1"  # manual runs skip the cadence gate
+
+# The workflow cron fires DAILY so a GitHub outage only delays a digest instead of
+# losing a whole cycle; this interval is what keeps the real rhythm at every-3-days.
+SEND_INTERVAL_DAYS = 3
 
 GROQ_MODEL = os.environ.get("GROQ_MODEL", "openai/gpt-oss-120b")
 GROQ_URL = "https://api.groq.com/openai/v1/chat/completions"
@@ -368,6 +374,25 @@ def _title_key(title):
 # ----------------------------------------------------------------------------
 # 2. Dedup
 # ----------------------------------------------------------------------------
+
+def too_soon_to_send():
+    """True if the last real digest went out too recently for another send.
+
+    Reads generated_at from state/latest_digest.json (written only on real sends).
+    The threshold is half a day short of SEND_INTERVAL_DAYS because GitHub's cron
+    routinely fires 1-2 hours late — a strict 72 h check would let that jitter
+    push the digest a whole extra day. Missing or unreadable state never blocks
+    a send.
+    """
+    try:
+        with open(LATEST_PATH) as f:
+            last = datetime.datetime.fromisoformat(json.load(f)["generated_at"])
+    except (OSError, KeyError, ValueError) as e:
+        print(f"[gate] no usable last-send timestamp ({e}); allowing send")
+        return False
+    elapsed = _now() - last
+    return elapsed < datetime.timedelta(days=SEND_INTERVAL_DAYS - 0.5)
+
 
 def load_seen():
     try:
@@ -923,6 +948,13 @@ def main():
     date_str = _now().strftime("%Y-%m-%d")
     print(f"[run] Reality Sci-Fi Check {date_str} "
           f"(dry_run={DRY_RUN}, mock_llm={MOCK_LLM}, model={GROQ_MODEL})")
+
+    # Cadence gate: the cron is daily, but a digest only goes out every
+    # SEND_INTERVAL_DAYS. Dry runs and manual force-sends bypass it.
+    if too_soon_to_send() and not (DRY_RUN or FORCE_SEND):
+        print(f"[run] last digest is under ~{SEND_INTERVAL_DAYS} days old — "
+              "not sending today (daily cron, every-3-days cadence)")
+        return
 
     candidates = fetch_candidates()
     seen = load_seen()
