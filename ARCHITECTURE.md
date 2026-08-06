@@ -37,7 +37,7 @@ cannot reach the other.
 | `api/telegram.py` | A Vercel webhook wrapper over `reply_core` (superseded — see rough edges) |
 | `state/seen.json` | Stories already sent, so nothing repeats |
 | `state/latest_digest.json` | The last digest, written only after a real send — the reply bot and the smoke test both read it |
-| `.github/workflows/news-bot.yml` | The cron that sends the digest every three days, then commits `state/` back |
+| `.github/workflows/news-bot.yml` | Fires the bot daily; the bot itself keeps the every-3-days send rhythm, then `state/` is committed back |
 | `.github/workflows/reply-bot.yml` | Keeps exactly one listener alive around the clock |
 | `site/index.html` | The front door. No design of its own: it forwards to the chosen version, so anything opening `site/` lands on the current page |
 | `site/versions/page.css` | The page itself: frame, scroll, scenes, palette. **Shared by both versions** |
@@ -68,6 +68,13 @@ code, and `.env` is gitignored.
 
 Newest first.
 
+- **The cron is daily; the bot owns the cadence** (on `main`, 2026-08-06). GitHub
+  never re-runs a schedule it missed, so during the Aug 6 Actions outage a
+  3-day cron slot would have cost a whole cycle. Now the workflow fires every
+  day and `news_bot.py` checks `state/latest_digest.json`: last real send under
+  ~2.5 days ago → exit before fetching anything. The threshold is half a day
+  short of 3 because GitHub's cron fires 1–2 hours late in practice. Manual runs
+  set `FORCE_SEND=1` and always send; dry runs also bypass the gate.
 - **The page design is shared, the mascots are not.** This reverses the earlier
   choice of one self-contained trio per version. The two stylesheets had grown to
   345 and 331 lines with only one value genuinely different between their page
