@@ -83,6 +83,11 @@ TELEGRAM_LIMIT = 4096
 # reasoning too, so the ranking needs headroom or its JSON gets truncated.
 SELECT_MAX_TOKENS = 2200
 ANALYZE_MAX_TOKENS = 2000
+# A whole digest's narration does not fit in one reply — it gets cut off mid-JSON
+# and the digest degrades to bare headlines. Narrate a few items per call instead.
+ANALYZE_BATCH = 4
+# Below this many properly narrated stories the digest is a link dump, so hold it.
+MIN_NARRATED_ITEMS = 3
 
 # Browser-ish headers — many news sites 403 the default feedparser UA.
 FEED_HEADERS = {
@@ -262,7 +267,40 @@ def extract_json(text):
             return json.loads(text[start:end + 1])
         except Exception:
             pass
-    return {}
+    return salvage_cut_off_items(text)
+
+
+def salvage_cut_off_items(text):
+    """Recover the item objects that finished before a reply was cut off.
+
+    A truncated model reply cannot be parsed as a whole, but every object that
+    closed before the cut is still valid JSON on its own. Keeping those beats
+    throwing the entire digest away.
+    """
+    found, open_braces = [], []
+    in_string = escaped = False
+    for i, ch in enumerate(text):
+        if in_string:
+            if escaped:
+                escaped = False
+            elif ch == "\\":
+                escaped = True
+            elif ch == '"':
+                in_string = False
+        elif ch == '"':
+            in_string = True
+        elif ch == "{":
+            open_braces.append(i)
+        elif ch == "}" and open_braces:
+            try:
+                obj = json.loads(text[open_braces.pop():i + 1])
+            except Exception:
+                continue
+            if isinstance(obj, dict) and ("scifi_hook" in obj or "headline" in obj):
+                found.append(obj)
+    if found:
+        print(f"[json] reply was cut off; salvaged {len(found)} complete item(s)")
+    return {"items": found} if found else {}
 
 
 # ----------------------------------------------------------------------------
@@ -452,7 +490,11 @@ def groq_chat(system_prompt, user_prompt, temperature=0.3, max_tokens=2000, labe
                     continue
                 print(f"[groq{label}] API error: {err}")
                 return ""
-            content = j["choices"][0]["message"]["content"]
+            choice = j["choices"][0]
+            content = choice["message"]["content"]
+            if choice.get("finish_reason") == "length":
+                print(f"[groq{label}] reply hit the {max_tokens}-token ceiling and "
+                      f"was CUT OFF — it is incomplete")
             if DEBUG:
                 print(f"[groq{label}] raw head: {content[:200]!r}")
             return content
@@ -645,6 +687,45 @@ Rules:
 Return ONLY JSON: {"items":[{"i":<n>, "topic":"...", "country":"...", ...one object per input item...}]}"""
 
 
+def narrate_batch(numbered):
+    """Write the sci-fi/plain-terms/why lines for a few items in one LLM call.
+
+    numbered: [(index_in_digest, candidate), ...]. Returns {index: analysis}.
+    Kept small on purpose — one call for a whole digest overruns the token
+    ceiling and comes back cut off, which strips every story to a bare headline.
+    """
+    blocks = [f"### ITEM {i} (theme: {c['_theme']}, source: {c['source']})\n"
+              f"TITLE: {c['title']}\nARTICLE TEXT: {c['text'][:ANALYZE_CHARS]}"
+              for i, c in numbered]
+    user = ("WATCHLIST (only cite tickers from here):\n" + render_for_prompt() +
+            "\n\n" + "\n\n".join(blocks))
+    wanted = {i for i, _ in numbered}
+    found = {}
+    for attempt in range(2):
+        raw = groq_chat(ANALYZE_SYSTEM, user, temperature=0.35,
+                        max_tokens=ANALYZE_MAX_TOKENS, label=":analyze")
+        results = extract_json(raw).get("items", [])
+        if not results and raw:
+            print(f"[analyze] unparseable head: {raw[:200]!r}")
+        # Match each analysis to its item by the index the model echoes back —
+        # NOT by position — so a reordered or short reply can never attach one
+        # story's text to another story's link.
+        for position, r in enumerate(results):
+            try:
+                i = int(r["i"])
+            except (KeyError, ValueError, TypeError):
+                # Model omitted the index; fall back to the order we asked in.
+                i = numbered[position][0] if position < len(numbered) else None
+            if i in wanted:
+                found[i] = r
+        missing = sorted(wanted - set(found))
+        if not missing:
+            return found
+        print(f"[analyze] no narration for item(s) {missing} "
+              f"(attempt {attempt + 1} of 2)")
+    return found
+
+
 def analyze_items(selected):
     """selected: {theme: [candidate,...]}. Returns same structure with analysis merged."""
     flat = []
@@ -661,27 +742,10 @@ def analyze_items(selected):
         return selected
 
     allowed = all_tickers()
-    blocks = [f"### ITEM {i} (theme: {c['_theme']}, source: {c['source']})\n"
-              f"TITLE: {c['title']}\nARTICLE TEXT: {c['text'][:ANALYZE_CHARS]}"
-              for i, c in enumerate(flat)]
-    user = ("WATCHLIST (only cite tickers from here):\n" + render_for_prompt() +
-            "\n\n" + "\n\n".join(blocks))
-    raw = groq_chat(ANALYZE_SYSTEM, user, temperature=0.35,
-                    max_tokens=ANALYZE_MAX_TOKENS, label=":analyze")
-    results = extract_json(raw).get("items", [])
-    if not results and raw:
-        print(f"[analyze] unparseable head: {raw[:200]!r}")
-
-    # Match analyses to items by their echoed index — NOT by array position —
-    # so a reordered/short model response can never attach text to the wrong link.
     by_i = {}
-    for r in results:
-        try:
-            by_i[int(r["i"])] = r
-        except (KeyError, ValueError, TypeError):
-            continue
-    if not by_i and results:  # model omitted indices; fall back to input order
-        by_i = dict(enumerate(results))
+    numbered = list(enumerate(flat))
+    for start in range(0, len(numbered), ANALYZE_BATCH):
+        by_i.update(narrate_batch(numbered[start:start + ANALYZE_BATCH]))
 
     for idx, c in enumerate(flat):
         a = by_i.get(idx, {})
@@ -697,6 +761,26 @@ def analyze_items(selected):
         c["confidence"] = a.get("confidence", "low")
         c["tickers"] = [t for t in a.get("tickers", []) if t in allowed][:3]
     return selected
+
+
+def drop_unnarrated(analyzed):
+    """Remove items the narrator failed on, so they never reach Telegram.
+
+    Without the sci-fi/plain-terms/why lines an item is a bare headline plus a
+    link — exactly what this digest exists not to be. Dropped items are never
+    marked seen, so they come back on the next run instead of being lost.
+    """
+    kept, dropped = {}, 0
+    for theme, items in analyzed.items():
+        narrated = [c for c in items
+                    if c.get("scifi_hook") and c.get("eli5") and c.get("why")]
+        dropped += len(items) - len(narrated)
+        if narrated:
+            kept[theme] = narrated
+    if dropped:
+        print(f"[analyze] dropped {dropped} un-narrated item(s); they stay unseen "
+              f"and return next run")
+    return kept
 
 
 def _mock_analyze(c):
@@ -968,7 +1052,13 @@ def main():
         print("[run] nothing selected")
         return
 
-    analyzed = analyze_items(selected)
+    analyzed = drop_unnarrated(analyze_items(selected))
+    narrated_count = sum(len(items) for items in analyzed.values())
+    if narrated_count < MIN_NARRATED_ITEMS:
+        print(f"[run] only {narrated_count} narrated item(s) — holding the digest "
+              f"rather than sending a link dump. Nothing marked seen; the next run "
+              f"retries these stories.")
+        raise SystemExit(1)
 
     # Number items globally (in THEME order, same order persist writes them) so the
     # reply bot's "deeper N" references line up with what's shown.
