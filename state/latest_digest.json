@@ -1,16 +1,41 @@
 {
-  "date": "2026-09-13",
-  "generated_at": "2026-09-13T12:23:35.304116+00:00",
+  "date": "2026-09-16",
+  "generated_at": "2026-09-16T12:16:04.144159+00:00",
   "prices": {
-    "MP": {
-      "last": 50.51,
-      "low": 50.51,
-      "high": 60.17
+    "AMD": {
+      "last": 504.2,
+      "low": 456.16,
+      "high": 521.1
     },
-    "REMX": {
-      "last": 70.56,
-      "low": 70.56,
-      "high": 80.75
+    "BA": {
+      "last": 209.69,
+      "low": 204.8,
+      "high": 225.95
+    },
+    "LMT": {
+      "last": 533.46,
+      "low": 524.19,
+      "high": 603.44
+    },
+    "NVDA": {
+      "last": 212.17,
+      "low": 208.25,
+      "high": 230.1
+    },
+    "RTX": {
+      "last": 195.5,
+      "low": 195.34,
+      "high": 225.49
+    },
+    "TMC": {
+      "last": 3.75,
+      "low": 3.75,
+      "high": 5.09
+    },
+    "TSM": {
+      "last": 413.75,
+      "low": 410.12,
+      "high": 439.0
     }
   },
   "items": [
@@ -19,136 +44,143 @@
       "theme": "space",
       "topic": "astronomy",
       "country": "US",
-      "headline": "Chandra captures colliding galaxies in vivid multi\u2011wavelength image",
-      "title": "NASA\u2019s Chandra Spots Galactic Gem",
-      "scifi_hook": "Two galaxies smash together, lighting up black holes and hidden star nurseries for the first time.",
-      "eli5": "NASA combined X\u2011ray, visible and infrared pictures to show two galaxies merging and feeding giant black holes.",
-      "why": "It reveals how galaxy collisions built the early universe\u2019s structure.",
+      "headline": "Webb observes record\u2011strong gas outflow from a quiescent galaxy",
+      "title": "Webb measures extreme gas outflows from distant 'dead' galaxies",
+      "scifi_hook": "James Webb sees a galaxy blowing out gas faster than any ever measured.",
+      "eli5": "The telescope measured a dead galaxy ejecting massive amounts of gas, far beyond previous records.",
+      "why": "It shows how galaxies may try to shut down star formation but often cannot fully succeed.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://www.nasa.gov/image-article/nasas-chandra-spots-galactic-gem/",
-      "source": "nasa.gov",
-      "text": "X-ray: NASA/CXC/SAO; Optical: NASA/ESA/STScI; Infrared: NASA/ESA/CSA/STScI; Image Processing: NASA/CXC/SAO/L. Frattare and J. Major Two galaxies merge at a furious rate in this Aug. 25, 2026, image of the II Zw 096 system. This and several other images of both visually and scientifically interesting galaxies were released by NASA\u2019s Chandra X-ray Observatory and other telescopes. Chandra X-ray data (magenta) pinpoint powerful black hole activity and hot gas, while optical data (blue and white) from NASA\u2019s Hubble Space Telescope and infrared data from NASA\u2019s James Webb Space Telescope illuminate vast stellar nurseries hidden behind interstellar dust. Systems like II Zw 096 show us how powerful galaxy collisions shaped the early universe. See more galaxy photos from Chandra. Image credit: X-ray: NASA/CXC/SAO; Optical: NASA/ESA/STScI; Infrared: NASA/ESA/CSA/STScI; Image Processing: NASA/CXC/SAO/L. Frattare and J. Major"
+      "link": "https://phys.org/news/2026-09-webb-extreme-gas-outflows-distant.html",
+      "source": "phys.org",
+      "text": "Astronomers using the James Webb Space Telescope have measured the most powerful gas outflow ever recorded from a \"dead\" galaxy outside our cosmic neighborhood and found that even outflows this extreme may not be enough to permanently shut down star formation."
     },
     {
       "n": 2,
       "theme": "space",
       "topic": "launch",
       "country": "US",
-      "headline": "NASA announces live coverage of Roman Space Telescope launch from Florida",
-      "title": "NASA Sets Coverage for Roman Space Telescope Launch from Florida - nasa.gov",
-      "scifi_hook": "The next\u2011generation space eye will lift off, promising a new era of cosmic surveys.",
-      "eli5": "NASA will stream the launch of the Roman Telescope, a powerful observatory that will map the universe.",
-      "why": "The telescope will expand our ability to study dark energy and exoplanets.",
+      "headline": "Roman Space Telescope fuel enough for 22\u2011year mission",
+      "title": "The Roman telescope has enough gas for 22 years, double NASA's expectations",
+      "scifi_hook": "NASA\u2019s Roman telescope carries enough propellant for over two decades of observations.",
+      "eli5": "Precise launch and maneuvers left the telescope with fuel lasting at least 22 years instead of the planned 5\u201110.",
+      "why": "Extended fuel means far longer scientific return without extra launches.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQYnY4VjlDZTZPSERFaHNsZy1aQ041SHN4OXBNcFdKckx5bFYyaDRGTGZLTy1zamgxc0tzNG1QOUFBLUw5SGgwcmZGUTBZWV9zakpJN29WUGpQbzdEMW5vbHVKZlFkdXhsdWRoWVI5dHNfVi11WU1iMmtOV3ZOR2NrS19kSGJLRERzajRDZ2NvWjFmTVBhZ01uNGltWDRRNXB2?oc=5",
-      "source": "nasa.gov",
-      "text": "NASA Sets Coverage for Roman Space Telescope Launch from Florida nasa.gov"
+      "link": "https://arstechnica.com/space/2026/09/the-roman-telescope-has-enough-gas-for-22-years-double-nasas-expectations/",
+      "source": "arstechnica.com",
+      "text": "NASA's Nancy Grace Roman Space Telescope is gliding toward its distant observation post on a pinpoint trajectory so precise that engineers estimate the spacecraft's fuel load will last twice as long as their initial expectations, the space agency confirmed Monday. The $4.3 billion observatory's designers originally planned to load enough propellant into Roman's four fuel tanks for a minimum lifetime of five years, plus a potential five-year mission extension. That was a conservative estimate. NASA officials knew an on-target launch and perfect execution of the observatory's first post-launch course correction maneuver would leave Roman with a hearty fuel reserve. \"As a result of exquisite planning by our orbital dynamics team, brilliant execution by the operations team, and a precise launch from SpaceX, Roman has fuel for at least 22 years of potential science operations,\" Jamie Dunn, center director at NASA's Goddard Space Flight Center, said in a press release. Read full article Comments"
     },
     {
       "n": 3,
-      "theme": "minerals",
-      "topic": "mining",
+      "theme": "space",
+      "topic": "launch",
       "country": "US",
-      "headline": "Cyclic Materials opens first commercial\u2011scale rare\u2011earth magnet recycling plant in Arizona",
-      "title": "Site visit: Cyclic Materials opens\u00a0commercial-scale\u00a0rare\u00a0earth recycling plant in Arizona",
-      "scifi_hook": "A new facility tears apart old magnets to reclaim rare earths, copper, aluminum and steel.",
-      "eli5": "The plant mechanically separates magnets from used products, turning them into reusable rare\u2011earth material.",
-      "why": "It adds domestic processing capacity, reducing U.S. reliance on foreign rare\u2011earth supplies.",
+      "headline": "Starship set for first orbital flight next week",
+      "title": "Starship to Attempt First Orbital Flight Next Week - Space Policy Online",
+      "scifi_hook": "SpaceX\u2019s massive Starship will attempt its inaugural orbit in just days.",
+      "eli5": "The giant reusable rocket is scheduled to try reaching orbit for the first time next week.",
+      "why": "Successful orbital flight would mark a major step toward rapid, cheap space travel.",
       "tickers": [],
-      "proxy_note": "",
+      "proxy_note": "SpaceX is private",
       "bias": "n/a",
       "rationale": "",
       "confidence": "medium",
-      "link": "https://www.mining.com/site-visit-cyclic-materials-opens-commercial-scale-rare-earth-recycling-plant-in-arizona/",
-      "source": "mining.com",
-      "text": "Ribbon cutting at Cyclic Materials Mesa, Arizona plant. Image: Amanda Stutt. Cyclic Materials opened its first commercial-scale rare earth magnet recycling facility in Mesa, Arizona on Sept. 9, hosting a ceremony attended by government, industry, stakeholders and investors. The plant adds significant domestic processing capacity as the United States seeks to reduce its reliance on concentrated foreign supplies of critical minerals. The 144,000-square-foot facility has capacity to process up to 25,000 metric tonnes of magnet-bearing end-of-life products annually, making it the largest rare earth magnet recycling facility of its kind, according to the company. The plant also represents the first commercial-scale deployment of Cyclic Materials\u2019 proprietary MagCycle technology, which mechanically separates permanent magnets from end-of-life products and forms the front end of the company\u2019s integrated rare earth recovery platform. The facility produces Cyclic\u2019s Mag-Xtract rare earth magnet material while also recovering critical materials including copper, aluminum and steel. Commercial operations are already underway. Cyclic said the feedstock-agnostic plant is processing material at a rate of eight tonnes per hour and selling recovered products to US smelters. More than 7,000 metric tonnes of material have already been delivered to the Mesa site, with substantially larger volumes secured through the company\u2019s supply pipeline. The first commercial shipments to US customers are ex"
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOeXR0X3g1RTR6Y3JJQjAxckE1N29lTm02akpTQl9taHE1c250WS1PTlNnR2lLd2JwSkJRQ1loRXV1SXFnYjdWM01zSFVKeDVNdEJ1Q0pwV2c3ek5FaVI4WFBrNVdZSmtXa1dBN0tlNi1rV2E4eUNYWngzakZOMHZMVFBVcWJWWVJvVkE5aVo2UQ?oc=5",
+      "source": "Space Policy Online",
+      "text": "Starship to Attempt First Orbital Flight Next Week Space Policy Online"
     },
     {
       "n": 4,
       "theme": "minerals",
-      "topic": "mining",
-      "country": "US",
-      "headline": "USA Rare Earth breaks ground on $1.2\u202fbillion magnet manufacturing complex in South Carolina",
-      "title": "USA Rare Earth breaks ground at $1.2B magnet manufacturing facility in\u00a0South Carolina",
-      "scifi_hook": "A massive new plant will forge rare\u2011earth magnets at home, securing a critical supply chain.",
-      "eli5": "The company started building a huge factory to make rare\u2011earth metals and magnets in the United States.",
-      "why": "It creates domestic production of strategic materials for defense and clean\u2011energy technologies.",
-      "tickers": [],
-      "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "medium",
-      "link": "https://www.mining.com/usa-rare-earth-breaks-ground-at-1-2b-rare-earth-magnet-manufacturing-facility-in-south-carolina/",
-      "source": "mining.com",
-      "text": "USA Rare Earth (Nasdaq: USAR) this week broke ground on its new rare earth metal and magnet manufacturing facility in Blacksburg, South Carolina, marking a milestone in its plan to build an integrated rare earth supply chain for the US and its allies. Located on a 124-acre site in Bailey Industrial Park in Cherokee County, the 800,000-square-foot facility represents an approximately $1.2 billion investment and is expected to create roughly 490 manufacturing jobs upstate. USA Rare Earth said it selected Blacksburg following a comprehensive evaluation of nearly 275 potential sites across the country, adding that South Carolina stood out for its skilled advanced manufacturing workforce, reliable power, transportation infrastructure, proximity to customers and suppliers, and strong support from state and local partners. \u201cBreaking ground in Blacksburg is an important moment because it moves our vision from plans on paper to infrastructure taking shape,\u201d CEO Barbara Humpton said in a news release. \u201cWe\u2019re building the capabilities America needs to make critical rare earth materials and magnets at home, while making a long-term investment in the people and communities that will help us do it.\u201d USA Rare Earth\u2019s ambitious plans for domestic supply chain Investing in education USA Rare Earth also announced a $250,000 contribution to Spartanburg Community College to support its new SPARK Center in Cherokee County. The new center will connect education, workforce development and economic "
-    },
-    {
-      "n": 5,
-      "theme": "minerals",
-      "topic": "mining",
-      "country": "US",
-      "headline": "DOE allocates $73M to create testbeds for advanced domestic mining technologies",
-      "title": "US Department of Energy\u00a0grants $73M to advance domestic mining technology",
-      "scifi_hook": "DOE funds testbeds to turn futuristic mining rigs into field reality across America.",
-      "eli5": "The Energy Department is paying companies to build real\u2011world sites to try out new, high\u2011tech mining equipment.",
-      "why": "It helps secure U.S. critical mineral supplies and boosts competitiveness.",
+      "topic": "materials",
+      "country": "",
+      "headline": "Green Manganese proves single\u2011step metal recovery from deep\u2011sea nodules",
+      "title": "Green Manganese demonstrates single process critical metals recovery from polymetallic nodules",
+      "scifi_hook": "A new water\u2011based process pulls nickel, cobalt, copper and manganese from ocean floor nodules in one go.",
+      "eli5": "The company showed it can extract several critical battery metals from seabed rocks using one hydrometallurgical step.",
+      "why": "Simpler, lower\u2011energy extraction could unlock deep\u2011sea mining for battery supply chains.",
       "tickers": [
-        "MP",
-        "REMX"
+        "TMC"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "Tech advances could lift miner earnings",
+      "rationale": "potential cost reduction",
       "confidence": "medium",
-      "link": "https://www.mining.com/us-department-of-energy-grants-73m-to-advance-domestic-mining-technology/",
+      "link": "https://www.mining.com/green-manganese-demonstrates-single-process-critical-metals-recovery-from-polymetallic-nodules/",
       "source": "mining.com",
-      "text": "The U.S. Department of Energy\u2019s (DOE) Office of Critical Minerals and Energy Innovation (CMEI) this week selected four projects for $73 million in funding through DOE\u2019s Mine of the Future initiative to establish domestic testing grounds for innovative mining technologies. The projects will accelerate the commercialization of mining technologies, upgrade domestic mining capabilities, and build on the US\u2019 mission to secure America\u2019s critical minerals supply chains, CMEI said. \u201cInvesting in moving cutting-edge mining technologies out of the lab and into the field will help unleash America\u2019s vast mineral resources,\u201d US Secretary of Energy Chris Wright said in a news release . \u201cThese investments will prove that American innovation can redefine what\u2019s possible in modern mining,\u201d said Assistant Secretary of Energy Audrey Robertson. \u201cBy establishing world class testing grounds, we\u2019re accelerating breakthroughs that will strengthen our supply chains, our workforce, and our national competitiveness.\u201d DOE\u2019s Advanced Mining and Mineral Processing Technologies Office selected Lynchburg-headquartered Innovative Wireless Technologies, with project locations in Julian and Blacksburg, West Virginia and Idaho Springs, Colorado. This project aims to create a national testbed to accelerate the development and deployment of advanced mining technologies that enhance safety, productivity, and supply chain resilience. The effort will combine underground and surface mining environments to validate ne"
+      "text": "Green Manganese Technologies said it has successfully completed initial metallurgical test work demonstrating that its proprietary hydrometallurgical process can recover multiple critical metals from polymetallic nodules through a single, integrated process. Polymetallic nodules, found resting unattached on the deep-ocean floor contain nickel, cobalt, copper, and manganese \u2013 core inputs for global battery, electronics, and defense supply chains. As interest in ocean-based mineral resources grows, efficiently processing the complex matrix of metals contained in nodules remains a primary bottleneck to commercial deployment. Unlike conventional processing flowsheets that rely on multi-stage pyrometallurgical smelting\u2014sequentially calcining and smelting nodules to separate a nickel-copper-cobalt alloy from a manganese silicate slag\u2014Green Manganese says its hydrometallurgical platform is engineered to extract all principal critical metals from polymetallic nodules in one integrated process. By bypassing Submerged Arc Furnaces (SAF), electrolysis, and multi-phase converting steps entirely, Green Manganese said process consumes up to 5 times less energy while achieving greater than 90% recovery of manganese, nickel, cobalt, and copper simultaneously. Selectively dissolving the manganese minerals releases associated critical metals into a unified process solution. Simultaneously, iron minerals are converted into hematite, simplifying downstream handling and creating an additional val"
+    },
+    {
+      "n": 5,
+      "theme": "tech",
+      "topic": "weather",
+      "country": "JP",
+      "headline": "AI Boosts Accuracy of Weather Forecasts",
+      "title": "Artificial intelligence makes inroads into weather forecasting - The Japan Times",
+      "scifi_hook": "Artificial intelligence now predicts storms with near\u2011future precision.",
+      "eli5": "AI crunches massive weather data to give more accurate forecasts.",
+      "why": "Better forecasts protect lives and reduce economic losses.",
+      "tickers": [
+        "NVDA",
+        "AMD",
+        "TSM"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "AI demand lifts chip makers",
+      "confidence": "medium",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSzF6V3NEM282cmNMNm1kSzQ5c2hiUDBUbE41RVR0RndvZ3FFaXl6SE9oQ3BCTkpkZDFNQ2hmQTNTSVpNbTlrUmdCaktULVowbGhwdEhZNnViNWUwaVJwTE5DYkJ6bVZfNkFOajlFa2FBLXAtUVJBeURBdmdleFBEVkh2LUpCZ05ERWxZbQ?oc=5",
+      "source": "The Japan Times",
+      "text": "Artificial intelligence makes inroads into weather forecasting The Japan Times"
     },
     {
       "n": 6,
       "theme": "tech",
-      "topic": "astronomy",
+      "topic": "defense",
       "country": "US",
-      "headline": "Researchers achieve record\u2011precise measurement of primordial helium",
-      "title": "Researchers pinpoint key early-universe measurement with record precision",
-      "scifi_hook": "Scientists measured the universe\u2019s newborn helium with record precision, peering back to the first minutes after the Big Bang.",
-      "eli5": "A team measured how much helium was made just five minutes after the universe began, more accurately than ever.",
-      "why": "It sharpens our understanding of the early universe and fundamental physics.",
-      "tickers": [],
+      "headline": "U.S. Confirms Deployment of Space\u2011Based Weapons",
+      "title": "The U.S. Just Admitted it Has Weapons in Space. Why That's a Big Deal - time.com",
+      "scifi_hook": "The United States openly admits it has weapons orbiting Earth.",
+      "eli5": "The U.S. says it has weapons that can operate from space.",
+      "why": "It reshapes the strategic balance and space security landscape.",
+      "tickers": [
+        "LMT",
+        "RTX",
+        "BA"
+      ],
       "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "high",
-      "link": "https://phys.org/news/2026-09-key-early-universe-precision.html",
-      "source": "phys.org",
-      "text": "An international team, including researchers from the University of Minnesota Twin Cities, has reached a major milestone in \"precision cosmology\" by measuring the amount of helium created in the universe's first five minutes with unprecedented accuracy."
+      "bias": "up",
+      "rationale": "Space weapons boost defense spend",
+      "confidence": "medium",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE52dkZWQTE2SkNzcFJ1UmNmNjBDMl9idGdONC1YM0l0aU5HajJMVmxLMGFaMXVqVzUwSUdGTC1YSERlaXEwcWtMQ2tCV1N0Vnc0OVdSek9BVWVLR2FkQllNOWtuVkpOODROTW1Gd0FLZnJOU2xXNDVN?oc=5",
+      "source": "time.com",
+      "text": "The U.S. Just Admitted it Has Weapons in Space. Why That's a Big Deal time.com"
     },
     {
       "n": 7,
       "theme": "earth",
       "topic": "cleanenergy",
-      "country": "IN",
-      "headline": "India\u2019s evening power deficit persists despite record solar capacity growth",
-      "title": "India's Evening Power Deficit Persists Despite Record Solar Capacity Growth - MarketScale",
-      "scifi_hook": "India\u2019s solar boom still leaves evenings dark, exposing limits of daylight\u2011only power.",
-      "eli5": "Even though India added a lot of solar panels, there\u2019s still not enough electricity at night.",
-      "why": "Shows the need for storage or other sources to balance the grid.",
+      "country": "US",
+      "headline": "U.S. Solar Capacity Reaches Power for 50\u202fMillion Homes",
+      "title": "US solar hits milestone, with enough installed capacity to generate power for 50 million homes - The Cool Down",
+      "scifi_hook": "Solar farms now generate enough electricity for tens of millions of households.",
+      "eli5": "The U.S. installed enough solar panels to supply 50\u202fmillion homes with power.",
+      "why": "It expands renewable energy share and cuts carbon emissions.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
-      "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxQMFkwbjBicHdEOVlTbEc0R1dwdGt3Q1RCd013dGVJZ1FCVkQyUlBzeEFiTXVUUTQxbXA3bnI2NS1WV0lGeGZFU1pHNUl1UG5RT1I2Vi0zMVdPeUJBa2FlRnZYOWpoYUYtNmF4VlJBQ0JXNUdoY0RPTFBEaFRXNWVuWVVHTVZwZ2ZtVTlSX2VycVRyd1UxWFJsRUMwZHdzcDVlWTZJdlB5RmppWWYwcERpVVZtdTlsUQ?oc=5",
-      "source": "MarketScale",
-      "text": "India's Evening Power Deficit Persists Despite Record Solar Capacity Growth MarketScale"
+      "confidence": "low",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQSU9TRk5zWW1sdU8zc1hiYUg0VVhqdDU0RXo1T1Uzb215MVlQMlVFQTNfYlBMemZEZVMwS1E3bUtmZ0JNZGpmbmFRTzFKNGpHdVYwMnpjVUFVV09vdmN3eEhZek56U29kOEsycWV4QjJLTGtJVURucnVhaDl0ajhVRkpiX0Y?oc=5",
+      "source": "The Cool Down",
+      "text": "US solar hits milestone, with enough installed capacity to generate power for 50 million homes The Cool Down"
     }
   ]
 }
