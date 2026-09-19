@@ -1,41 +1,26 @@
 {
-  "date": "2026-09-16",
-  "generated_at": "2026-09-16T12:16:04.144159+00:00",
+  "date": "2026-09-19",
+  "generated_at": "2026-09-19T11:40:18.436943+00:00",
   "prices": {
-    "AMD": {
-      "last": 504.2,
-      "low": 456.16,
-      "high": 521.1
+    "FCX": {
+      "last": 71.54,
+      "low": 69.09,
+      "high": 79.91
     },
-    "BA": {
-      "last": 209.69,
-      "low": 204.8,
-      "high": 225.95
+    "IONQ": {
+      "last": 39.13,
+      "low": 36.75,
+      "high": 44.86
     },
-    "LMT": {
-      "last": 533.46,
-      "low": 524.19,
-      "high": 603.44
+    "QBTS": {
+      "last": 17.11,
+      "low": 16.27,
+      "high": 20.39
     },
-    "NVDA": {
-      "last": 212.17,
-      "low": 208.25,
-      "high": 230.1
-    },
-    "RTX": {
-      "last": 195.5,
-      "low": 195.34,
-      "high": 225.49
-    },
-    "TMC": {
-      "last": 3.75,
-      "low": 3.75,
-      "high": 5.09
-    },
-    "TSM": {
-      "last": 413.75,
-      "low": 410.12,
-      "high": 439.0
+    "RGTI": {
+      "last": 15.76,
+      "low": 14.79,
+      "high": 17.91
     }
   },
   "items": [
@@ -44,143 +29,139 @@
       "theme": "space",
       "topic": "astronomy",
       "country": "US",
-      "headline": "Webb observes record\u2011strong gas outflow from a quiescent galaxy",
-      "title": "Webb measures extreme gas outflows from distant 'dead' galaxies",
-      "scifi_hook": "James Webb sees a galaxy blowing out gas faster than any ever measured.",
-      "eli5": "The telescope measured a dead galaxy ejecting massive amounts of gas, far beyond previous records.",
-      "why": "It shows how galaxies may try to shut down star formation but often cannot fully succeed.",
+      "headline": "XRISM observes stellar wind feeding a pulsar in BP Crucis",
+      "title": "NASA-JAXA XRISM Mission Sees Pulsar Gathering Companion\u2019s \u2018Wind\u2019",
+      "scifi_hook": "Astronomers watch a giant star\u2019s wind stream onto a compact pulsar, powering X\u2011ray flares.",
+      "eli5": "A massive star blows gas that a nearby neutron star captures, creating bright X\u2011ray bursts.",
+      "why": "It proves how matter transfer powers extreme X\u2011ray sources.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://phys.org/news/2026-09-webb-extreme-gas-outflows-distant.html",
-      "source": "phys.org",
-      "text": "Astronomers using the James Webb Space Telescope have measured the most powerful gas outflow ever recorded from a \"dead\" galaxy outside our cosmic neighborhood and found that even outflows this extreme may not be enough to permanently shut down star formation."
+      "link": "https://science.nasa.gov/missions/xrism/xrism-sees-pulsar-gathering-companions-wind/",
+      "source": "science.nasa.gov",
+      "text": "5 min read NASA-JAXA XRISM Mission Sees Pulsar Gathering Companion\u2019s \u2018Wind\u2019 Using data from the Japan-led XRISM (X-ray Imaging and Spectroscopy Mission) observatory, astronomers have directly observed a giant star\u2019s outflow, called a stellar wind, being captured by its compact companion and providing the power source for strong X-ray flares. The research is part of NASA\u2019s exploration of the extreme universe to better understand how the cosmos works. \u201cWe\u2019ve never before seen clear indications of wind plasma falling onto a compact object,\u201d said Roi Rahin, a researcher at UMBC (University of Maryland, Baltimore County) and NASA\u2019s Goddard Space Flight Center in Greenbelt, Maryland. \u201cWe can now test our understanding of these processes in much greater detail.\u201d A paper describing the findings published Friday in the journal Science Advances. The target system is BP Crucis, a high-mass X-ray binary located about 13,000 light-years away in the southern constellation Crux. The primary star, known as Wray 977, is a blue hypergiant about 40 times the Sun\u2019s mass and 60 times its size. It\u2019s so big, hot, and luminous that ionized gas constantly streams away from it, a phenomenon astronomers call a stellar wind. This artist\u2019s concept of the BP Crucis system follows the pulsar on a passage through the dense stream of plasma flowing from its companion, a blue hypergiant 40 times the Sun\u2019s mass. During each four-day passage, the pulsar\u2019s X-ray brightness flares as it pulls in some of the gas. "
     },
     {
       "n": 2,
       "theme": "space",
-      "topic": "launch",
+      "topic": "astronomy",
       "country": "US",
-      "headline": "Roman Space Telescope fuel enough for 22\u2011year mission",
-      "title": "The Roman telescope has enough gas for 22 years, double NASA's expectations",
-      "scifi_hook": "NASA\u2019s Roman telescope carries enough propellant for over two decades of observations.",
-      "eli5": "Precise launch and maneuvers left the telescope with fuel lasting at least 22 years instead of the planned 5\u201110.",
-      "why": "Extended fuel means far longer scientific return without extra launches.",
+      "headline": "COSI gamma\u2011ray telescope assembled for Milky Way studies",
+      "title": "COSI Telescope Comes Together",
+      "scifi_hook": "A new space\u2011borne gamma\u2011ray eye is being built to map matter\u2011antimatter fireworks across the galaxy.",
+      "eli5": "Scientists are putting together a telescope that will detect high\u2011energy gamma rays from stars and explosions.",
+      "why": "It will reveal energetic processes shaping our galaxy.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://arstechnica.com/space/2026/09/the-roman-telescope-has-enough-gas-for-22-years-double-nasas-expectations/",
-      "source": "arstechnica.com",
-      "text": "NASA's Nancy Grace Roman Space Telescope is gliding toward its distant observation post on a pinpoint trajectory so precise that engineers estimate the spacecraft's fuel load will last twice as long as their initial expectations, the space agency confirmed Monday. The $4.3 billion observatory's designers originally planned to load enough propellant into Roman's four fuel tanks for a minimum lifetime of five years, plus a potential five-year mission extension. That was a conservative estimate. NASA officials knew an on-target launch and perfect execution of the observatory's first post-launch course correction maneuver would leave Roman with a hearty fuel reserve. \"As a result of exquisite planning by our orbital dynamics team, brilliant execution by the operations team, and a precise launch from SpaceX, Roman has fuel for at least 22 years of potential science operations,\" Jamie Dunn, center director at NASA's Goddard Space Flight Center, said in a press release. Read full article Comments"
+      "link": "https://www.nasa.gov/image-article/cosi-telescope-comes-together/",
+      "source": "nasa.gov",
+      "text": "UC Berkeley/Alan Toth UC Berkeley engineers and managers watch as the COSI (Compton Spectrometer and Imager) detector assembly is slowly raised from a table in this July 8, 2026, image. The four pieces of silver material on the top of the detector box cover the flex circuits, which carry signals from the detectors to the readout electronics. COSI is a wide-field gamma-ray telescope that will study energetic phenomena in the Milky Way and beyond, including the creation and destruction of matter and antimatter and the final stages of the lives of stars. The mission is a collaboration between the University of California, Berkeley\u2019s Space Sciences Laboratory; the University of California, San Diego; the Naval Research Laboratory; NASA\u2019s Goddard Space Flight Center; Northrop Grumman; Space Dynamics Laboratory; the Italian Space Agency; and a number of research institutions. Image credit: UC Berkeley/Alan Toth"
     },
     {
       "n": 3,
-      "theme": "space",
-      "topic": "launch",
+      "theme": "minerals",
+      "topic": "mining",
       "country": "US",
-      "headline": "Starship set for first orbital flight next week",
-      "title": "Starship to Attempt First Orbital Flight Next Week - Space Policy Online",
-      "scifi_hook": "SpaceX\u2019s massive Starship will attempt its inaugural orbit in just days.",
-      "eli5": "The giant reusable rocket is scheduled to try reaching orbit for the first time next week.",
-      "why": "Successful orbital flight would mark a major step toward rapid, cheap space travel.",
-      "tickers": [],
-      "proxy_note": "SpaceX is private",
-      "bias": "n/a",
-      "rationale": "",
+      "headline": "Copper supply risks cause first production decline since 2017",
+      "title": "Copper mine supply risks first decline since 2017: Sprott",
+      "scifi_hook": "Disruptions at major mines shave off 600,000 tonnes of copper, threatening power\u2011grid and AI growth.",
+      "eli5": "Problems at big copper mines mean less copper will be produced this year, despite high prices.",
+      "why": "Reduced copper supply could pressure prices for grids, AI data centers, and defense.",
+      "tickers": [
+        "FCX"
+      ],
+      "proxy_note": "",
+      "bias": "down",
+      "rationale": "Supply constraints may lift copper prices",
       "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOeXR0X3g1RTR6Y3JJQjAxckE1N29lTm02akpTQl9taHE1c250WS1PTlNnR2lLd2JwSkJRQ1loRXV1SXFnYjdWM01zSFVKeDVNdEJ1Q0pwV2c3ek5FaVI4WFBrNVdZSmtXa1dBN0tlNi1rV2E4eUNYWngzakZOMHZMVFBVcWJWWVJvVkE5aVo2UQ?oc=5",
-      "source": "Space Policy Online",
-      "text": "Starship to Attempt First Orbital Flight Next Week Space Policy Online"
+      "link": "https://www.mining.com/copper-mine-supply-risks-first-decline-since-2017-sprott/",
+      "source": "mining.com",
+      "text": "Global mined copper production could fall this year for the first time in nearly a decade even after prices hit records, as disruptions, declining grades and weak Chilean output expose how slowly miners can respond to higher prices, Sprott Asset Management says. Mine output fell 1.1% year over year in the first half of 2026, while disruptions at Freeport-McMoRan\u2019s (NYSE: FCX) Grasberg mine in Indonesia and Ivanhoe Mines\u2019 (TSX: IVN; US-OTC: IVPAF) Kamoa-Kakula complex in the Democratic Republic of Congo removed an estimated 600,000 tonnes of expected 2026 production, according to a new report this week by Sprott. That is equal to about 2.5% of annual global mine supply. \u201cHigher prices improve project economics, but they cannot compress every stage of development or quickly replenish the discovery pipeline,\u201d Jacob White, director of ETF product management at Sprott Asset Management, wrote in the report. Copper projects take about 17.5 years on average to move from discovery into production, he said. The constraint is colliding with rising demand from power grids, artificial intelligence data centres and defence, while U.S. tariff policy has shifted unusually large volumes of refined metal into American warehouses. Copper prices gained 47% in the 12 months through August, according to Toronto-based Sprott. It manages about C$77 billion ($55 billion) in assets. The spot copper price since mid-last year. Chile drags Chile, which accounted for about 23% of world mine production las"
     },
     {
       "n": 4,
-      "theme": "minerals",
-      "topic": "materials",
-      "country": "",
-      "headline": "Green Manganese proves single\u2011step metal recovery from deep\u2011sea nodules",
-      "title": "Green Manganese demonstrates single process critical metals recovery from polymetallic nodules",
-      "scifi_hook": "A new water\u2011based process pulls nickel, cobalt, copper and manganese from ocean floor nodules in one go.",
-      "eli5": "The company showed it can extract several critical battery metals from seabed rocks using one hydrometallurgical step.",
-      "why": "Simpler, lower\u2011energy extraction could unlock deep\u2011sea mining for battery supply chains.",
-      "tickers": [
-        "TMC"
-      ],
+      "theme": "tech",
+      "topic": "quantum",
+      "country": "US",
+      "headline": "LHC rules out certain microscopic quantum black holes",
+      "title": "Large Hadron Collider search rules out quantum black holes with certain properties",
+      "scifi_hook": "Physicists extend LHC searches and find no evidence for tiny black holes that could link gravity to quantum forces.",
+      "eli5": "Scientists looked for tiny black holes at the Large Hadron Collider and didn\u2019t find them.",
+      "why": "It narrows theories that try to unite gravity with quantum physics.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "potential cost reduction",
-      "confidence": "medium",
-      "link": "https://www.mining.com/green-manganese-demonstrates-single-process-critical-metals-recovery-from-polymetallic-nodules/",
-      "source": "mining.com",
-      "text": "Green Manganese Technologies said it has successfully completed initial metallurgical test work demonstrating that its proprietary hydrometallurgical process can recover multiple critical metals from polymetallic nodules through a single, integrated process. Polymetallic nodules, found resting unattached on the deep-ocean floor contain nickel, cobalt, copper, and manganese \u2013 core inputs for global battery, electronics, and defense supply chains. As interest in ocean-based mineral resources grows, efficiently processing the complex matrix of metals contained in nodules remains a primary bottleneck to commercial deployment. Unlike conventional processing flowsheets that rely on multi-stage pyrometallurgical smelting\u2014sequentially calcining and smelting nodules to separate a nickel-copper-cobalt alloy from a manganese silicate slag\u2014Green Manganese says its hydrometallurgical platform is engineered to extract all principal critical metals from polymetallic nodules in one integrated process. By bypassing Submerged Arc Furnaces (SAF), electrolysis, and multi-phase converting steps entirely, Green Manganese said process consumes up to 5 times less energy while achieving greater than 90% recovery of manganese, nickel, cobalt, and copper simultaneously. Selectively dissolving the manganese minerals releases associated critical metals into a unified process solution. Simultaneously, iron minerals are converted into hematite, simplifying downstream handling and creating an additional val"
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://quantumzeitgeist.com/lhc-quantum-black-holes-large-hadron/",
+      "source": "quantumzeitgeist.com",
+      "text": "UC Santa Barbara physicists extended the search for microscopic black holes at the Large Hadron Collider, probing theories linking gravity to the universe\u2019s basic forces."
     },
     {
       "n": 5,
       "theme": "tech",
-      "topic": "weather",
-      "country": "JP",
-      "headline": "AI Boosts Accuracy of Weather Forecasts",
-      "title": "Artificial intelligence makes inroads into weather forecasting - The Japan Times",
-      "scifi_hook": "Artificial intelligence now predicts storms with near\u2011future precision.",
-      "eli5": "AI crunches massive weather data to give more accurate forecasts.",
-      "why": "Better forecasts protect lives and reduce economic losses.",
+      "topic": "quantum",
+      "country": "",
+      "headline": "New polynomial error\u2011correcting colour codes boost quantum fault tolerance",
+      "title": "Researchers Build Colour Codes with Polynomial Error Correction",
+      "scifi_hook": "Researchers unveiled hyperbolic colour codes that protect quantum data with polynomial scaling, edging toward reliable quantum computers.",
+      "eli5": "The new codes keep quantum bits safe longer by using math that grows protection faster than before.",
+      "why": "Stronger error correction is essential for scaling practical quantum processors.",
       "tickers": [
-        "NVDA",
-        "AMD",
-        "TSM"
+        "IONQ",
+        "RGTI",
+        "QBTS"
       ],
       "proxy_note": "",
       "bias": "up",
-      "rationale": "AI demand lifts chip makers",
+      "rationale": "Improved codes could lift quantum hardware demand",
       "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPSzF6V3NEM282cmNMNm1kSzQ5c2hiUDBUbE41RVR0RndvZ3FFaXl6SE9oQ3BCTkpkZDFNQ2hmQTNTSVpNbTlrUmdCaktULVowbGhwdEhZNnViNWUwaVJwTE5DYkJ6bVZfNkFOajlFa2FBLXAtUVJBeURBdmdleFBEVkh2LUpCZ05ERWxZbQ?oc=5",
-      "source": "The Japan Times",
-      "text": "Artificial intelligence makes inroads into weather forecasting The Japan Times"
+      "link": "https://quantumzeitgeist.com/colour-codes-polynomial-error-correction-implementation/",
+      "source": "quantumzeitgeist.com",
+      "text": "Previous hyperbolic colour codes offered only logarithmic protection against computational errors. Now, constructions utilising arithmetic hyperbolic manifolds demonstrate polynomial scaling of both code distance *and* the number of logical qubits, a critical step towards dependable quantum processing in dimensions \\(Dgeq 4\\). This advance establishes a new family of error-correcting codes for exploring advanced fault tolerance."
     },
     {
       "n": 6,
       "theme": "tech",
-      "topic": "defense",
-      "country": "US",
-      "headline": "U.S. Confirms Deployment of Space\u2011Based Weapons",
-      "title": "The U.S. Just Admitted it Has Weapons in Space. Why That's a Big Deal - time.com",
-      "scifi_hook": "The United States openly admits it has weapons orbiting Earth.",
-      "eli5": "The U.S. says it has weapons that can operate from space.",
-      "why": "It reshapes the strategic balance and space security landscape.",
-      "tickers": [
-        "LMT",
-        "RTX",
-        "BA"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "Space weapons boost defense spend",
-      "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE52dkZWQTE2SkNzcFJ1UmNmNjBDMl9idGdONC1YM0l0aU5HajJMVmxLMGFaMXVqVzUwSUdGTC1YSERlaXEwcWtMQ2tCV1N0Vnc0OVdSek9BVWVLR2FkQllNOWtuVkpOODROTW1Gd0FLZnJOU2xXNDVN?oc=5",
-      "source": "time.com",
-      "text": "The U.S. Just Admitted it Has Weapons in Space. Why That's a Big Deal time.com"
-    },
-    {
-      "n": 7,
-      "theme": "earth",
-      "topic": "cleanenergy",
-      "country": "US",
-      "headline": "U.S. Solar Capacity Reaches Power for 50\u202fMillion Homes",
-      "title": "US solar hits milestone, with enough installed capacity to generate power for 50 million homes - The Cool Down",
-      "scifi_hook": "Solar farms now generate enough electricity for tens of millions of households.",
-      "eli5": "The U.S. installed enough solar panels to supply 50\u202fmillion homes with power.",
-      "why": "It expands renewable energy share and cuts carbon emissions.",
+      "topic": "astronomy",
+      "country": "",
+      "headline": "Simulations test icy moon ocean stability after cosmic impacts",
+      "title": "Scientists simulate cosmic crashes to test whether icy moons gain or lose their ability to sustain life",
+      "scifi_hook": "Scientists crash virtual comets into Saturn, Uranus and Neptune moons to see if their hidden oceans survive.",
+      "eli5": "Computer models smash space rocks into icy moons to check if their underground seas stay intact for life.",
+      "why": "Understanding ocean durability guides future missions searching for extraterrestrial life.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxQSU9TRk5zWW1sdU8zc1hiYUg0VVhqdDU0RXo1T1Uzb215MVlQMlVFQTNfYlBMemZEZVMwS1E3bUtmZ0JNZGpmbmFRTzFKNGpHdVYwMnpjVUFVV09vdmN3eEhZek56U29kOEsycWV4QjJLTGtJVURucnVhaDl0ajhVRkpiX0Y?oc=5",
-      "source": "The Cool Down",
-      "text": "US solar hits milestone, with enough installed capacity to generate power for 50 million homes The Cool Down"
+      "link": "https://phys.org/news/2026-09-scientists-simulate-cosmic-icy-moons.html",
+      "source": "phys.org",
+      "text": "Many of the moons orbiting Saturn, Uranus and Neptune likely conceal oceans of liquid water beneath miles of icy shell. Because life as we know it needs water, these buried oceans rank among the most promising places to search for life beyond Earth."
+    },
+    {
+      "n": 7,
+      "theme": "earth",
+      "topic": "ecosystems",
+      "country": "US",
+      "headline": "Community effort restores Paint Rock River and revives native mussels",
+      "title": "It Takes a Village to Clean a River: Habitat restoration and mussel recovery on the Paint Rock - | Outdoor Alabama",
+      "scifi_hook": "A village\u2011wide project cleans a Alabama river, letting endangered mussels repopulate its waters.",
+      "eli5": "People worked together to remove pollution from the Paint Rock River, helping mussels that filter water to return.",
+      "why": "Healthy rivers support biodiversity and improve regional water quality.",
+      "tickers": [],
+      "proxy_note": "",
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOZUlQQjdjN1BYUWVaLTd2c3J4U1ZhMUpaeGRyaW1MT0FUNVFUTFhyUG4yemt1UlZPNnRobjhham03a1k3RzlISXVXTFZpak1teS1BZTk2UkYyQWVfT3pFYmhJTjh2SU1Xbk81cjFZWTN5T0R2TFlBQklXMTlfcmJlUlhtNkl5ZFdVdEpHVS0yN3FITlVEUVFaM3ItLS1uOU1iSlAxMkVXUjMxMXhEd1ltYk94d3UtTzVqekVZ?oc=5",
+      "source": "| Outdoor Alabama",
+      "text": "It Takes a Village to Clean a River: Habitat restoration and mussel recovery on the Paint Rock | Outdoor Alabama"
     }
   ]
 }
