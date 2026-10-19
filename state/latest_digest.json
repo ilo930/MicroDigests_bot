@@ -1,148 +1,205 @@
 {
-  "date": "2026-10-16",
-  "generated_at": "2026-10-16T11:58:08.603593+00:00",
+  "date": "2026-10-19",
+  "generated_at": "2026-10-19T14:07:23.526568+00:00",
   "prices": {
-    "TECK": {
-      "last": 65.74,
-      "low": 64.25,
-      "high": 68.88
+    "AMD": {
+      "last": 542.46,
+      "low": 528.75,
+      "high": 649.42
+    },
+    "BA": {
+      "last": 189.43,
+      "low": 184.39,
+      "high": 201.15
+    },
+    "LMT": {
+      "last": 546.34,
+      "low": 499.22,
+      "high": 552.09
+    },
+    "LYC.AX": {
+      "last": 11.35,
+      "low": 10.81,
+      "high": 14.67
+    },
+    "MP": {
+      "last": 39.64,
+      "low": 39.64,
+      "high": 51.04
+    },
+    "NVDA": {
+      "last": 215.44,
+      "low": 214.13,
+      "high": 239.24
+    },
+    "REMX": {
+      "last": 53.47,
+      "low": 53.47,
+      "high": 70.97
+    },
+    "RTX": {
+      "last": 191.5,
+      "low": 180.26,
+      "high": 194.34
+    },
+    "TMC": {
+      "last": 2.57,
+      "low": 2.57,
+      "high": 4.41
+    },
+    "TSM": {
+      "last": 418.09,
+      "low": 412.61,
+      "high": 485.8
     }
   },
   "items": [
     {
       "n": 1,
       "theme": "space",
-      "topic": "launch",
-      "country": "IN",
-      "headline": "ISRO completes crew\u2011module and service\u2011module separation tests for Gaganyaan",
-      "title": "ISRO successfully completes Crew Module-Service Module Separation Tests for Gaganyaan Programme - ISRO",
-      "scifi_hook": "India\u2019s crew\u2011capsule proved it can detach from its service module in a rehearsal for its first astronaut flight.",
-      "eli5": "ISRO tested the part of its space crew capsule that separates from the rocket stage before reaching orbit.",
-      "why": "Successful separation is a key step toward India\u2019s first crewed mission.",
+      "topic": "astronomy",
+      "country": "",
+      "headline": "ESA\u2019s Euclid telescope spots its first unknown comet",
+      "title": "Euclid discovers new comet",
+      "scifi_hook": "A space telescope designed to map dark energy just found a wandering comet.",
+      "eli5": "Euclid took pictures in September and saw a comet no one had seen before.",
+      "why": "It shows Euclid can discover new objects while studying the cosmos.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "high",
-      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTE9yTlRKYUU1RkpfU3REbTIxQ3pMMDFhRV9aTFh6a19nZF94LUlSSXU2eXRVYWt0QVFqeV84TWdVcUlwWnMxQ1pISXNGS0ZQa202WGhGNzhIYlhDNVgzV2M5VFJrZHRoNmJzUUZ0YUdCVm4xMGNHOTN6aWxGd1c?oc=5",
-      "source": "ISRO",
-      "text": "ISRO successfully completes Crew Module-Service Module Separation Tests for Gaganyaan Programme ISRO"
+      "link": "https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_discovers_new_comet",
+      "source": "esa.int",
+      "text": "The European Space Agency\u2019s Euclid space telescope has discovered its first previously unknown comet, in images taken between 16 and 24 September 2026."
     },
     {
       "n": 2,
-      "theme": "space",
-      "topic": "launch",
-      "country": "US",
-      "headline": "Blue Origin expands Florida site to launch up to 150 New Glenn rockets annually",
-      "title": "Blue Origin is going all in on the New Glenn rocket",
-      "scifi_hook": "Blue Origin plans new pads, a massive upper\u2011stage factory, and extra landing ships to boost New\u202fGlenn launch cadence.",
-      "eli5": "Blue Origin will build more launch pads, a factory for rocket parts, and ships to catch returning boosters at its Florida base.",
-      "why": "Higher launch capacity could reshape commercial heavy\u2011lift market.",
-      "tickers": [],
-      "proxy_note": "Blue Origin is private",
-      "bias": "n/a",
-      "rationale": "",
+      "theme": "minerals",
+      "topic": "policy",
+      "country": "",
+      "headline": "Greenland parliament votes to ban seabed mining until at least 2029",
+      "title": "Greenland to introduce ban on seabed mining",
+      "scifi_hook": "The Arctic island puts a pause on deep\u2011sea mineral grabs amid geopolitical tension.",
+      "eli5": "Greenland passed a law stopping mining on the ocean floor for several years.",
+      "why": "It could curb future supply of critical minerals from the seabed.",
+      "tickers": [
+        "TMC"
+      ],
+      "proxy_note": "",
+      "bias": "down",
+      "rationale": "potentially reduces demand for deep\u2011sea nodules",
       "confidence": "medium",
-      "link": "https://arstechnica.com/space/2026/10/blue-origin-is-going-all-in-on-the-new-glenn-rocket/",
-      "source": "arstechnica.com",
-      "text": "Blue Origin announced a major expansion of its already considerable Florida launch facilities on Friday morning with the intent of eventually flying 150 rockets a year from there. The company said it would add two additional launch pads for the New Glenn rocket, in addition to two already under construction at Cape Canaveral. The company is also investing heavily in a new manufacturing facility that will produce up to 150 upper stages for a larger variant of the New Glenn rocket. Additionally, the company plans to procure two additional landing ships to catch and return the first stage of the New Glenn rocket (it currently has one, named Jacklyn ). Finally, Blue Origin said it would add a new customer integration facility, built in conjunction with the US Space Force, that will feature four payload bays to process multiple missions at the same time. Read full article Comments"
+      "link": "https://www.mining.com/greenland-to-introduce-ban-on-seabed-mining/",
+      "source": "mining.com",
+      "text": "Greenland Parliament has unanimously passed a resolution to introduce a ban on seabed mineral extraction, RMF24 reported Friday . The news comes a day after US President Donald Trump announced \u201cmassive oil, gas and mineral exploration\u201d was set to begin on Greenland. Trump described the Danish Arctic island, which is run by a semi-autonomous government, as \u201cour new and beautiful Greenland\u201d in a social media post that hailed what he said were US gains from a security deal signed in September. The resolution stipulates the memorandum on deep-sea mining is to remain in force until the end of 2029, RMF24 reported, with the possibility of extension for further two-year periods. The legislation is expected to be passed in the first half of 2027. Deep-sea mining faces surprise risk of rocks catching fire Greenland has been caught up in a confrontation with Trump who has been saying since 2019 the US should buy or take the strategically located and mineral-rich island for security reasons. On several occasions, he refused to rule out force. Greenland has one of the world\u2019s most significant underexplored critical mineral endowments, positioning the territory at the center of critical minerals and defense supply chain strategies. The Tanbreez property in Greenland, with a 28.2 million tonne TREO resource, has been ranked as one of the world\u2019s top rare earth projects. Rare earth explorers are drawn to Greenland to dig into what the US Geological Survey calls the world\u2019s biggest undevelop"
     },
     {
       "n": 3,
       "theme": "minerals",
-      "topic": "mining",
-      "country": "GB",
-      "headline": "Tech firms eye equity stakes in Anglo American amid copper shortage",
-      "title": "Tech giants come knocking for a piece of Anglo American as copper scarcity bites, Wanblad tells  FT",
-      "scifi_hook": "Silicon\u2011valley giants may buy shares in a copper miner to lock down the metal that powers data centres.",
-      "eli5": "Tech companies are considering buying part of Anglo American to secure copper needed for servers.",
-      "why": "Equity interest could drive demand and support copper prices.",
+      "topic": "policy",
+      "country": "CA",
+      "headline": "Canada to tighten rules on foreign minority investments in critical minerals",
+      "title": "Canada\u2019s new foreign investment rules: What critical minerals miners need to know",
+      "scifi_hook": "New filing rules force overseas backers to seek Canadian approval before funding mines.",
+      "eli5": "Canada will require foreign investors to notify the government before buying small stakes in mineral projects.",
+      "why": "It may slow capital flow to Canadian critical\u2011minerals projects.",
       "tickers": [
-        "TECK"
+        "MP",
+        "LYC.AX",
+        "REMX"
       ],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "possible equity deals boost",
+      "bias": "down",
+      "rationale": "could limit foreign funding for miners",
       "confidence": "medium",
-      "link": "https://www.mining.com/tech-giants-come-knocking-for-a-piece-of-anglo-american-as-copper-scarcity-bites-wanblad-tells-ft/",
+      "link": "https://www.mining.com/canadas-new-foreign-investment-rules-what-critical-minerals-miners-need-to-know/",
       "source": "mining.com",
-      "text": "Anglo American (LON: AAL) has held talks with technology companies interested in buying equity in the miner as a way of securing supplies of the metals that go into data centres, chief executive Duncan Wanblad told the Financial Times\u2019 Metals and Mining Summit in London on Thursday. Discussions were \u201cabsolutely being had\u201d, Wanblad said, with the question from the tech side coming down to whether to lock in long-term offtake directly or take an equity position to secure a stake in future supply. No stakes have been taken, but there had been \u201cdeep expressions of interest\u201d in doing so, he told the summit. \u201cGiven the scarcity issue that we\u2019ve been speaking about, a lot of people are looking for ways to secure supply.\u201d Comex copper for December delivery traded near $6.52 a pound (about $14,370 a tonne) on Thursday, a third straight decline, after stronger than expected US inflation data put a Federal Reserve rate hike this month back on the table. Cash copper on the LME settled at a record $14,822 on Monday and the most-active Comex contract remains within 6% of its September 9 record settlement of $6.89. A $90 billion copper company Anglo\u2019s New York-listed shares added 0.6% to $26.86 in early trade on Thursday for a market value of $58.0 billion, while Teck Resources (NYSE: TECK) edged up 0.3% to $64.96 and is worth $31.9 billion. At those prices Anglo-Teck would carry a combined nominal value of just under $90 billion, up from the $53 billion the two companies put on the merger "
+      "text": "Canadian critical minerals companies will need to consider how they raise foreign capital as Ottawa prepares to implement new Investment Canada Act rules that will require certain types of minority investments into a mandatory pre-closing filing regime. The changes could have particular consequences for miners and developers that rely on strategic investors to finance exploration, feasibility work, and project development, Toronto- based partner in Cassels\u2019 Competition & Foreign Investment Group Chris Hersh told MINING.COM in an interview. The legislation underpinning the new regime was enacted in 2024, but key provisions requiring regulations are set to take effect in early 2027. Under the coming rules, certain investments by non-Canadians in businesses operating in prescribed sensitive sectors will require notification before the transaction can be completed \u2014 and will target investments that do not involve an acquisition of control of a Canadian business. Currently, acquisitions of control of Canadian businesses that fall below the applicable net-benefit review threshold generally require a notification that can be submitted up to 30 days after implementation, while minority investments that do not trigger a mandatory filing can be voluntarily notified to obtain greater certainty under national security review provisions of the law. This is because the Investment Canada Act allows the government to review foreign investments on national security grounds regardless of their"
     },
     {
       "n": 4,
-      "theme": "minerals",
-      "topic": "mining",
+      "theme": "tech",
+      "topic": "ai",
       "country": "US",
-      "headline": "US announces $3\u202fbillion for mining and mineral processing, plus $250\u202fbillion infrastructure plan",
-      "title": "Op-Ed: New investment could reshape US mining",
-      "scifi_hook": "Washington pledges billions to revive domestic mines and train the next generation of mineral engineers.",
-      "eli5": "The US government is spending billions to fund new mines, processing plants, and mining education.",
-      "why": "Funding aims to reduce reliance on foreign critical minerals.",
+      "headline": "WarpWare raises $1.2\u202fM pre\u2011seed to reuse flight\u2011software with AI tools",
+      "title": "WarpWare Closes Pre-Seed to Bring Agentic Tools to Flight Software",
+      "scifi_hook": "AI\u2011driven platform aims to stop spacecraft teams from rebuilding code for every mission.",
+      "eli5": "WarpWare builds AI software that lets space engineers reuse code instead of starting from scratch each time.",
+      "why": "It could cut development time and cost for future spacecraft.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
-      "confidence": "high",
-      "link": "https://www.mining.com/op-ed-new-investment-could-reshape-us-mining/",
-      "source": "mining.com",
-      "text": "Recent announcements suggest the United States may be entering a new period for domestic mining. The federal government has announced about $3 billion in investments for mining and mineral processing, including more than $180 million for education and workforce development . Bank of America has also announced a $250 billion infrastructure financing initiative that includes mining and critical minerals. For an industry accustomed to seeing projects struggle to secure financing and advance through permitting and processing, the scale of these commitments matters. Capital can help projects move forward, expand domestic capacity and address supply-chain vulnerabilities built up over decades. But mines take years to develop, and the people needed to design, build and operate them take years to train. Those timelines must be considered together. Enrollment figures show the size of the challenge. Enrollment in US mining engineering programs fell from nearly 1,500 students eight years ago to fewer than 600 in 2023, according to data compiled by the Society for Mining, Metallurgy & Exploration (SME) and the Society of Mining Professors. Anecdotal evidence suggests the numbers may be improving, but demand for minerals used in energy, manufacturing, infrastructure and national security continues to grow. North America is building rare earth plants faster than it is building rare earth engineers A project can attract financing and move through permitting, but it still needs people with t"
+      "confidence": "low",
+      "link": "https://payloadspace.com/warpware-closes-pre-seed-to-bring-agentic-tools-to-flight-software/",
+      "source": "payloadspace.com",
+      "text": "For spacecraft software teams, every new program can feel like Groundhog Day. CO-based WarpWare closed its $1.2M pre-seed round today to expand what it calls an AI-enabled engineering platform for space missions. The round\u2014raised through SAFEs\u2014was primarily angel-funded. Angel groups including the Rockies Venture Club, Cowtown Angels, and the Aggie Angel Network joined individual angels and two space-focused early-stage funds, Vesper Alpha and Marlboro Lane Ventures. \u201cRoughly 80% of the space software stack is expensive and time-consuming to build, but it is not proprietary,\u201d WarpWare CEO and cofounder Alex Reynolds told Payload via email. Origin story: WarpWare grew out of a question the founders had while working at Sierra Space: How much of the company\u2019s flight software could be reused for a new vehicle? The answer\u2014according to Reynolds and COO Mickey Mathew , also a cofounder\u2014was almost none. \u201cMost teams are building many of the same foundational capabilities,\u201d Reynolds said. Engineers often build flight software, guidance, navigation and control (GN&C), simulation and testing environments from scratch for each new program\u2014dragging out timelines, raising costs, and adding technical risk, WarpWare officials say. WarpWare replaces that ground-up approach with one connected platform covering flight software, GN&C, simulation, and testing. WarpWare wants agentic workflows to take on more of that work, but the company says technical experts maintain control of mission-critical"
     },
     {
       "n": 5,
       "theme": "tech",
-      "topic": "quantum",
-      "country": "",
-      "headline": "Terra Quantum joins QuEra Alliance to link software with neutral\u2011atom hardware",
-      "title": "Terra Quantum Joins QuEra Quantum Alliance",
-      "scifi_hook": "A software firm plugs its cloud quantum platform into a future fault\u2011tolerant atom computer.",
-      "eli5": "Terra Quantum adds its cloud\u2011based quantum code tools to work with QuEra's atom\u2011based quantum machines.",
-      "why": "It could speed up enterprise use of next\u2011gen quantum computers.",
-      "tickers": [],
-      "proxy_note": "Terra Quantum is private",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://thequantuminsider.com/2026/10/16/terra-quantum-quera-quantum-alliance/",
-      "source": "thequantuminsider.com",
-      "text": "Insider Brief Terra Quantum has joined the QuEra Quantum Alliance, adding its quantum software, algorithms and enterprise application expertise to the neutral-atom quantum computing partner network. Terra Quantum \u2018s TQ42 platform provides a cloud-based quantum software environment with a Python SDK, APIs and algorithms for optimization, quantum machine learning and simulation. The partnership aims to connect enterprise applications with QuEra\u2019s neutral-atom hardware, as QuEra targets availability of its 256-logical-qubit Libra fault-tolerant quantum computer through Amazon Braket in 2028. PRESS RELEASE \u2014 Terra Quantum , a global leader in the development of quantum technologies and their industrial application, the leader in neutral-atom quantum computing, today announced that Terra Quantum has joined the QuEra Quantum Alliance, a global partner program dedicated to accelerating the development, deployment, and utilization of neutral-atom quantum computers to solve the world\u2019s most challenging computational problems. Reinforcing the Applications Layer of the QuEra Quantum Alliance Terra Quantum is hardware-agnostic by design, developing proprietary algorithms and software rather than quantum processors. Its TQ42 platform, a cloud-based quantum software-as-a-service environment, gives developers a Python SDK, APIs, and command-line tools alongside a library of algorithms for optimization, quantum machine learning, and simulation. The company works with customers across financi"
+      "topic": "defense",
+      "country": "US",
+      "headline": "EraDrive secures $13M DoD award for autonomous satellite modules",
+      "title": "Exclusive: EraDrive Lands $13M DoD Award For Autonomy Module",
+      "scifi_hook": "A tiny startup\u2019s AI brains will pilot military satellites, bypassing Earth\u2011bound bottlenecks.",
+      "eli5": "EraDrive\u2019s vision\u2011based module lets satellites make their own decisions without ground control.",
+      "why": "Autonomous sats could speed up missions and reduce reliance on limited downlink capacity.",
+      "tickers": [
+        "LMT",
+        "RTX",
+        "BA"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "defense contractors may see increased demand",
+      "confidence": "medium",
+      "link": "https://payloadspace.com/exclusive-eradrive-lands-13m-dod-award-for-autonomy-module/",
+      "source": "payloadspace.com",
+      "text": "EraDrive, the Palo Alto, CA-based startup building autonomous capabilities for satellites, won a $13M DoD award, under which the Space Force will buy an undisclosed number of the company\u2019s Era-Node vision-based autonomy modules. The Accelerate the Procurement and Fielding of Innovative Technologies (APFIT) award is intended to provide direct procurement funding for new capabilities, unlike R&D-focused awards such as SBIR and STTR. EraDrive\u2019s award creates an accelerated pathway for the Space Force to acquire Era-Nodes for future spacecraft. \u201cGetting a small company\u2019s technology onto a government contract usually takes years. Working with the APFIT office and NASA Ames, we got EraDrive selected and on contract within the same fiscal year. That\u2019s the pace we need to keep up with what the commercial sector is building,\u201d Lawrence Robertson, the Air Force\u2019s lead for space experiments, told Payload via email. Keys to the castle: Autonomous capabilities for military sats have been on the DoD\u2019s wish list for years. While serving as the Space Force\u2019s top acquisition official in 2024, Frank Calvelli said autonomous sats would be vital to helping the DoD get around downlink bottlenecks. But EraDrive officials claim that its tech provides a range of capabilities beyond just flying in GPS-denied environments. \u201cThe way we think about GPS-denied navigation, space domain awareness, RPO, and autonomous operations is basically these are just like four different flavors of autonomy, which are j"
     },
     {
       "n": 6,
-      "theme": "earth",
+      "theme": "tech",
       "topic": "weather",
-      "country": "",
-      "headline": "AI doubles reliability of 2\u2011to\u20116\u2011week weather forecasts",
-      "title": "AI improves weather forecasting: Researchers double reliability for forecasts 2 to 6 weeks ahead - Notebookcheck",
-      "scifi_hook": "Artificial intelligence now predicts medium\u2011range weather with twice the confidence of before.",
-      "eli5": "Researchers used AI models to make forecasts for two to six weeks ahead twice as reliable.",
-      "why": "Better forecasts improve planning for agriculture, energy and disaster preparedness.",
-      "tickers": [],
+      "country": "US",
+      "headline": "Microsoft unveils AI framework to improve mid\u2011range weather forecasts",
+      "title": "New AI framework bridges a critical gap in mid-range weather forecasts - Microsoft",
+      "scifi_hook": "AI now fills the forecast blind spot, giving you a clearer picture of tomorrow\u2019s storms.",
+      "eli5": "The new AI system helps predict weather a few days ahead more accurately than before.",
+      "why": "Better forecasts aid agriculture, logistics and disaster preparedness.",
+      "tickers": [
+        "NVDA",
+        "AMD",
+        "TSM"
+      ],
       "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPLXczWVhvZ0dZLTdRNmpLYUs0T3BDdlZseC05bTZDMmNQMGkzWm5iNlZleGFFMW9aaXdGSTBPVzM4X1RkT0N3SFFTdDlKSFZKbGZSQzY3MVBaRVg5a1duNjRuYlRPeVhwQko5dF8wUEluU05jbXlORHVGZXp1clExTms0ZEViZURzTEp2WUNDbENsNGJQV2o2LS1nZURVTlNoRndULWhxZjBwaDJaeHVELWZ4N1JmR0l5WWMzbUdTOHNydi1QT2t6RjJrTTg0TVlHaTVzdUJQNA?oc=5",
-      "source": "Notebookcheck",
-      "text": "AI improves weather forecasting: Researchers double reliability for forecasts 2 to 6 weeks ahead Notebookcheck"
+      "bias": "up",
+      "rationale": "AI chip demand could rise",
+      "confidence": "medium",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOVENVYkFuNV9XZWh5dTRjZG5EaXM3WktvMGg5dEItdkNaRjhFUmhvSXhtWVdsWGJ2VXhVbTlha0dsWkRwbGxjWUhoOFdDakR5Z094X0tnVEU0bHNYcVpuRnJxa3phaWZvVDdpZzRORk9vTUt2ZjF2eDdWLWI0b3lqNEZNUHBINXg1WFBPeHMzcTBYbkQ2LWFjZGE1Sk4xRG1zUGJQb1ZUVUhORnpYclJvMlMycjNJTHgwRHc?oc=5",
+      "source": "Microsoft",
+      "text": "New AI framework bridges a critical gap in mid-range weather forecasts Microsoft"
     },
     {
       "n": 7,
       "theme": "earth",
       "topic": "cleanenergy",
       "country": "AU",
-      "headline": "Australia's solar project pipeline hits record 3.5\u202fGW for 2026",
-      "title": "Australia solar investment decisions reach record 3.5GW in 2026 - PV Tech",
-      "scifi_hook": "Australia locks in enough solar capacity to power millions of homes by 2026.",
-      "eli5": "Investors have approved solar projects totaling 3.5 gigawatts to be built in Australia by 2026.",
-      "why": "It marks a major step toward a greener, renewable\u2011heavy electricity grid.",
+      "headline": "Australia\u2019s large\u2011scale solar projects hit record 3.5\u202fGW of investment decisions",
+      "title": "Large-scale solar projects in Australia reach record 3.5 GW of annual investment decisions - pv magazine Global",
+      "scifi_hook": "Sun\u2011powered farms are sprouting across the outback, lighting a greener future.",
+      "eli5": "Investors have approved solar projects that together can generate 3.5 gigawatts of power.",
+      "why": "More solar capacity reduces reliance on fossil fuels and cuts emissions.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxPSnQ3cTdFYWRfSmN3OTZMckZ4NF9SdlJNTkd2ci1LRE1pdFVGVExycm4yVng1MHI3X01zaHBtUUUxTklMaWo0UHBFcDdCcHJoNEg3ajVYaGF3cTVJYmhoSGpVU2VWUEpOMUFIUkRZcklKYVNmTzdLa0sxRERoZGRsZkxHZ2duWFh2dVRhdjZTbEpwQQ?oc=5",
-      "source": "PV Tech",
-      "text": "Australia solar investment decisions reach record 3.5GW in 2026 PV Tech"
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOQVpLQkx0Q0tlaXFqb1RweXJFXzdJemFlQjhpdEg4VDhobVpFYlZSOWNIaWd4SGNBdnVZTllzdWZMcEhKYmJBZXNVWG1SLUFzamxFdWl5eVBIMjRzdGdYd3ROc2g4dVFsWTVhNHkzOC1wUzVFaXA0ZF9rT2NHb1E0SHRoMVB1QXY0TUNuaHY3V1lsX3h2MFFvdEN5YTFIQlI1T2xUNDdMZ3V0d1pMZl9zQVpDWkR1SHc?oc=5",
+      "source": "pv magazine Global",
+      "text": "Large-scale solar projects in Australia reach record 3.5 GW of annual investment decisions pv magazine Global"
     }
   ]
 }
