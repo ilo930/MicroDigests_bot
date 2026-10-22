@@ -1,205 +1,222 @@
 {
-  "date": "2026-10-19",
-  "generated_at": "2026-10-19T14:07:23.526568+00:00",
+  "date": "2026-10-22",
+  "generated_at": "2026-10-22T12:35:48.965758+00:00",
   "prices": {
-    "AMD": {
-      "last": 542.46,
-      "low": 528.75,
-      "high": 649.42
-    },
     "BA": {
-      "last": 189.43,
+      "last": 192.28,
       "low": 184.39,
-      "high": 201.15
+      "high": 199.93
+    },
+    "FCX": {
+      "last": 68.9,
+      "low": 68.87,
+      "high": 74.19
+    },
+    "IONQ": {
+      "last": 32.28,
+      "low": 30.78,
+      "high": 45.48
     },
     "LMT": {
-      "last": 546.34,
+      "last": 551.51,
       "low": 499.22,
       "high": 552.09
     },
     "LYC.AX": {
-      "last": 11.35,
+      "last": 11.38,
       "low": 10.81,
       "high": 14.67
     },
     "MP": {
-      "last": 39.64,
-      "low": 39.64,
+      "last": 39.5,
+      "low": 38.95,
       "high": 51.04
     },
-    "NVDA": {
-      "last": 215.44,
-      "low": 214.13,
-      "high": 239.24
+    "QBTS": {
+      "last": 12.1,
+      "low": 11.78,
+      "high": 17.56
     },
     "REMX": {
-      "last": 53.47,
-      "low": 53.47,
+      "last": 53.37,
+      "low": 53.36,
       "high": 70.97
     },
+    "RGTI": {
+      "last": 12.05,
+      "low": 11.66,
+      "high": 16.66
+    },
     "RTX": {
-      "last": 191.5,
+      "last": 191.6,
       "low": 180.26,
-      "high": 194.34
+      "high": 193.92
     },
-    "TMC": {
-      "last": 2.57,
-      "low": 2.57,
-      "high": 4.41
+    "TECK": {
+      "last": 62.78,
+      "low": 62.78,
+      "high": 68.88
     },
-    "TSM": {
-      "last": 418.09,
-      "low": 412.61,
-      "high": 485.8
+    "VUL.AX": {
+      "last": 1.1,
+      "low": 1.1,
+      "high": 2.18
     }
   },
   "items": [
     {
       "n": 1,
       "theme": "space",
-      "topic": "astronomy",
-      "country": "",
-      "headline": "ESA\u2019s Euclid telescope spots its first unknown comet",
-      "title": "Euclid discovers new comet",
-      "scifi_hook": "A space telescope designed to map dark energy just found a wandering comet.",
-      "eli5": "Euclid took pictures in September and saw a comet no one had seen before.",
-      "why": "It shows Euclid can discover new objects while studying the cosmos.",
+      "topic": "exploration",
+      "country": "US",
+      "headline": "National Academies rank four non\u2011polar lunar sites for crewed missions",
+      "title": "National Academies Rank Nonpolar Moon Sites",
+      "scifi_hook": "Astronauts could step onto the far\u2011side Bhabha Crater, shielded from Earth\u2019s radio chatter.",
+      "eli5": "A science panel listed the best non\u2011pole spots on the Moon for short astronaut trips.",
+      "why": "It directs future NASA missions to locations with high scientific payoff.",
+      "tickers": [
+        "LMT",
+        "BA",
+        "RTX"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "possible new lunar contract revenue",
+      "confidence": "medium",
+      "link": "https://payloadspace.com/national-academies-rank-ideal-nonpolar-moon-sites/",
+      "source": "payloadspace.com",
+      "text": "Location, location, location is everything\u2014even on the Moon. Astronauts are heading back to the lunar surface, and now the scientific community has made its voice heard on where they should go with the release yesterday of a National Academies report ranking the top four non-polar sites for future crewed lunar missions. NASA asked the committee which science goals in locations beyond the poles need people rather than robots, and where to send those astronauts. The committee\u2019s answer assumes short sorties: two-person crews, no rover, and one to four moonwalks per site. Sites were weighed on three criteria: whether science aligned with the decadal surveys and NASA\u2019s Moon to Mars objectives, if the missions would expand US exploration capabilities, and, to a lesser degree, how they would contribute to public inspiration. Site seeing: The sites, in priority order: Bhabha Crater: Astronauts have never landed this far from Earth. The far-side crater sits in the middle of the South Pole-Aitken Basin, which may have the oldest impact signature in the solar system. The region is also shielded from Earth\u2019s radio noise, making it a prime spot for low-frequency astronomy. Mons Hadley: Apollo 11 and 17 are seen by NASA as protected heritage sites because of their historical significance, so the committee picked the Apollo 15 site instead. Crews would land ~2 km away from the Apollo site and venture over to investigate how the hardware and astronaut waste left behind have held up after 55+"
+    },
+    {
+      "n": 2,
+      "theme": "space",
+      "topic": "satellite",
+      "country": "CN",
+      "headline": "Chinese start\u2011ups aim to offer in\u2011orbit satellite repair services",
+      "title": "China\u2019s start-ups want to offer a satellite repair service in space - Lowy Institute",
+      "scifi_hook": "Entrepreneurs plan to send robotic hands to fix broken satellites before they die.",
+      "eli5": "New Chinese companies want to service satellites in space, extending their life.",
+      "why": "Extending satellite lifespans could lower costs and reduce space debris.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
-      "confidence": "high",
-      "link": "https://www.esa.int/Science_Exploration/Space_Science/Euclid/Euclid_discovers_new_comet",
-      "source": "esa.int",
-      "text": "The European Space Agency\u2019s Euclid space telescope has discovered its first previously unknown comet, in images taken between 16 and 24 September 2026."
-    },
-    {
-      "n": 2,
-      "theme": "minerals",
-      "topic": "policy",
-      "country": "",
-      "headline": "Greenland parliament votes to ban seabed mining until at least 2029",
-      "title": "Greenland to introduce ban on seabed mining",
-      "scifi_hook": "The Arctic island puts a pause on deep\u2011sea mineral grabs amid geopolitical tension.",
-      "eli5": "Greenland passed a law stopping mining on the ocean floor for several years.",
-      "why": "It could curb future supply of critical minerals from the seabed.",
-      "tickers": [
-        "TMC"
-      ],
-      "proxy_note": "",
-      "bias": "down",
-      "rationale": "potentially reduces demand for deep\u2011sea nodules",
-      "confidence": "medium",
-      "link": "https://www.mining.com/greenland-to-introduce-ban-on-seabed-mining/",
-      "source": "mining.com",
-      "text": "Greenland Parliament has unanimously passed a resolution to introduce a ban on seabed mineral extraction, RMF24 reported Friday . The news comes a day after US President Donald Trump announced \u201cmassive oil, gas and mineral exploration\u201d was set to begin on Greenland. Trump described the Danish Arctic island, which is run by a semi-autonomous government, as \u201cour new and beautiful Greenland\u201d in a social media post that hailed what he said were US gains from a security deal signed in September. The resolution stipulates the memorandum on deep-sea mining is to remain in force until the end of 2029, RMF24 reported, with the possibility of extension for further two-year periods. The legislation is expected to be passed in the first half of 2027. Deep-sea mining faces surprise risk of rocks catching fire Greenland has been caught up in a confrontation with Trump who has been saying since 2019 the US should buy or take the strategically located and mineral-rich island for security reasons. On several occasions, he refused to rule out force. Greenland has one of the world\u2019s most significant underexplored critical mineral endowments, positioning the territory at the center of critical minerals and defense supply chain strategies. The Tanbreez property in Greenland, with a 28.2 million tonne TREO resource, has been ranked as one of the world\u2019s top rare earth projects. Rare earth explorers are drawn to Greenland to dig into what the US Geological Survey calls the world\u2019s biggest undevelop"
+      "confidence": "low",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOV2cyTVZ0ak8yS1JjdmJnZFNNdXdsX2kzWEp2RFNRZDhjNEotajNaUGh4ajI1MmNLaHdKZmMyVm1jRlo3Ml9fZzJPbGwtSEhoYmw4Umt1cEhrV3RBR3hyZTdrSFZUTDZQNnJ6UzJTeHZzdHdKM0RlZVVCZjNwS1dYZ0g5cXBSN0J1N3Z5MFlCZ3NDRGFRMzA3YUM2MzRHSXRLODVBVURMNHhvSHpobjhWS1VnNA?oc=5",
+      "source": "Lowy Institute",
+      "text": "China\u2019s start-ups want to offer a satellite repair service in space Lowy Institute"
     },
     {
       "n": 3,
       "theme": "minerals",
-      "topic": "policy",
+      "topic": "mining",
       "country": "CA",
-      "headline": "Canada to tighten rules on foreign minority investments in critical minerals",
-      "title": "Canada\u2019s new foreign investment rules: What critical minerals miners need to know",
-      "scifi_hook": "New filing rules force overseas backers to seek Canadian approval before funding mines.",
-      "eli5": "Canada will require foreign investors to notify the government before buying small stakes in mineral projects.",
-      "why": "It may slow capital flow to Canadian critical\u2011minerals projects.",
+      "headline": "Hudbay and Mitsubishi approve development of Arizona\u2019s Copper World project",
+      "title": "Hudbay, Mitsubishi greenlight Copper World project development in Arizona",
+      "scifi_hook": "A massive open\u2011pit copper mine could start producing in 2029, boosting U.S. metal supply.",
+      "eli5": "Hudbay and Mitsubishi will build a large copper mine in Arizona, aiming for 102,000 tonnes per year.",
+      "why": "It adds a domestic source of copper critical for electrification and renewable tech.",
+      "tickers": [
+        "FCX",
+        "TECK"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "higher copper demand supports miners",
+      "confidence": "medium",
+      "link": "https://im-mining.com/2026/10/22/hudbay-mitsubishi-greenlight-copper-world-project-development-in-arizona/",
+      "source": "im-mining.com",
+      "text": "Hudbay Minerals Inc and its partner Mitsubishi Corporation have approved the development of what they say will be one of the largest open-pit copper mines in the US. The news came when announcing the results of the definitive feasibility study and related prefeasibility studies (collectively referred to as \u2018the DFS\u2019) for the Copper World project, 70% owned by Hudbay and 30% owned by Mitsubishi. With first production projected in the second half of 2029, Copper World will be the first of the next generation of long-life, low-cost copper mines in the Americas, Hudbay claims. The DFS outlines annual copper production of 102,000 t over the first 10 years, an 11% increase when compared to 92,000 t in Hudbay\u2019s 2023 prefeasibility study for Copper World. This could see Hudbay\u2019s consolidated annual copper production increase to approximately 250,000 t, doubling current production levels, with other brownfield growth projects underway. The base case for Copper World contemplates a 15-year mine life utilising mineral reserves (390 Mt at 0.47% Cu), and requires only state and local permits, This base case further optimises the 2023 PFS mine plan with an in-pit crushing and conveying (IPCC) system in year four and an expansion of the concentrator from 54,431 t/d to 81,64t t/d in year five. Concentrator expansion enables a 43% increase in average annual copper production to 120,000 t in years six to 10 compared with 84,000 t over the first five years. The addition of an IPCC system, start"
+    },
+    {
+      "n": 4,
+      "theme": "tech",
+      "topic": "quantum",
+      "country": "",
+      "headline": "Researchers reveal how lasers can generate entangled light",
+      "title": "New theory explains how lasers create entangled light",
+      "scifi_hook": "Strong lasers can now be tuned to spit out pairs of linked photons for quantum tech.",
+      "eli5": "Scientists showed that powerful lasers can create entangled photons through nonlinear electronic effects.",
+      "why": "Entangled light is a key resource for quantum communication and computing.",
+      "tickers": [
+        "IONQ",
+        "RGTI",
+        "QBTS"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "potential boost to quantum hardware",
+      "confidence": "low",
+      "link": "https://quantumzeitgeist.com/friedrich-schiller-lasers-create-entangled-theory/",
+      "source": "quantumzeitgeist.com",
+      "text": "New research explains how strongly driven lasers can generate nonclassical radiation, including entangled light, via nonlinear electronic responses."
+    },
+    {
+      "n": 5,
+      "theme": "tech",
+      "topic": "quantum",
+      "country": "",
+      "headline": "Random matrix theory sheds light on energy changes during quantum quenches",
+      "title": "Random matrix theory explains work done during quantum quenches",
+      "scifi_hook": "Physicists use random matrix math to map sudden quantum jumps like a cosmic dice roll.",
+      "eli5": "When a quantum system is abruptly changed, random matrix theory predicts how much work is done.",
+      "why": "Improves fundamental understanding of fast quantum processes for future technologies.",
+      "tickers": [
+        "IONQ",
+        "RGTI",
+        "QBTS"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "research boost for quantum firms",
+      "confidence": "medium",
+      "link": "https://quantumzeitgeist.com/quantum-random-matrix-theory-explains-work/",
+      "source": "quantumzeitgeist.com",
+      "text": "Sudden quantum quenches are analyzed using concepts from Haar unitaries, a key element of random matrix theory."
+    },
+    {
+      "n": 6,
+      "theme": "earth",
+      "topic": "cleanenergy",
+      "country": "",
+      "headline": "Endurance Energy reaches milestone in undersea geothermal power development",
+      "title": "Endurance Energy hits a brief milestone in its quest for undersea geothermal power - GeekWire",
+      "scifi_hook": "A company taps the ocean floor\u2019s heat to generate electricity beneath the waves.",
+      "eli5": "Endurance Energy proved it can capture geothermal energy from deep under the sea.",
+      "why": "Adds a new renewable source that could diversify the clean\u2011energy mix.",
+      "tickers": [
+        "VUL.AX"
+      ],
+      "proxy_note": "",
+      "bias": "up",
+      "rationale": "geothermal potential lifts related stocks",
+      "confidence": "low",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUkYwRjZkWEMxVFFyX094MHVyNDFHWjNvQkVrMzJOOHNPYjV2YUx4UUROVk5EWFB3U2J1bEc4S0VQdVBxeWRTdU51cTdpSUUzOTJ4ZzBnLXU2NDFuRXNWckd1d0xaeWFQYTJpWF84MXNXZnlCWTRGUUFJU2ZSaEFYbXU1WnJSRjJSYmkzU3hKWVZTcG5ha2Q3V0wzd3J0VV9raGxzOUNMMnp6XzZyLVBIVTRPdw?oc=5",
+      "source": "GeekWire",
+      "text": "Endurance Energy hits a brief milestone in its quest for undersea geothermal power GeekWire"
+    },
+    {
+      "n": 7,
+      "theme": "society",
+      "topic": "policy",
+      "country": "IN",
+      "headline": "Quad nations outline regulatory framework for critical mineral partnerships",
+      "title": "Regulatory Environment for Operationalising Quad Critical Minerals Partnerships - CSEP India",
+      "scifi_hook": "Four major economies draft rules to lock in rare\u2011earth supplies for future tech.",
+      "eli5": "The US, Japan, India and Australia are creating rules to share and secure critical minerals.",
+      "why": "Sets the legal groundwork for stable supply chains of strategic resources.",
       "tickers": [
         "MP",
         "LYC.AX",
         "REMX"
       ],
       "proxy_note": "",
-      "bias": "down",
-      "rationale": "could limit foreign funding for miners",
-      "confidence": "medium",
-      "link": "https://www.mining.com/canadas-new-foreign-investment-rules-what-critical-minerals-miners-need-to-know/",
-      "source": "mining.com",
-      "text": "Canadian critical minerals companies will need to consider how they raise foreign capital as Ottawa prepares to implement new Investment Canada Act rules that will require certain types of minority investments into a mandatory pre-closing filing regime. The changes could have particular consequences for miners and developers that rely on strategic investors to finance exploration, feasibility work, and project development, Toronto- based partner in Cassels\u2019 Competition & Foreign Investment Group Chris Hersh told MINING.COM in an interview. The legislation underpinning the new regime was enacted in 2024, but key provisions requiring regulations are set to take effect in early 2027. Under the coming rules, certain investments by non-Canadians in businesses operating in prescribed sensitive sectors will require notification before the transaction can be completed \u2014 and will target investments that do not involve an acquisition of control of a Canadian business. Currently, acquisitions of control of Canadian businesses that fall below the applicable net-benefit review threshold generally require a notification that can be submitted up to 30 days after implementation, while minority investments that do not trigger a mandatory filing can be voluntarily notified to obtain greater certainty under national security review provisions of the law. This is because the Investment Canada Act allows the government to review foreign investments on national security grounds regardless of their"
-    },
-    {
-      "n": 4,
-      "theme": "tech",
-      "topic": "ai",
-      "country": "US",
-      "headline": "WarpWare raises $1.2\u202fM pre\u2011seed to reuse flight\u2011software with AI tools",
-      "title": "WarpWare Closes Pre-Seed to Bring Agentic Tools to Flight Software",
-      "scifi_hook": "AI\u2011driven platform aims to stop spacecraft teams from rebuilding code for every mission.",
-      "eli5": "WarpWare builds AI software that lets space engineers reuse code instead of starting from scratch each time.",
-      "why": "It could cut development time and cost for future spacecraft.",
-      "tickers": [],
-      "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://payloadspace.com/warpware-closes-pre-seed-to-bring-agentic-tools-to-flight-software/",
-      "source": "payloadspace.com",
-      "text": "For spacecraft software teams, every new program can feel like Groundhog Day. CO-based WarpWare closed its $1.2M pre-seed round today to expand what it calls an AI-enabled engineering platform for space missions. The round\u2014raised through SAFEs\u2014was primarily angel-funded. Angel groups including the Rockies Venture Club, Cowtown Angels, and the Aggie Angel Network joined individual angels and two space-focused early-stage funds, Vesper Alpha and Marlboro Lane Ventures. \u201cRoughly 80% of the space software stack is expensive and time-consuming to build, but it is not proprietary,\u201d WarpWare CEO and cofounder Alex Reynolds told Payload via email. Origin story: WarpWare grew out of a question the founders had while working at Sierra Space: How much of the company\u2019s flight software could be reused for a new vehicle? The answer\u2014according to Reynolds and COO Mickey Mathew , also a cofounder\u2014was almost none. \u201cMost teams are building many of the same foundational capabilities,\u201d Reynolds said. Engineers often build flight software, guidance, navigation and control (GN&C), simulation and testing environments from scratch for each new program\u2014dragging out timelines, raising costs, and adding technical risk, WarpWare officials say. WarpWare replaces that ground-up approach with one connected platform covering flight software, GN&C, simulation, and testing. WarpWare wants agentic workflows to take on more of that work, but the company says technical experts maintain control of mission-critical"
-    },
-    {
-      "n": 5,
-      "theme": "tech",
-      "topic": "defense",
-      "country": "US",
-      "headline": "EraDrive secures $13M DoD award for autonomous satellite modules",
-      "title": "Exclusive: EraDrive Lands $13M DoD Award For Autonomy Module",
-      "scifi_hook": "A tiny startup\u2019s AI brains will pilot military satellites, bypassing Earth\u2011bound bottlenecks.",
-      "eli5": "EraDrive\u2019s vision\u2011based module lets satellites make their own decisions without ground control.",
-      "why": "Autonomous sats could speed up missions and reduce reliance on limited downlink capacity.",
-      "tickers": [
-        "LMT",
-        "RTX",
-        "BA"
-      ],
-      "proxy_note": "",
       "bias": "up",
-      "rationale": "defense contractors may see increased demand",
+      "rationale": "policy may benefit miners",
       "confidence": "medium",
-      "link": "https://payloadspace.com/exclusive-eradrive-lands-13m-dod-award-for-autonomy-module/",
-      "source": "payloadspace.com",
-      "text": "EraDrive, the Palo Alto, CA-based startup building autonomous capabilities for satellites, won a $13M DoD award, under which the Space Force will buy an undisclosed number of the company\u2019s Era-Node vision-based autonomy modules. The Accelerate the Procurement and Fielding of Innovative Technologies (APFIT) award is intended to provide direct procurement funding for new capabilities, unlike R&D-focused awards such as SBIR and STTR. EraDrive\u2019s award creates an accelerated pathway for the Space Force to acquire Era-Nodes for future spacecraft. \u201cGetting a small company\u2019s technology onto a government contract usually takes years. Working with the APFIT office and NASA Ames, we got EraDrive selected and on contract within the same fiscal year. That\u2019s the pace we need to keep up with what the commercial sector is building,\u201d Lawrence Robertson, the Air Force\u2019s lead for space experiments, told Payload via email. Keys to the castle: Autonomous capabilities for military sats have been on the DoD\u2019s wish list for years. While serving as the Space Force\u2019s top acquisition official in 2024, Frank Calvelli said autonomous sats would be vital to helping the DoD get around downlink bottlenecks. But EraDrive officials claim that its tech provides a range of capabilities beyond just flying in GPS-denied environments. \u201cThe way we think about GPS-denied navigation, space domain awareness, RPO, and autonomous operations is basically these are just like four different flavors of autonomy, which are j"
-    },
-    {
-      "n": 6,
-      "theme": "tech",
-      "topic": "weather",
-      "country": "US",
-      "headline": "Microsoft unveils AI framework to improve mid\u2011range weather forecasts",
-      "title": "New AI framework bridges a critical gap in mid-range weather forecasts - Microsoft",
-      "scifi_hook": "AI now fills the forecast blind spot, giving you a clearer picture of tomorrow\u2019s storms.",
-      "eli5": "The new AI system helps predict weather a few days ahead more accurately than before.",
-      "why": "Better forecasts aid agriculture, logistics and disaster preparedness.",
-      "tickers": [
-        "NVDA",
-        "AMD",
-        "TSM"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "AI chip demand could rise",
-      "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOVENVYkFuNV9XZWh5dTRjZG5EaXM3WktvMGg5dEItdkNaRjhFUmhvSXhtWVdsWGJ2VXhVbTlha0dsWkRwbGxjWUhoOFdDakR5Z094X0tnVEU0bHNYcVpuRnJxa3phaWZvVDdpZzRORk9vTUt2ZjF2eDdWLWI0b3lqNEZNUHBINXg1WFBPeHMzcTBYbkQ2LWFjZGE1Sk4xRG1zUGJQb1ZUVUhORnpYclJvMlMycjNJTHgwRHc?oc=5",
-      "source": "Microsoft",
-      "text": "New AI framework bridges a critical gap in mid-range weather forecasts Microsoft"
-    },
-    {
-      "n": 7,
-      "theme": "earth",
-      "topic": "cleanenergy",
-      "country": "AU",
-      "headline": "Australia\u2019s large\u2011scale solar projects hit record 3.5\u202fGW of investment decisions",
-      "title": "Large-scale solar projects in Australia reach record 3.5 GW of annual investment decisions - pv magazine Global",
-      "scifi_hook": "Sun\u2011powered farms are sprouting across the outback, lighting a greener future.",
-      "eli5": "Investors have approved solar projects that together can generate 3.5 gigawatts of power.",
-      "why": "More solar capacity reduces reliance on fossil fuels and cuts emissions.",
-      "tickers": [],
-      "proxy_note": "",
-      "bias": "n/a",
-      "rationale": "",
-      "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOQVpLQkx0Q0tlaXFqb1RweXJFXzdJemFlQjhpdEg4VDhobVpFYlZSOWNIaWd4SGNBdnVZTllzdWZMcEhKYmJBZXNVWG1SLUFzamxFdWl5eVBIMjRzdGdYd3ROc2g4dVFsWTVhNHkzOC1wUzVFaXA0ZF9rT2NHb1E0SHRoMVB1QXY0TUNuaHY3V1lsX3h2MFFvdEN5YTFIQlI1T2xUNDdMZ3V0d1pMZl9zQVpDWkR1SHc?oc=5",
-      "source": "pv magazine Global",
-      "text": "Large-scale solar projects in Australia reach record 3.5 GW of annual investment decisions pv magazine Global"
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOeFg1RkVmdUpISC1BTkxoY0Z1TDVUY3huU2JGR2YxNWtDY0Q4SmVWUzVTSFZoS3NFbjRkUUtyTENULVc3SmN5TTY5RFJsM1ZPeVpnLTBrUlBoRUVwdGxWNC1MUUtZSTFkQy1qNDJtU1JoUEZUZHNCWDQ0SGt1QnBLSk8tYTVOVldGV3B0MWhZbkh1dUZFWkVoZFM3SjIzb2VZVWZkcA?oc=5",
+      "source": "CSEP India",
+      "text": "Regulatory Environment for Operationalising Quad Critical Minerals Partnerships CSEP India"
     }
   ]
 }
