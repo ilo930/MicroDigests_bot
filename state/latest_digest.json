@@ -1,222 +1,140 @@
 {
-  "date": "2026-10-22",
-  "generated_at": "2026-10-22T12:35:48.965758+00:00",
-  "prices": {
-    "BA": {
-      "last": 192.28,
-      "low": 184.39,
-      "high": 199.93
-    },
-    "FCX": {
-      "last": 68.9,
-      "low": 68.87,
-      "high": 74.19
-    },
-    "IONQ": {
-      "last": 32.28,
-      "low": 30.78,
-      "high": 45.48
-    },
-    "LMT": {
-      "last": 551.51,
-      "low": 499.22,
-      "high": 552.09
-    },
-    "LYC.AX": {
-      "last": 11.38,
-      "low": 10.81,
-      "high": 14.67
-    },
-    "MP": {
-      "last": 39.5,
-      "low": 38.95,
-      "high": 51.04
-    },
-    "QBTS": {
-      "last": 12.1,
-      "low": 11.78,
-      "high": 17.56
-    },
-    "REMX": {
-      "last": 53.37,
-      "low": 53.36,
-      "high": 70.97
-    },
-    "RGTI": {
-      "last": 12.05,
-      "low": 11.66,
-      "high": 16.66
-    },
-    "RTX": {
-      "last": 191.6,
-      "low": 180.26,
-      "high": 193.92
-    },
-    "TECK": {
-      "last": 62.78,
-      "low": 62.78,
-      "high": 68.88
-    },
-    "VUL.AX": {
-      "last": 1.1,
-      "low": 1.1,
-      "high": 2.18
-    }
-  },
+  "date": "2026-10-25",
+  "generated_at": "2026-10-25T12:09:59.394326+00:00",
+  "prices": {},
   "items": [
     {
       "n": 1,
       "theme": "space",
-      "topic": "exploration",
+      "topic": "launch",
       "country": "US",
-      "headline": "National Academies rank four non\u2011polar lunar sites for crewed missions",
-      "title": "National Academies Rank Nonpolar Moon Sites",
-      "scifi_hook": "Astronauts could step onto the far\u2011side Bhabha Crater, shielded from Earth\u2019s radio chatter.",
-      "eli5": "A science panel listed the best non\u2011pole spots on the Moon for short astronaut trips.",
-      "why": "It directs future NASA missions to locations with high scientific payoff.",
-      "tickers": [
-        "LMT",
-        "BA",
-        "RTX"
-      ],
+      "headline": "Artemis III to test Orion docking with test landers in Earth orbit",
+      "title": "NASA\u2019s Artemis III Mission to Test Future Moon Lander Operations",
+      "scifi_hook": "NASA will fly three spacecraft on three rockets to rehearse lunar landing steps in orbit.",
+      "eli5": "Astronauts will practice docking Orion with prototype Moon landers before the real Moon landing.",
+      "why": "It reduces risk and validates hardware for the 2028 crewed Moon landing.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "possible new lunar contract revenue",
-      "confidence": "medium",
-      "link": "https://payloadspace.com/national-academies-rank-ideal-nonpolar-moon-sites/",
-      "source": "payloadspace.com",
-      "text": "Location, location, location is everything\u2014even on the Moon. Astronauts are heading back to the lunar surface, and now the scientific community has made its voice heard on where they should go with the release yesterday of a National Academies report ranking the top four non-polar sites for future crewed lunar missions. NASA asked the committee which science goals in locations beyond the poles need people rather than robots, and where to send those astronauts. The committee\u2019s answer assumes short sorties: two-person crews, no rover, and one to four moonwalks per site. Sites were weighed on three criteria: whether science aligned with the decadal surveys and NASA\u2019s Moon to Mars objectives, if the missions would expand US exploration capabilities, and, to a lesser degree, how they would contribute to public inspiration. Site seeing: The sites, in priority order: Bhabha Crater: Astronauts have never landed this far from Earth. The far-side crater sits in the middle of the South Pole-Aitken Basin, which may have the oldest impact signature in the solar system. The region is also shielded from Earth\u2019s radio noise, making it a prime spot for low-frequency astronomy. Mons Hadley: Apollo 11 and 17 are seen by NASA as protected heritage sites because of their historical significance, so the committee picked the Apollo 15 site instead. Crews would land ~2 km away from the Apollo site and venture over to investigate how the hardware and astronaut waste left behind have held up after 55+"
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://www.nasa.gov/missions/artemis/nasas-artemis-iii-mission-to-test-future-moon-lander-operations/",
+      "source": "nasa.gov",
+      "text": "Before astronauts return to the lunar surface, NASA will first conduct one of the most ambitious and complex test missions in the agency\u2019s history. Launching in 2027, Artemis III will send NASA astronauts Randy Bresnik, Frank Rubio, Andre Douglas, and ESA (European Space Agency) astronaut Luca Parmitano aboard the Orion spacecraft into low Earth orbit to perform a series of demonstrations with test versions, or test articles, of human landing systems being developed by industry partners Blue Origin and SpaceX. During the planned 14-day mission, crews and flight controllers will practice the rendezvous, docking, habitation, and operational procedures that will be essential when Artemis astronauts begin landing near the Moon\u2019s South Pole in 2028. The mission is designed to reduce risk, validate hardware, and gain operational experience before NASA attempts a crewed lunar landing. \u201cEvery piece of this mission in Earth orbit is designed to reduce risk before we put astronauts back on the Moon,\u201d said Jeremy Parsons, NASA\u2019s Artemis program manager. \u201cWe\u2019re launching three spacecraft on three different rockets and testing how they operate together \u2014 something NASA has never attempted. Every lesson we learn here gets us closer to landing on the Moon in 2028.\u201d This graphic shows NASA\u2019s concept of operations for Artemis III. The mission will send four astronauts to low Earth orbit next year to test critical systems needed for future lunar landings. NASA First stop: Blue Origin\u2019s lunar l"
     },
     {
       "n": 2,
       "theme": "space",
-      "topic": "satellite",
-      "country": "CN",
-      "headline": "Chinese start\u2011ups aim to offer in\u2011orbit satellite repair services",
-      "title": "China\u2019s start-ups want to offer a satellite repair service in space - Lowy Institute",
-      "scifi_hook": "Entrepreneurs plan to send robotic hands to fix broken satellites before they die.",
-      "eli5": "New Chinese companies want to service satellites in space, extending their life.",
-      "why": "Extending satellite lifespans could lower costs and reduce space debris.",
+      "topic": "launch",
+      "country": "US",
+      "headline": "NASA revises Artemis architecture, Orion to dock with Starship in high\u2011Earth orbit",
+      "title": "NASA updates lander plans for Moon landings, finally solves long-festering Orion issue",
+      "scifi_hook": "Orion will meet SpaceX\u2019s Starship far above Earth before heading to the Moon.",
+      "eli5": "NASA plans to connect its crew ship with Starship high above Earth, then travel together to the Moon.",
+      "why": "The new docking plan streamlines the lunar mission and avoids in\u2011space refueling.",
+      "tickers": [],
+      "proxy_note": "",
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://arstechnica.com/space/2026/10/nasa-updates-lander-plans-for-moon-landings-finally-solves-long-festering-orion-issue/",
+      "source": "arstechnica.com",
+      "text": "During a lengthy news conference on Friday, NASA provided a detailed overview of how it plans to return astronauts to the lunar surface as soon as 2028 as part of its Artemis Program. Although much of the information behind these plans has been previously reported at Ars Technica and elsewhere, this marked the first time NASA has laid them out in detail and acknowledged some substantial changes in the architecture. Most notably, for SpaceX's Starship vehicle, the revised plan calls for the Orion spacecraft to dock with the Starship lunar lander in high-Earth orbit before transiting to the Moon. And for Blue Origin, the mission architecture includes four launches of the New Glenn rocket, but no spacecraft-to-spacecraft refuelings. Additionally, the Blue Origin plans allows for the possibility of its Blue Moon lander rendezvousing with Orion in low-Lunar orbit. Read full article Comments"
+    },
+    {
+      "n": 3,
+      "theme": "space",
+      "topic": "launch",
+      "country": "US",
+      "headline": "NASA, Blue Origin and SpaceX accelerate lunar lander designs for 2028 missions",
+      "title": "NASA, Partners Accelerate Lander Development for 2028 Moon Missions",
+      "scifi_hook": "NASA pushes its commercial partners to fast\u2011track crew and cargo landers for a Moon base.",
+      "eli5": "NASA is speeding up work with Blue Origin and SpaceX to build Moon landers for astronauts and supplies.",
+      "why": "Accelerated development aims to meet the 2028 deadline for a sustained lunar presence.",
+      "tickers": [],
+      "proxy_note": "",
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://www.nasa.gov/missions/artemis/nasa-partners-accelerate-lander-development-for-2028-moon-missions/",
+      "source": "nasa.gov",
+      "text": "7 Min Read NASA, Partners Accelerate Lander Development for 2028 Moon Missions As NASA returns humans to the lunar surface and establishes a long-term presence on our closest celestial neighbor, the agency and commercial human landing system providers Blue Origin and SpaceX have streamlined the designs and changed both concepts of operations for its future crewed landers. Since NASA established initial contracts with Blue Origin and SpaceX for crewed missions to the Moon, the agency has redefined Artemis III to demonstrate rendezvous and docking capabilities between test versions of landers from each provider and the agency\u2019s Orion spacecraft in low Earth orbit next year. In parallel, the companies are also developing crew and cargo versions of their landers for near-term Artemis missions. \u201cWe are executing President Trump\u2019s National Space Policy to complete the long-awaited return of American astronauts to the lunar surface in 2028 and establish a Moon Base,\u201d said NASA Administrator Jared Isaacman. \u201cWe have a proven foundation in SLS and Orion, along with two lunar landers in development with Blue Origin and SpaceX. But NASA has no intention of sitting idly by as all the pieces come together. That is not how Apollo succeeded, and it is not how the near-impossible is achieved. NASA is energized, our core capabilities are being rebuilt, our machine shops are running 24/7, and our experts are in the field attacking the critical path. We are building a Super Bowl-caliber team to"
+    },
+    {
+      "n": 4,
+      "theme": "minerals",
+      "topic": "materials",
+      "country": "US",
+      "headline": "DOE adds helium to critical materials list under Energy Act",
+      "title": "US Department of Energy names helium to critical materials list",
+      "scifi_hook": "Helium, essential for chips, is now officially a strategic U.S. resource.",
+      "eli5": "The government says helium is a vital material and will protect its domestic supply.",
+      "why": "Helium scarcity could threaten semiconductor manufacturing and national security.",
+      "tickers": [],
+      "proxy_note": "",
+      "bias": "n/a",
+      "rationale": "",
+      "confidence": "high",
+      "link": "https://www.mining.com/us-department-of-energy-names-helium-to-critical-materials-list/",
+      "source": "mining.com",
+      "text": "The U.S. Department of Energy (DOE) announced Friday that Secretary of Energy Chris Wright has designated helium as a critical material under the Energy Act of 2020. The designation advances the Trump Administration\u2019s commitment to freeing America from reliance on foreign sources of critical materials, strengthening domestic manufacturing, supporting American jobs, and securing the materials essential to U.S. economic and national security, the DOE said. DOE determined that helium meets the statutory definition of a critical material due to its essential role in American manufacturing and growing exposure to supply chain risks. Helium\u2019s unique properties make it indispensable to semiconductor production, with no viable substitutes in many critical applications. Helium in the US is produced as a byproduct of natural gas processing in Kansas, Texas, Wyoming, Colorado, Arizona, New Mexico and Oklahoma. Kansas leads production, with plants refining crude and Grade-A helium from natural gas in fields in the Hugoton and Greenwood areas. Texas has large production and storage infrastructure, including the Panhandle-Hugoton fields, the Cliffside field, and storage caverns near Beaumont. \u201cHelium is essential to producing the semiconductors and advanced technologies that power our economy,\u201d US Secretary of Energy Chris Wright said in a news release . \u201cBy designating helium as a critical material, we are taking another step toward securing our supply chains, creating American jobs, and "
+    },
+    {
+      "n": 5,
+      "theme": "minerals",
+      "topic": "nuclear",
+      "country": "AU",
+      "headline": "Bannerman Energy greenlights $353M Etango uranium mine in Namibia",
+      "title": "Bannerman pulls trigger on $353M uranium mine",
+      "scifi_hook": "A joint venture begins building a long\u2011life uranium mine to fuel the world\u2019s power grids.",
+      "eli5": "Bannerman and China\u2019s CNNC will start building a mine that will produce about 3.5\u202fmillion pounds of uranium each year.",
+      "why": "It adds secure, diversified uranium supply for global utilities.",
       "tickers": [],
       "proxy_note": "",
       "bias": "n/a",
       "rationale": "",
       "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxOV2cyTVZ0ak8yS1JjdmJnZFNNdXdsX2kzWEp2RFNRZDhjNEotajNaUGh4ajI1MmNLaHdKZmMyVm1jRlo3Ml9fZzJPbGwtSEhoYmw4Umt1cEhrV3RBR3hyZTdrSFZUTDZQNnJ6UzJTeHZzdHdKM0RlZVVCZjNwS1dYZ0g5cXBSN0J1N3Z5MFlCZ3NDRGFRMzA3YUM2MzRHSXRLODVBVURMNHhvSHpobjhWS1VnNA?oc=5",
-      "source": "Lowy Institute",
-      "text": "China\u2019s start-ups want to offer a satellite repair service in space Lowy Institute"
-    },
-    {
-      "n": 3,
-      "theme": "minerals",
-      "topic": "mining",
-      "country": "CA",
-      "headline": "Hudbay and Mitsubishi approve development of Arizona\u2019s Copper World project",
-      "title": "Hudbay, Mitsubishi greenlight Copper World project development in Arizona",
-      "scifi_hook": "A massive open\u2011pit copper mine could start producing in 2029, boosting U.S. metal supply.",
-      "eli5": "Hudbay and Mitsubishi will build a large copper mine in Arizona, aiming for 102,000 tonnes per year.",
-      "why": "It adds a domestic source of copper critical for electrification and renewable tech.",
-      "tickers": [
-        "FCX",
-        "TECK"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "higher copper demand supports miners",
-      "confidence": "medium",
-      "link": "https://im-mining.com/2026/10/22/hudbay-mitsubishi-greenlight-copper-world-project-development-in-arizona/",
-      "source": "im-mining.com",
-      "text": "Hudbay Minerals Inc and its partner Mitsubishi Corporation have approved the development of what they say will be one of the largest open-pit copper mines in the US. The news came when announcing the results of the definitive feasibility study and related prefeasibility studies (collectively referred to as \u2018the DFS\u2019) for the Copper World project, 70% owned by Hudbay and 30% owned by Mitsubishi. With first production projected in the second half of 2029, Copper World will be the first of the next generation of long-life, low-cost copper mines in the Americas, Hudbay claims. The DFS outlines annual copper production of 102,000 t over the first 10 years, an 11% increase when compared to 92,000 t in Hudbay\u2019s 2023 prefeasibility study for Copper World. This could see Hudbay\u2019s consolidated annual copper production increase to approximately 250,000 t, doubling current production levels, with other brownfield growth projects underway. The base case for Copper World contemplates a 15-year mine life utilising mineral reserves (390 Mt at 0.47% Cu), and requires only state and local permits, This base case further optimises the 2023 PFS mine plan with an in-pit crushing and conveying (IPCC) system in year four and an expansion of the concentrator from 54,431 t/d to 81,64t t/d in year five. Concentrator expansion enables a 43% increase in average annual copper production to 120,000 t in years six to 10 compared with 84,000 t over the first five years. The addition of an IPCC system, start"
-    },
-    {
-      "n": 4,
-      "theme": "tech",
-      "topic": "quantum",
-      "country": "",
-      "headline": "Researchers reveal how lasers can generate entangled light",
-      "title": "New theory explains how lasers create entangled light",
-      "scifi_hook": "Strong lasers can now be tuned to spit out pairs of linked photons for quantum tech.",
-      "eli5": "Scientists showed that powerful lasers can create entangled photons through nonlinear electronic effects.",
-      "why": "Entangled light is a key resource for quantum communication and computing.",
-      "tickers": [
-        "IONQ",
-        "RGTI",
-        "QBTS"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "potential boost to quantum hardware",
-      "confidence": "low",
-      "link": "https://quantumzeitgeist.com/friedrich-schiller-lasers-create-entangled-theory/",
-      "source": "quantumzeitgeist.com",
-      "text": "New research explains how strongly driven lasers can generate nonclassical radiation, including entangled light, via nonlinear electronic responses."
-    },
-    {
-      "n": 5,
-      "theme": "tech",
-      "topic": "quantum",
-      "country": "",
-      "headline": "Random matrix theory sheds light on energy changes during quantum quenches",
-      "title": "Random matrix theory explains work done during quantum quenches",
-      "scifi_hook": "Physicists use random matrix math to map sudden quantum jumps like a cosmic dice roll.",
-      "eli5": "When a quantum system is abruptly changed, random matrix theory predicts how much work is done.",
-      "why": "Improves fundamental understanding of fast quantum processes for future technologies.",
-      "tickers": [
-        "IONQ",
-        "RGTI",
-        "QBTS"
-      ],
-      "proxy_note": "",
-      "bias": "up",
-      "rationale": "research boost for quantum firms",
-      "confidence": "medium",
-      "link": "https://quantumzeitgeist.com/quantum-random-matrix-theory-explains-work/",
-      "source": "quantumzeitgeist.com",
-      "text": "Sudden quantum quenches are analyzed using concepts from Haar unitaries, a key element of random matrix theory."
+      "link": "https://www.mining.com/bannerman-pulls-trigger-on-353m-uranium-mine/",
+      "source": "mining.com",
+      "text": "Bannerman Energy (ASX, NSX: BMN; US-OTC: BNNLF) and its Chinese partner CNNC Overseas have approved construction of the Etango uranium project in Namibia, with funding secured without project debt and first production targeted for 2028. The development is expected to cost $353 million before production and deliver an average of 3.5 million lb. of uranium oxide annually. About $64 million has already been spent on early works, leaving roughly $289 million in pre-production spending, Bannerman said in its announcement Friday. The decision moves Etango into full-scale construction after years of studies and preparatory work. \u201c[The FID] is the culmination of more than two decades of exploration, study and disciplined de-risking, and it formally commits the JV to full-scale construction of the world-class Etango Uranium project,\u201d Chamberlain said in a release. \u201cEtango is set to be a long-life, large-scale producer in Namibia\u2019s Erongo region, a highly established uranium province, at a time when the world\u2019s utilities increasingly need secure, diversified supply.\u201d The approval follows a September financing deal with CNNC Overseas, part of China National Nuclear Corp., that secured both construction capital and a buyer for most of Etango\u2019s output. Bannerman owns 55% of the joint venture and CNNC Overseas holds 45%. The venture owns 95% of Etango. Bannerman shares fell 4.2% to A$3 apiece in Sydney on Friday, valuing the company at roughly A$748 million. Ahead of the construction decis"
     },
     {
       "n": 6,
-      "theme": "earth",
-      "topic": "cleanenergy",
-      "country": "",
-      "headline": "Endurance Energy reaches milestone in undersea geothermal power development",
-      "title": "Endurance Energy hits a brief milestone in its quest for undersea geothermal power - GeekWire",
-      "scifi_hook": "A company taps the ocean floor\u2019s heat to generate electricity beneath the waves.",
-      "eli5": "Endurance Energy proved it can capture geothermal energy from deep under the sea.",
-      "why": "Adds a new renewable source that could diversify the clean\u2011energy mix.",
-      "tickers": [
-        "VUL.AX"
-      ],
+      "theme": "tech",
+      "topic": "quantum",
+      "country": "US",
+      "headline": "UC professor Martinis to outline path to large\u2011scale superconducting qubits",
+      "title": "University of California\u2019s Martinis to discuss qubit scaling",
+      "scifi_hook": "A Nobel laureate maps the road from tiny qubits to practical quantum computers.",
+      "eli5": "John Martinis will explain how to grow superconducting qubits into big systems that can solve real problems.",
+      "why": "Scaling qubits is essential for delivering usable quantum technology.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "geothermal potential lifts related stocks",
+      "bias": "n/a",
+      "rationale": "",
       "confidence": "low",
-      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUkYwRjZkWEMxVFFyX094MHVyNDFHWjNvQkVrMzJOOHNPYjV2YUx4UUROVk5EWFB3U2J1bEc4S0VQdVBxeWRTdU51cTdpSUUzOTJ4ZzBnLXU2NDFuRXNWckd1d0xaeWFQYTJpWF84MXNXZnlCWTRGUUFJU2ZSaEFYbXU1WnJSRjJSYmkzU3hKWVZTcG5ha2Q3V0wzd3J0VV9raGxzOUNMMnp6XzZyLVBIVTRPdw?oc=5",
-      "source": "GeekWire",
-      "text": "Endurance Energy hits a brief milestone in its quest for undersea geothermal power GeekWire"
+      "link": "https://quantumzeitgeist.com/qubit-scaling-university-californias-martinis/",
+      "source": "quantumzeitgeist.com",
+      "text": "Nobel laureate John M. Martinis will discuss the path from superconducting qubits to building practical quantum computers, addressing hurdles in creating large-scale systems."
     },
     {
       "n": 7,
-      "theme": "society",
-      "topic": "policy",
-      "country": "IN",
-      "headline": "Quad nations outline regulatory framework for critical mineral partnerships",
-      "title": "Regulatory Environment for Operationalising Quad Critical Minerals Partnerships - CSEP India",
-      "scifi_hook": "Four major economies draft rules to lock in rare\u2011earth supplies for future tech.",
-      "eli5": "The US, Japan, India and Australia are creating rules to share and secure critical minerals.",
-      "why": "Sets the legal groundwork for stable supply chains of strategic resources.",
-      "tickers": [
-        "MP",
-        "LYC.AX",
-        "REMX"
-      ],
+      "theme": "earth",
+      "topic": "climate",
+      "country": "",
+      "headline": "Record 43.6\u202fMt of CO\u2082 stored underground in 2024",
+      "title": "Global underground CO\u2082 storage hit record 43.6 million metric tons in 2024 alone",
+      "scifi_hook": "Geological reservoirs trapped more carbon this year than ever before, sealing it deep underground.",
+      "eli5": "In 2024, 43.6\u202fmillion tonnes of carbon dioxide were injected into rock formations, setting a new annual record.",
+      "why": "It demonstrates expanding capacity for carbon removal to limit climate warming.",
+      "tickers": [],
       "proxy_note": "",
-      "bias": "up",
-      "rationale": "policy may benefit miners",
+      "bias": "n/a",
+      "rationale": "",
       "confidence": "medium",
-      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOeFg1RkVmdUpISC1BTkxoY0Z1TDVUY3huU2JGR2YxNWtDY0Q4SmVWUzVTSFZoS3NFbjRkUUtyTENULVc3SmN5TTY5RFJsM1ZPeVpnLTBrUlBoRUVwdGxWNC1MUUtZSTFkQy1qNDJtU1JoUEZUZHNCWDQ0SGt1QnBLSk8tYTVOVldGV3B0MWhZbkh1dUZFWkVoZFM3SjIzb2VZVWZkcA?oc=5",
-      "source": "CSEP India",
-      "text": "Regulatory Environment for Operationalising Quad Critical Minerals Partnerships CSEP India"
+      "link": "https://phys.org/news/2026-10-global-underground-storage-million-metric.html",
+      "source": "phys.org",
+      "text": "The most comprehensive record yet of carbon dioxide stored underground through geological carbon dioxide storage has been published today, revealing that 43.6 million metric tons were sequestered in 2024 alone\u2014a new annual record\u2014and that 421.7 million metric tons have now been stored in the past three decades."
     }
   ]
 }
